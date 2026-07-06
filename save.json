@@ -1,0 +1,14 @@
+{
+    "stats" : {
+        "name" : "name",
+        "class" : "class",
+        "hp" : 10,
+        "mana" : 3,
+        "str" : 1,
+        "luck" : 1,
+        "inv" : "inv",
+        "xp" : 0,
+        "lvl" : 0,
+        "pts" : 10
+    }
+}
