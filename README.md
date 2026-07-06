@@ -1,0 +1,5 @@
+#En: This is a Python game I am developing to both enchance and demonstrate my Python skills and the languages I speak. I'm making a text based RPG using base Python, so no pygame or other libraries. I'm making so that the user is free to choose between 3 languages which are English (the base one), Portuguese and French. The user will also be able to save/load the game, choose between classes and freely distribute it's points accross 4 choices (Luck, Strenght, Mana and HP).
+
+#Pt: Este é um jogo de Python que estou desenvolvendo para melhorar e demonstrar minhas habilidades de Python e as línguas nas quais eu falo. Eu estou fazendo um RPG baseado em texto utilizando o Python base, então sem pygame ou outros tipos de bibliotecas. Eu estou fazendo para que o usuário possa livremente escolher entre 3 línguas: inglês (língua base), português e francês. O usuário também poderá salvar/carregar o jogo, escolher entre classes e livremente distribuir pontos entre 4 escolhas (Sorte, Força, Mana e HP).
+
+#Fr: WIP
