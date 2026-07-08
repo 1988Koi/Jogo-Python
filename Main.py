@@ -42,4 +42,52 @@ if begin1 == "2":
     actualname = placeholdername.replace("{name}", name1)
     print ("\n" + actualname)
     save(init_stats)
+
     print("\n" + lang[language1]["class"])
+    print("\n" + lang[language1]["classc"])
+    classconf = False
+
+    acceptedclass = {
+            "1" : "Hobo",
+            "2" : "Magician",
+            "3" : "Security",
+            "4" : "Foreman",
+            "5" : "Chef"
+        }
+    
+    statusclass = {
+        "Hobo" : {"hp" : 8, "mana": 7, "str": 3, "luck": 10},
+        "Magician" : {"hp" : 7, "mana": 15, "str": 2, "luck": 5},
+        "Security" : {"hp" : 10, "mana": 3, "str": 10, "luck": 3},
+        "Foreman" : {"hp" : 30, "mana": 1, "str": 4, "luck": 0},
+        "Chef" : {"hp" : 7, "mana": 15, "str": 3, "luck": 5}
+    }
+
+    while not classconf:
+
+        class1 = input("> ").strip().lower()
+        if class1 not in acceptedclass:
+            print("\n" + lang[language1]["classno"])
+            continue
+
+        placeholderclass = lang[language1]["classok"]
+        classname = acceptedclass[class1]
+        init_stats["stats"]["class"] = classname
+        actualclass = placeholderclass.replace("{class}", classname)
+        print ("\n" + actualclass)
+        print("\n" + lang[language1]["sure"])
+
+        conf = input("> ").strip().lower()
+        if conf == "1":
+            classconf = True
+        else:
+            print("\n" + lang[language1]["classc"])
+
+    chosenclass = init_stats["stats"]["class"]
+    classst = statusclass[chosenclass]
+
+    init_stats["stats"]["hp"] = classst["hp"]
+    init_stats["stats"]["mana"] = classst["mana"]
+    init_stats["stats"]["str"] = classst["str"]
+    init_stats["stats"]["luck"] = classst["luck"]
+    save(init_stats)

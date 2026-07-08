@@ -1,14 +1,1 @@
-{
-    "stats" : {
-        "name" : "name",
-        "class" : "class",
-        "hp" : 10,
-        "mana" : 3,
-        "str" : 1,
-        "luck" : 1,
-        "inv" : "inv",
-        "xp" : 0,
-        "lvl" : 0,
-        "pts" : 10
-    }
-}
+{"stats": {"name": "Roberto", "class": "Hobo", "hp": 8, "mana": 7, "str": 3, "luck": 10, "inv": "inv", "xp": 0, "lvl": 0, "pts": 10}}

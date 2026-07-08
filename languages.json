@@ -2,19 +2,25 @@
     "en" :
     {
         "loadgame" : "Do you have a save? Type 1!",
-        "newgame" : "begin thy andventure! Type 2!",
-        "nameusr" : "And who might you be?",
-        "nameok" : "Ah! The great {name}",
-        "class" : "Please, choose your class, oh so brave warri... thing!",
-        "classok" : "Ah yes, you are a [class1]"
+        "newgame" : "begin your adventure! Type 2!",
+        "nameusr" : "Impressive... \n Most Impressive... \n I have no record of you... \n What's your name?",
+        "nameok" : "...{name}... \n ...{name}...?",
+        "class" : "Did you ever had a job...?",
+        "classc" : "Jobs: \n Hobo: Class with a lot of luck, even getting free equipment. \n Magician: Class that focuses on MP generation and magic attacks. \n Security: Focused on raw power while being very frail. \n Foreman: Tank capable of redirecting damage to himself instead of allies. \n Chef: Capable of curing and applying buffs to allies while applying debuffs to enemies. \n To choose your class by typing 1 to 5.",
+        "classno" : "Unrecognized class, please type 1 to 5",
+        "classok" : "A {class}...",
+        "sure" : "Are you certain? \n Type 1 for yes or 2 for no."
     },
     "pt":
     {
         "loadgame" : "Você tem um save? Digite 1!",
         "newgame" : "Começar sua aventura? Digite 2!",
-        "nameusr" : "E quem seria você?",
-        "nameok" : "Ah! O grande {name}",
-        "class" : "Por favor, escolha sua classe inicial, oh bravo hero... coisa!",
-        "classok" : "Ah sim, você é um [class1]"
+        "nameusr" : "Impressionante... \n Muito Impressionante... \n Não se sabe nada sobre você... \n Qual é seu nome?",
+        "nameok" : "...{name}... \n ...{name}...",
+        "class" : "Você já teve algum emprego?",
+        "classc" : "Classes: \n Hobo: Classe com muita sorte, consegue diversos tipos de equipamentos de graça \n Magician: Classe focada na geração de MP e ataques mágicos \n Security: Focado em dano puro, mas tendo pouca vida. \n Foreman: Tanque capaz de redirecionar dano para ele em vez de seus aliados. \n Chef: Capaz de adicionar buffs e curar aliados, também consegue aplicar debuffs a oponentes. \n Para escoher sua classe digite do 1 ao 5.",
+        "classno" : "Classe não reconhecida, por favor digite do 1 ao 5.",
+        "classok" : "Um {class}",
+        "sure" : "Você tem certeza? Digite 1 para sim e 2 para não."
     }
 }
