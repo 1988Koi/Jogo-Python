@@ -1,0 +1,85 @@
+{
+    "mobster": {
+        "name" : "Gun mobster",
+        "eid" : 1,
+        "hp" : 50,
+        "maxhp" : 50,
+        "stre" : 30,
+        "xpdrop" : 100,
+        "isboss" : false,
+        "possibledrop" : [
+            {
+                "itemid" : "Ammo",
+                "chance" : 1
+            }
+        ]
+    },
+    "bully": {
+        "name" : "Bully",
+        "eid" : 2,
+        "hp" : 25,
+        "maxhp" : 25,
+        "stre" : 4,
+        "xpdrop" : 50,
+        "isboss" : false,
+        "possibledrop" : [
+            {
+            "itemid" : "Piece of gum",
+            "chance" : 0.90
+            },
+            {
+                "itemid" : "Spare change",
+                "chance" : 0.50
+            }
+        ]
+    },
+    "lbully": {
+        "name" : "Low life Bully",
+        "eid" : 3,
+        "hp" : 20,
+        "maxhp" : 20,
+        "stre" : 1,
+        "xpdrop" : 10,
+        "isboss" : false,
+        "possibledrop" : [
+            {
+            "itemid" : "Piece of gum",
+            "chance" : 0.90
+            },
+            {
+                "itemid" : "Spare change",
+                "chance" : 0.50
+            }
+        ]
+    },
+    "thug1" : {
+        "name" : "Ornery Yakuza",
+        "eid" : 29,
+        "hp" : 100,
+        "maxhp" : 100,
+        "stre" : 50,
+        "xpdrop" : 200,
+        "isboss" : true,
+        "possibledrop" : [
+            {
+                "itemid" : "Katana",
+                "chance" : 1
+            }
+        ]
+    },
+    "amon" : {
+        "name" : "Sanjo Amon",
+        "eid" : 30,
+        "hp" : 1500,
+        "maxhp" : 1500,
+        "stre" : 50,
+        "xpdrop" : 1000,
+        "isboss" : true,
+        "possibledrop" : [
+            {
+                "itemid" : "Simple Bowie",
+                "chance" : 1
+            }
+        ]
+    }
+}

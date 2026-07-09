@@ -1,0 +1,10 @@
+{
+    "city": {
+        "mapID" : 0,
+        "name" : "City",
+        "lvlrq" : 1,
+        "enemyspawn" : [
+            1, 2, 3
+        ]
+    }
+}

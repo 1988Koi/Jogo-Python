@@ -9,7 +9,12 @@
         "classc" : "Jobs: \n Hobo: Class with a lot of luck, even getting free equipment. \n Magician: Class that focuses on MP generation and magic attacks. \n Security: Focused on raw power while being very frail. \n Foreman: Tank capable of redirecting damage to himself instead of allies. \n Chef: Capable of curing and applying buffs to allies while applying debuffs to enemies. \n To choose your class by typing 1 to 5.",
         "classno" : "Unrecognized class, please type 1 to 5",
         "classok" : "A {class}...",
-        "sure" : "Are you certain? \n Type 1 for yes or 2 for no."
+        "sure" : "Are you certain? \n Type 1 for yes or 2 for no.",
+        "combat" : "Type 1 to attack, 2 to use magic, 3 to use items if you have any.",
+        "hitenemy" : "The {name} caused {allyhit} on {enemyname}",
+        "enemyhit" : "The {enemyname} caused {enemyhit} on {allyname}",
+        "map1" : "City map: \n Type 1 for the Cafe (lvl req: 1) \n Type 2 to go to the workshop (lvl req: 10) \n Type 3 for the Tanban (minigames) (lvl req: 1) \n Type 4 for the bar (lvl req: 2) \n Type 5 for the Pawn Shop (lvl req: 4) \n (lvl necessário: 4) \n Dungeons \n type 6 to go to the Liang Qui (lvl req: 1) \n Type 7 to go to the Feizhua (lvl req: 10) \n Type 8 for the Jiangyang Ryu (Dungeon) (lvl req: 15) \n Type 9 to go the Fuxi Donzen (lvl req: 20) \n Type 0 to save and quit the game",
+        "bye" : "Game saved, goodbye!"
     },
     "pt":
     {
@@ -21,6 +26,10 @@
         "classc" : "Classes: \n Hobo: Classe com muita sorte, consegue diversos tipos de equipamentos de graça \n Magician: Classe focada na geração de MP e ataques mágicos \n Security: Focado em dano puro, mas tendo pouca vida. \n Foreman: Tanque capaz de redirecionar dano para ele em vez de seus aliados. \n Chef: Capaz de adicionar buffs e curar aliados, também consegue aplicar debuffs a oponentes. \n Para escoher sua classe digite do 1 ao 5.",
         "classno" : "Classe não reconhecida, por favor digite do 1 ao 5.",
         "classok" : "Um {class}",
-        "sure" : "Você tem certeza? Digite 1 para sim e 2 para não."
+        "sure" : "Você tem certeza? Digite 1 para sim e 2 para não.",
+        "combat" : "1 para atacar, 2 para utilizar magia e 3 para utilizar itens caso você tenha algum.",
+        "enemyhit" : "O {enemyname} cause {enemyhit} no {allyname}",
+        "map1" : "mapa da cidade: \n Digite 1 para o café (lvl necessário: 1) \n Digite 2 para ir à oficina (lvl necessário: 10) \n Digite 3 para ir ao Tanban (minigames) (lvl necessário: 3) \n Digite 4 para ir ao bar (lvl necessário: 2) \n Digite 5 para ir à loja de penhores \n (lvl necessário: 4) \n Dungeons \n Digite 6 para ir ao Liang Qui (lvl necessário: 1) \n Digite 7 para ir ao Feizhua (lvl necessário: 10) \n Digite 8 para ir ao Jiangyang Ryu (lvl necessário: 15) \n Digite 9 para ir ao Fuxi Donzen (lvl necessário: 20) \n Digite 0 para salvar e sair do jogo",
+        "bye" : "Jogo salvo, adeus!"
     }
 }

@@ -1,0 +1,18 @@
+{
+    "gordon": {
+        "name" : "Gordon",
+        "class" : "Salaryman",
+        "hp" : 15,
+        "maxhp" : 15,
+        "mana" : 7,
+        "stre" : 5
+    },
+    "zhouzhen": {
+        "name" : "Zhou Zhen",
+        "class" : "Technician",
+        "hp" : 7,
+        "maxhp" : 7,
+        "mana" : 15,
+        "stre" : 10
+    }
+}
