@@ -2,17 +2,37 @@
     "gordon": {
         "name" : "Gordon",
         "class" : "Salaryman",
-        "hp" : 15,
         "maxhp" : 15,
+        "hp" : 15,
         "mana" : 7,
+        "maxmana" : 7,
         "stre" : 5
     },
     "zhouzhen": {
         "name" : "Zhou Zhen",
         "class" : "Technician",
-        "hp" : 7,
         "maxhp" : 7,
+        "hp" : 7,
         "mana" : 15,
+        "maxmana" : 15,
         "stre" : 10
+    },
+    "yatakeyomai": {
+        "name" : "Yatake Yomai",
+        "class" : "Yakuza",
+        "maxhp" : 20,
+        "hp" : 20,
+        "mana" : 10,
+        "maxmana" : 10,
+        "stre" : 20
+    },
+    "joryukazama": {
+        "name" : "Moryu Kazaki",
+        "class" : "Legend",
+        "maxhp": 30,
+        "hp" : 30,
+        "mana" : 30,
+        "maxmana" : 30,
+        "stre" : 30
     }
 }

@@ -8,6 +8,12 @@ def cleaning():
 with open("languages.json", "r", encoding="utf-8") as thingy:
     lang = json.load(thingy)
 
+with open("enemies.json", "r", encoding="utf-8") as enemies:
+    enemis = json.load(enemies)
+
+with open ("party.json", "r", encoding="utf-8") as part:
+    parte = json.load(part)
+
 def load():
     with open("save.json", "r", encoding="utf-8") as saves1:
         saves0 = json.load(saves1)
@@ -31,8 +37,20 @@ def combat1(init_stats, enemy_id):
     enemystr = current_enemy["stre"]
     enemyxp = current_enemy["xpdrop"]
 
-    while enemyhp > 0 and init_stats["party"][0]["hp"] > 0:       
-        cleaning()
+    while enemyhp > 0 and init_stats["party"][0]["hp"] > 0:    
+        cleaning()   
+        enemybarmax = (enemyhp * 10) // enemymaxhp
+        enemybarmin = (10 - enemybarmax)
+        print (f"{enemyname}:  [\033[91m{'█' * enemybarmax}\033[0m{'░' * enemybarmin}] {enemyhp} / {enemymaxhp}")
+
+        for member in init_stats["party"]:
+            hpbarmax = (member["hp"] * 10) // member["maxhp"]
+            hpbarmin = (10 - hpbarmax)
+            print (f"{member['name']}:[\033[92m{'█' * hpbarmax}\033[0m{'░' * hpbarmin}] {member['hp']} / {member['maxhp']}")
+            manabarmax = (member["mana"] * 10) // member["maxmana"]
+            manabarmin = (10 - manabarmax)
+            print (f"{member['name']}: [\033[95m{'█' * manabarmax}\033[0m{'░' * manabarmin}] {member['mana']} / {member['maxmana']}")
+
         for combate in init_stats["party"]:
             if combate["hp"] > 0 and enemyhp > 0:
 
@@ -56,12 +74,6 @@ def combat1(init_stats, enemy_id):
     elif init_stats["party"][0]["hp"] <= 0:
         print("\n" + placeholderdeath)
 
-with open("enemies.json", "r", encoding="utf-8") as enemies:
-    enemis = json.load(enemies)
-
-with open ("party.json", "r", encoding="utf-8") as part:
-    parte = json.load(part)
-
 
 print ("Welcome to the game! / bienvenue á la jeux! / Bem vindo ao jogo!")
 print ("Select your language / Choisissez votre language / Escolha seu idioma")
@@ -80,8 +92,10 @@ if begin1 == "2":
             {
                 "name" : "name",
                 "class" : "class",
+                "maxhp" : 10,
                 "hp" : 10,
                 "mana" : 3,
+                "maxmana" : 3,
                 "stre" : 1,
                 "luck" : 1,
                 "inv" : "inv",
@@ -113,11 +127,11 @@ if begin1 == "2":
         }
     
     statusclass = {
-        "Hobo" : {"hp" : 8, "mana": 7, "stre": 3, "luck": 10},
-        "Magician" : {"hp" : 7, "mana": 15, "stre": 2, "luck": 5},
-        "Security" : {"hp" : 10, "mana": 3, "stre": 10, "luck": 3},
-        "Foreman" : {"hp" : 30, "mana": 1, "stre": 4, "luck": 0},
-        "Chef" : {"hp" : 7, "mana": 15, "stre": 3, "luck": 5}
+        "Hobo" : {"hp" : 8, "mana": 7, "maxmana" : 7, "stre": 3, "luck": 10},
+        "Magician" : {"hp" : 7, "mana": 15, "maxmana" : 15, "stre": 2, "luck": 5},
+        "Security" : {"hp" : 10, "mana": 3, "maxmana" : 3, "stre": 10, "luck": 3},
+        "Foreman" : {"hp" : 30, "mana": 1, "maxmana" : 1, "stre": 4, "luck": 0},
+        "Chef" : {"hp" : 7, "mana": 15, "maxmana" : 15, "stre": 3, "luck": 5}
     }
 
     while not classconf:
@@ -172,3 +186,10 @@ while in_map:
     elif mapc == "2":
         if playerlvl >= 10:
             print("\n" + lang[language1]["inaid"])
+        else: 
+            print("\n" + lang[language1]["lowlv"])
+    elif mapc == "":
+        if playerlvl >= 10:
+            print("")
+        else:
+            print("\n" + lang[language1]["lowlv"])
