@@ -8,6 +8,9 @@ def cleaning():
 with open("languages.json", "r", encoding="utf-8") as thingy:
     lang = json.load(thingy)
 
+with open ("skills.json", "r", encoding="utf-8") as skill:
+    skills = json.load(skill)
+
 with open("enemies.json", "r", encoding="utf-8") as enemies:
     enemis = json.load(enemies)
 
@@ -28,20 +31,18 @@ def mape():
         map2 = json.load(map1)
         return map2
 
-def combat1(init_stats, enemy_id):
-    current_enemy = enemis[enemy_id]
+def combat1(init_stats, enemy_ids):
+    presentenemies = []
 
-    enemyname = current_enemy["name"]
-    enemyhp = current_enemy["hp"]
-    enemymaxhp = current_enemy["maxhp"]
-    enemystr = current_enemy["stre"]
-    enemyxp = current_enemy["xpdrop"]
+    for eids in enemy_ids:
+        presentenemies.append(enemis[str(eids)].copy())
 
-    while enemyhp > 0 and init_stats["party"][0]["hp"] > 0:    
+    while any(e["hp"] > 0 for e in presentenemies) and init_stats ["party"][0]["hp"] > 0:    
         cleaning()   
-        enemybarmax = (enemyhp * 10) // enemymaxhp
-        enemybarmin = (10 - enemybarmax)
-        print (f"{enemyname}:  [\033[91m{'█' * enemybarmax}\033[0m{'░' * enemybarmin}] {enemyhp} / {enemymaxhp}")
+        for enemies in presentenemies:
+            enemyhpmax = (10 * enemies["hp"]) // enemies["maxhp"]
+            enemyhpmin = (10 - enemyhpmax)
+            print (f"{enemies['name']}:  [\033[91m{'█' * enemyhpmax}\033[0m{'░' * enemyhpmin}] {enemies['hp']} / {enemies['maxhp']}")
 
         for member in init_stats["party"]:
             hpbarmax = (member["hp"] * 10) // member["maxhp"]
@@ -52,27 +53,101 @@ def combat1(init_stats, enemy_id):
             print (f"{member['name']}: [\033[95m{'█' * manabarmax}\033[0m{'░' * manabarmin}] {member['mana']} / {member['maxmana']}")
 
         for combate in init_stats["party"]:
-            if combate["hp"] > 0 and enemyhp > 0:
-
                 print ("\n" + lang[language1]["combat"])
                 playerturn = input("> ").strip().lower()
                 if playerturn == "1":
-                    enemyhp -= combate["stre"]
-                    placeholdername = lang[language1]["enemyhit"]
+                    print (f"\n" + lang[language1]["attack"])
+                    for i, enemy in enumerate(presentenemies):
+                        if enemy["hp"] > 0:
+                            print(f"{i + 1}: {enemy['name']}")
+                        else:
+                            print(f"{i + 1}: {enemy['name']} DEAD")
+                    target_choice = input("> ").strip()
+                    if target_choice.isdigit():
+                        choice = int(target_choice)
+
+                    if choice > 0 and choice <= len(presentenemies):
+                        target_index = choice - 1
+                        
+                        if presentenemies[target_index]["hp"] <= 0:
+                            print("Enemy already dead! Pick someone else.")
+                        else:
+                            presentenemies[target_index]["hp"] -= combate["stre"]
+                            placeholdername = lang[language1]["enemyhit"]
+
+                    else:
+                        print ("Invalid num!")
 
                 elif playerturn == "2":
-                    print("\n" + magiasdaclassatualplaceholder)
-                else:
-                    print("\n" + placeholder)
+                    current = combate["class"].lower()
+                    class_skills = skills[current]
+                    available = []
 
-    if enemyhp > 0 and init_stats["party"][0]["hp"] > 0:
-            init_stats["party"][0]["hp"] -= enemystr
-            print ("\n" + lang[language1]["enemyhit"])
-    if enemyhp <= 0:
-        init_stats["party"][0]["xp"] += enemyxp
-        print("\n" + enemyxp)
-    elif init_stats["party"][0]["hp"] <= 0:
-        print("\n" + placeholderdeath)
+                    for i, skil in enumerate(class_skills):
+                        if skil["lvlreq"] <= combate["lvl"]:
+                            available.append(skil)
+                            print(f"{i + 1}: {skil['name']}, cost: {skil['cost']}")
+
+                    skille = input("> ").strip()
+
+                    chosen_idx = int(skille) - 1
+                    chosen = available[chosen_idx]
+
+                    damage = round(combate["stre"] * chosen["dmgmlt"])
+                    presentenemies[target_index]["hp"] -= damage
+
+                elif playerturn == "3":
+                    print("\n" + placeholder)
+                else:
+                    print ("invalid num")
+
+                for eatt in presentenemies: 
+                    if eatt["hp"] <= 0:
+                        continue
+
+                    if combate["hp"] <= 0:
+                        break
+
+                    combate["hp"] -= eatt["stre"]
+                    print(f"{eatt['name']} attacks {combate['name']} for {eatt['stre']} damage!")
+
+    placeholderXP
+
+def dungeon(enemy_pool):
+    total_room = random.randint(5, 15)
+    events = ["enemy", "chest", "break", "echest"]
+    event_probability = [60, 20, 19, 1]
+
+    bossroom = total_room - 1
+    dung_path = random.choices(events, weights=event_probability, k=bossroom)
+
+    
+    pracehorder = (lang[language1][dungen])
+    actualprint = pracehorder.replace("{total_room}", total_room)
+    print(actualprint)
+
+    currentroom = 1
+
+    for event in dung_path:
+        print (f"\n Room {currentroom}")
+
+        if event == "enemy":
+            print(lang[language1]["enemye"])
+            combat1(init_stats, enemy_pool)
+        elif event == "chest":
+            print(lang[language1]["chest"])
+        elif event == "break":
+            print (lang[language1]["break"])
+            for member in init_stats["party"]:
+                member["hp"] = member["maxhp"]
+                member ["mana"] = member["maxmana"]
+        elif event == "echest":
+            print (lang[language1]["echest"])
+
+        currentroom += 1
+
+    print ("A boss spawned!")
+    combat1 (init_stats, "29")
 
 
 print ("Welcome to the game! / bienvenue á la jeux! / Bem vindo ao jogo!")
@@ -188,8 +263,10 @@ while in_map:
             print("\n" + lang[language1]["inaid"])
         else: 
             print("\n" + lang[language1]["lowlv"])
-    elif mapc == "":
+    elif mapc == "3":
         if playerlvl >= 10:
             print("")
         else:
             print("\n" + lang[language1]["lowlv"])
+    elif mapc == "4":
+        combat1(init_stats, enemy_id = 3)

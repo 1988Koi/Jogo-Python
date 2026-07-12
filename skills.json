@@ -1,5 +1,5 @@
 {
-    "Legend": [
+    "1": [
         {"name": "Finishing blow", "Description": "Ldmg", "cost" : 3, "dmgmlt": 1.5, "lvlreq" : 1},
         {"name": "3 Hit combo", "Description": "Ldmg", "cost" : 1, "dmgmlt": 1.3, "lvlreq": 1},
         {"name": "Essence of knife", "Description": "Mdmg", "cost": 5, "dmgmlt": 1.7, "lvlreq" : 3}, 
@@ -7,7 +7,7 @@
         {"name": "Essence of central mass", "Description": "Hdmg", "cost": 10, "dmgmlt": 2.5, "lvlreq" : 8},
         {"name": "Essence of remembrance", "Description": "Edmg", "cost": 10, "dmgmlt": 3.0, "lvlreq" : 10}
     ],
-    "Technician" : [
+    "2" : [
         {"name": "Quick fix", "Description": "LHea","cost": 2, "healing": 3, "lvlreq":1},
         {"name": "Hot fix", "Description": "MHea", "cost": 4, "healing":5, "lvlreq": 3},
         {"name": "Reboot", "Description": "LHea", "cost": 6, "healing": 9, "lvlreq": 6},

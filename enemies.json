@@ -1,5 +1,5 @@
 {
-    "mobster": {
+    "1": {
         "name" : "Gun mobster",
         "eid" : 1,
         "hp" : 50,
@@ -14,7 +14,7 @@
             }
         ]
     },
-    "bully": {
+    "2": {
         "name" : "Bully",
         "eid" : 2,
         "hp" : 25,
@@ -33,7 +33,7 @@
             }
         ]
     },
-    "lbully": {
+    "3": {
         "name" : "Low life Bully",
         "eid" : 3,
         "hp" : 20,
@@ -52,7 +52,7 @@
             }
         ]
     },
-    "thug1" : {
+    "29" : {
         "name" : "Ornery Yakuza",
         "eid" : 29,
         "hp" : 100,
@@ -67,7 +67,7 @@
             }
         ]
     },
-    "amon" : {
+    "30" : {
         "name" : "Sanjo Amon",
         "eid" : 30,
         "hp" : 1500,
