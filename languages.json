@@ -15,7 +15,7 @@
         "enemyhit" : "The {enemyname} caused {enemyhit} on {allyname}",
         "map1" : "City map: \n Type 1 for the Cafe (lvl req: 1) \n Type 2 to go to the workshop (lvl req: 10) \n Type 3 for the Tanban (minigames) (lvl req: 1) \n Type 4 for the bar (lvl req: 2) \n Type 5 for the Pawn Shop (lvl req: 4) \n Dungeons \n type 6 to go to the Liang Qui (lvl req: 1) \n Type 7 to go to the Feizhua (lvl req: 10) \n Type 8 for the Jiangyang Ryu (Dungeon) (lvl req: 15) \n Type 9 to go the Fuxi Donzen (lvl req: 20) \n Type 0 to save and quit the game",
         "bye" : "Game saved, goodbye!",
-        "dungen" : "You enetered the dungeon with {total_room}!",
+        "dungen" : "You enetered the dungeon with {total_rooms}!",
         "enemye" : "You enetered the room and got jumped!",
         "chest" : "You entered the room and there was a chest!",
         "break" : "You entered the room and saw some nice snacks around. \n You got full mana and hp!",
