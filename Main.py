@@ -10,6 +10,9 @@ def cleaning():
 with open("languages.json", "r", encoding="utf-8") as thingy:
     lang = json.load(thingy)
 
+with open("items.json", "r", encoding="utf-8") as thingamajing:
+    items = json.load(thingamajing)
+
 with open ("skills.json", "r", encoding="utf-8") as skill:
     skills = json.load(skill)
 
@@ -44,10 +47,13 @@ def dungeon(enemy_pool, boss_id):
 
         if event == "enemy":
             print(lang[language1]["enemye"])
-            sucess = combat1(init_stats, enemy_pool, enemis, lang, language1, skills)
+            num_enemies = random.randint(1, 3)
+            select_enemy_id = random.choices(enemy_pool, k=num_enemies)
+            sucess = combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
 
             if not sucess:
-                break
+                return
+
         elif event == "chest":
             print(lang[language1]["chest"])
         elif event == "break":
@@ -64,6 +70,7 @@ def dungeon(enemy_pool, boss_id):
     sucess = combat1(init_stats, [boss_id], enemis, lang, language1, skills)
     if not sucess:
         return
+    
 
 
 print ("Welcome to the game! / bienvenue á la jeux! / Bem vindo ao jogo!")
@@ -89,10 +96,11 @@ if begin1 == "2":
                 "maxmana" : 3,
                 "stre" : 1,
                 "luck" : 1,
-                "inv" : "inv",
-                "xp" : 1,
-                "lvl" : 0,
-                "pts" : 0
+                "inv" : {},
+                "xp" : 0,
+                "lvl" : 1,
+                "pts" : 0,
+                "eq_wep" : "Fists",
             }
         ]
     }
@@ -158,12 +166,14 @@ else:
     print("Game loaded.")
 playerlvl = init_stats["party"][0]["lvl"]
 map_data = mape()
+playerOV = init_stats["party"][0]
+player_itemOV = list(playerOV["inv"].keys())
 
 in_map = True
 while in_map:
 
     print("\n" + lang[language1]["map1"])
-    mapc = input("> ")
+    mapc = input("> ").strip()
     
     if mapc == "0":
         save(init_stats)
@@ -185,4 +195,24 @@ while in_map:
         else:
             print("\n" + lang[language1]["lowlv"])
     elif mapc == "4":
-        dungeon([1, 2, 3], 29)
+        dungeon([3, 2], 29)
+    elif mapc == "5":
+        combat1(init_stats, [3], enemis, lang, language1, skills, items)
+    elif mapc == "i":
+        closeinv = False
+        while not closeinv:
+            for i, itemname in enumerate(player_itemOV):
+                count = playerOV["inv"][itemname]
+                print(f"{i}: {itemname}(x{count})")
+                print("\n to close inventory type I")
+            choice = input("> ").strip()
+
+            if choice == "i":
+                closeinv = True
+                continue
+
+            else:
+                item_name = player_itemOV[choice]
+                item_data = items[item_name]
+
+

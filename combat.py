@@ -6,6 +6,9 @@ from saveload import *
 def cleaning():
     subprocess.run("cls", shell=True)
 
+with open("items.json", "r", encoding="utf-8") as thingamajing:
+    items = json.load(thingamajing)
+
 with open("languages.json", "r", encoding="utf-8") as thingy:
     lang = json.load(thingy)
 
@@ -18,7 +21,7 @@ with open("enemies.json", "r", encoding="utf-8") as enemies:
 with open ("party.json", "r", encoding="utf-8") as part:
     parte = json.load(part)
 
-def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills):
+def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
     presentenemies = []
 
     for eids in enemy_ids:
@@ -77,7 +80,10 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills):
                                 continue
                             else:
                                 presentenemies[target_index]["hp"] -= combate["stre"]
+                                combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
+                                #heal_target["hp"] = min(heal_target["maxhp"], heal_target["hp"] + chosen["healing"])
                                 print(f"Hit! {presentenemies[target_index]['name']} takes {combate['stre']} damage.")
+                                print(f"And you got +5 mana!")
                                 turn_completed = True
                         else:
                             print("Invalid number!")
@@ -133,21 +139,21 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills):
                                     else:
                                         print(f"{i + 1}: {ally ['name']} DEAD")
                                     
-                            healing_choice = input("> ").strip()
-                            if healing_choice.isdigit():
-                                heal_choice = int(healing_choice)
-                                if 0 < heal_choice <= len(init_stats["party"]):
-                                    ally_index = heal_choice - 1
-                                    heal_target = init_stats["party"][ally_index]
-                                    if heal_target["hp"] > 0:
-                                        heal_target["hp"] = min(heal_target["maxhp"], heal_target["hp"] + chosen["healing"])
-                                        combate["mana"] -= chosen["cost"]
-                                        print (f"Plus {chosen['healing']} on {heal_target['name']}")
-                                    else:
-                                        print (f"{heal_target['name']} cannot be healed due to large damage received!")
-                                        continue
+                                healing_choice = input("> ").strip()
+                                if healing_choice.isdigit():
+                                    heal_choice = int(healing_choice)
+                                    if 0 < heal_choice <= len(init_stats["party"]):
+                                        ally_index = heal_choice - 1
+                                        heal_target = init_stats["party"][ally_index]
+                                        if heal_target["hp"] > 0:
+                                            heal_target["hp"] = min(heal_target["maxhp"], heal_target["hp"] + chosen["healing"])
+                                            combate["mana"] -= chosen["cost"]
+                                            print (f"Plus {chosen['healing']} on {heal_target['name']}")
+                                        else:
+                                            print (f"{heal_target['name']} cannot be healed due to large damage received!")
+                                            continue
 
-                            elif "damage" in chosen:    
+                            elif "dmgmlt" in chosen:    
                                 for i, enemy in enumerate(presentenemies):
                                     if enemy["hp"] > 0:
                                         print(f"{i + 1}: {enemy['name']}")
@@ -181,8 +187,37 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills):
                             print("Invalid input!")
 
                 elif playerturn == "3":
-                    print("\n" + "placeholder")
-                    turn_completed = True
+                    player_item = list(combate["inv"].keys())
+
+                    for i, itemname in enumerate(player_item):
+                        count = combate["inv"][itemname]
+                        print(f"{i + 1}: {itemname}(x{count})")
+
+                    choice = int(input("> ")) -1
+                    item_name = player_item[choice]
+                    item_data = items[item_name]
+
+
+                    if item_data["type"] == "heal":
+                        if item_name == "Stamina Spork":
+                            combate["hp"] = (combate["hp"] + item_data["value"])
+                            print(f"You feel ill -{item_data['value']}")
+                            combate["inv"][item_name]  -= 1
+                        else:
+                            combate["hp"] = min(combate["maxhp"], combate["hp"] + item_data["value"])
+                            print(f"You consumed a nice {item_name} you got +{item_data['value']} health")
+                            combate["inv"][item_name]  -= 1
+                            
+                    elif item_data["type"] == "mana":
+                        combate["mana"] = min(combate["maxmana"], combate["mana"] + item_data["value"])
+                        print(f"You consumed a nice {item_name} and got + {item_data['value']}")
+
+                    combate["inv"][item_name] -= 1
+
+                turn_completed = True
+
+                if combate["inv"][item_name] >= 0:
+                    del(combate["inv"][item_name])
                     
                 else:
                     print("Invalid choice, try again.")
@@ -205,9 +240,24 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills):
                     target = random.choice(living_party)
                     target["hp"] -= eatt["stre"]
                     print(f"{eatt['name']} attacks {target['name']} for {eatt['stre']} damage!")
-            else:
-                print ("You died!")
-                game_over = True
-                break
+                else:
+                    print ("You died!")
+                    game_over = True
+                    break
 
     print("Combat Finished!")
+    for enemy in presentenemies:
+        if "possibledrop" in enemy:
+            drop_enemy = enemy["possibledrop"][0]["itemid"]
+            print(f"You got a {drop_enemy}!")
+            player_inv = init_stats["party"][0]["inv"]
+            if drop_enemy in player_inv:
+                player_inv[drop_enemy] += 1
+            else:
+                player_inv[drop_enemy]= 1
+                print("Debug Backpack:", init_stats["party"][0]["inv"])
+    
+    if game_over:
+        return False
+    else:
+        return True

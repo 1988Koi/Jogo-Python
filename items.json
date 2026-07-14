@@ -1,0 +1,47 @@
+{
+    "Piece of gum": {
+        "type": "heal",
+        "value" : 5,
+        "desc" : "Heals you a little, the flavor is long gone"
+    },
+    "Stamina spark": {
+        "type" : "heal",
+        "value" : 20,
+        "desc" : "Heals you a lot, hoho... ahhhh..."
+    },
+    "Frown burger": {
+        "type" : "heal",
+        "value" : 15,
+        "desc" :"Heals you a lot, a frown in each box"
+    },
+    "Stamina spork": {
+        "type" : "heal",
+        "value" : -20,
+        "desc" : "Heals you a lot, hoho... ahhhh..."
+    },
+    "Legend katana": {
+        "type" : "weapon",
+        "strenght" : 30,
+        "desc" : "A katana forged from rare ores, gives 30 more attack damage"
+    },
+    "Hero sword": {
+        "type" : "weapon",
+        "strenght" : 10,
+        "desc" : "A dusty baseball bat, gives 10 more attack"
+    },
+    "Fists": {
+        "type" : "weapon",
+        "strenght" : 0,
+        "desc" : "Your own fists, doesn't gives more attack"
+    },
+    "Spare change": {
+        "type" : "junk",
+        "sellvalue" : 4,
+        "desc" : "Some pocket change, can be sold for some reason"
+    },
+    "Ammo": {
+        "type" : "junk",
+        "sellvalue" : 10,
+        "desc" : "A single ammo, can be sold at a paw shop"
+    }
+}

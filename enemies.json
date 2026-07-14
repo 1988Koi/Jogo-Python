@@ -68,7 +68,7 @@
         ]
     },
     "30" : {
-        "name" : "Sanjo Amon",
+        "name" : "Sanjo Anon",
         "eid" : 30,
         "hp" : 1500,
         "maxhp" : 1500,
@@ -77,7 +77,7 @@
         "isboss" : true,
         "possibledrop" : [
             {
-                "itemid" : "Simple Bowie",
+                "itemid" : "Anon Sunglasses",
                 "chance" : 1
             }
         ]
