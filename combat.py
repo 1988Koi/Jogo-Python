@@ -63,6 +63,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                 playerturn = input("> ").strip().lower()
                 
                 if playerturn == "1":
+                    total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
                     print("\n" + lang[language1]["attack"])
                     for i, enemy in enumerate(presentenemies):
                         if enemy["hp"] > 0:
@@ -79,12 +80,13 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                                 print("Enemy already dead! Pick someone else.")
                                 continue
                             else:
-                                presentenemies[target_index]["hp"] -= combate["stre"]
+                                presentenemies[target_index]["hp"] -= total_damage
                                 combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
                                 #heal_target["hp"] = min(heal_target["maxhp"], heal_target["hp"] + chosen["healing"])
-                                print(f"Hit! {presentenemies[target_index]['name']} takes {combate['stre']} damage.")
+                                print(f"Hit! {presentenemies[target_index]['name']} takes {total_damage} damage.")
                                 print(f"And you got +5 mana!")
                                 turn_completed = True
+                                break
                         else:
                             print("Invalid number!")
                     else:
@@ -175,6 +177,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                                                 combate["mana"] -= chosen["cost"]
                                                 print(f"Used {chosen['name']}! Dealt {damage} damage.")
                                                 turn_completed = True
+                                                break
                                             else:
                                                 print("Not enough Mana!")
                                     else:
@@ -187,7 +190,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                             print("Invalid input!")
 
                 elif playerturn == "3":
-                    player_item = list(combate["inv"].keys())
+                    player_item = list(init_stats["party"][0]["inv"].keys())
 
                     for i, itemname in enumerate(player_item):
                         count = combate["inv"][itemname]
@@ -203,29 +206,33 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                             combate["hp"] = (combate["hp"] + item_data["value"])
                             print(f"You feel ill -{item_data['value']}")
                             combate["inv"][item_name]  -= 1
+                            if combate["inv"][item_name] == 0:
+                                del(combate["inv"][item_name])
                         else:
                             combate["hp"] = min(combate["maxhp"], combate["hp"] + item_data["value"])
                             print(f"You consumed a nice {item_name} you got +{item_data['value']} health")
                             combate["inv"][item_name]  -= 1
+                            if combate["inv"][item_name] == 0:
+                                del(combate["inv"][item_name])
                             
                     elif item_data["type"] == "mana":
                         combate["mana"] = min(combate["maxmana"], combate["mana"] + item_data["value"])
                         print(f"You consumed a nice {item_name} and got + {item_data['value']}")
-
                     combate["inv"][item_name] -= 1
+                    if combate["inv"][item_name] == 0:
+                        del(combate["inv"][item_name])
 
                 turn_completed = True
-
-                if combate["inv"][item_name] >= 0:
-                    del(combate["inv"][item_name])
                     
-                else:
-                    print("Invalid choice, try again.")
+            else:
+                print("Invalid choice, try again.")
+                continue
                     
             if not any(e["hp"] > 0 for e in presentenemies):
                 break
 
         if any(e["hp"] > 0 for e in presentenemies):
+            cleaning()
             for eatt in presentenemies: 
                 if eatt["hp"] <= 0:
                     continue
@@ -245,6 +252,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                     game_over = True
                     break
 
+
     print("Combat Finished!")
     for enemy in presentenemies:
         if "possibledrop" in enemy:
@@ -254,7 +262,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
             if drop_enemy in player_inv:
                 player_inv[drop_enemy] += 1
             else:
-                player_inv[drop_enemy]= 1
+                player_inv[drop_enemy] = 1
                 print("Debug Backpack:", init_stats["party"][0]["inv"])
     
     if game_over:

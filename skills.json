@@ -20,5 +20,19 @@
         {"name": "Simple Slash", "Description": "Ldmg", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
         {"name": "Devilish Slash", "Description": "Hdmg", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
         {"name": "Essence of Diabolic Slash", "Description": "Edmg", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
+    ],
+    "hobo": [
+        {"name": "Snooze", "Description": "Ldmg", "cost": 3, "healing": 1.5, "lvlreq": 1},
+        {"name": "Thoughtless Skewer", "Description": "Mdmg", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
+        {"name": "Simple Slash", "Description": "Ldmg", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Devilish Slash", "Description": "Hdmg", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
+        {"name": "Essence of Diabolic Slash", "Description": "Edmg", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
+    ],
+    "salaryman": [
+        {"name": "Briefcase Bash", "Description": "Ldmg", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Pure worker rage", "Description": "Mdmg", "cost": 7, "dmgmlt": 2, "lvlreq": 1},
+        {"name": "Papercut", "Description": "Mdmg", "cost": 7, "ailment": "None", "dmgmlt": 1.5, "lvlreq": 1},
+        {"name": "Coffee Break", "Description": "MHea", "cost": 12, "healing": 10, "lvlreq": 3},
+        {"name": "Essence of Rush Hour", "Description": "Edmg", "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
     ]
 }

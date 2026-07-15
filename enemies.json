@@ -43,7 +43,7 @@
         "isboss" : false,
         "possibledrop" : [
             {
-            "itemid" : "Piece of gum",
+            "itemid" : "Hero sword",
             "chance" : 0.90
             },
             {

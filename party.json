@@ -6,7 +6,9 @@
         "hp" : 15,
         "mana" : 7,
         "maxmana" : 7,
-        "stre" : 5
+        "stre" : 5,
+        "lvl" : 1,
+        "eq_wep" : "Briefcase"
     },
     "zhouzhen": {
         "name" : "Zhou Zhen",
@@ -15,7 +17,8 @@
         "hp" : 7,
         "mana" : 15,
         "maxmana" : 15,
-        "stre" : 10
+        "stre" : 10,
+        "lvl" : 1
     },
     "yatakeyomai": {
         "name" : "Yatake Yomai",
@@ -24,7 +27,8 @@
         "hp" : 20,
         "mana" : 10,
         "maxmana" : 10,
-        "stre" : 20
+        "stre" : 20,
+        "lvl" : 5
     },
     "joryukazama": {
         "name" : "Moryu Kazaki",
@@ -33,6 +37,7 @@
         "hp" : 30,
         "mana" : 30,
         "maxmana" : 30,
-        "stre" : 30
+        "stre" : 30,
+        "lvl" : 20
     }
 }

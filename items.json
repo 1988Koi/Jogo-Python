@@ -21,17 +21,17 @@
     },
     "Legend katana": {
         "type" : "weapon",
-        "strenght" : 30,
+        "stren" : 30,
         "desc" : "A katana forged from rare ores, gives 30 more attack damage"
     },
     "Hero sword": {
         "type" : "weapon",
-        "strenght" : 10,
+        "stren" : 10,
         "desc" : "A dusty baseball bat, gives 10 more attack"
     },
     "Fists": {
         "type" : "weapon",
-        "strenght" : 0,
+        "stren" : 0,
         "desc" : "Your own fists, doesn't gives more attack"
     },
     "Spare change": {
@@ -43,5 +43,10 @@
         "type" : "junk",
         "sellvalue" : 10,
         "desc" : "A single ammo, can be sold at a paw shop"
+    },
+    "Briefcase": {
+        "type" : "weapon",
+        "stren" : 0,
+        "desc" : "Gordon briefcase, there's not much inside"
     }
 }

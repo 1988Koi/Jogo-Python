@@ -1,6 +1,7 @@
 import json
 import random
 import subprocess
+import time
 from saveload import *
 from combat import *
 
@@ -46,6 +47,7 @@ def dungeon(enemy_pool, boss_id):
         print (f"\n Room {currentroom}")
 
         if event == "enemy":
+            cleaning()
             print(lang[language1]["enemye"])
             num_enemies = random.randint(1, 3)
             select_enemy_id = random.choices(enemy_pool, k=num_enemies)
@@ -55,13 +57,16 @@ def dungeon(enemy_pool, boss_id):
                 return
 
         elif event == "chest":
+            cleaning()
             print(lang[language1]["chest"])
         elif event == "break":
+            cleaning()
             print (lang[language1]["break"])
             for member in init_stats["party"]:
                 member["hp"] = member["maxhp"]
                 member ["mana"] = member["maxmana"]
         elif event == "echest":
+            cleaning()
             print (lang[language1]["echest"])
 
         currentroom += 1
@@ -195,24 +200,56 @@ while in_map:
         else:
             print("\n" + lang[language1]["lowlv"])
     elif mapc == "4":
-        dungeon([3, 2], 29)
+        already_recruit = False
+        for i in init_stats["party"]:
+            if "Gordon" == i["name"]:
+                already_recruit = True
+            if already_recruit == False:
+                print("You drink a little bit of beer, before you hear a man grumbling to himself")
+                time.sleep(2)
+                print("You decide to ask him what happened")
+                time.sleep(2)
+                print("After some time talking you realized he also worked for the same company you got fired from")
+                print("You explain how you know they are corrupt and how you want to take revenge.")
+                print("He thinks you are insane")
+                time.sleep(1)
+                print(".")
+                cleaning()
+                time.sleep(1)
+                print("..")
+                time.sleep(1)
+                cleaning()
+                print("...")
+                time.sleep(2)
+                cleaning()
+                print("But he joins your party.")
+                print("Gordon Joined the Party!")
+                init_stats["party"].append(parte["gordon"])
+
     elif mapc == "5":
+        cleaning()
         combat1(init_stats, [3], enemis, lang, language1, skills, items)
     elif mapc == "i":
+        player_itemOV = list(playerOV["inv"].keys())
+        weaponlist = []
         closeinv = False
+        for i in player_itemOV:
+            print("\n to close inventory type I")
+            currentitem = items[i]
+            if currentitem["type"] == "weapon":
+                weaponlist.append(i)
         while not closeinv:
-            for i, itemname in enumerate(player_itemOV):
+            for i, itemname in enumerate(weaponlist):
                 count = playerOV["inv"][itemname]
                 print(f"{i}: {itemname}(x{count})")
-                print("\n to close inventory type I")
             choice = input("> ").strip()
 
             if choice == "i":
                 closeinv = True
                 continue
 
-            else:
-                item_name = player_itemOV[choice]
+            elif choice.isdigit():
+                item_name = weaponlist[int(choice)]
                 item_data = items[item_name]
-
-
+                playerOV["eq_wep"] = item_name
+                print (f"You equipped {playerOV['eq_wep']}!")
