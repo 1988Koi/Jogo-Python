@@ -127,7 +127,8 @@ if begin1 == "2":
             "2" : "Magician",
             "3" : "Security",
             "4" : "Foreman",
-            "5" : "Chef"
+            "5" : "Chef",
+            "6" : "Hero"
         }
     
     statusclass = {
@@ -135,7 +136,9 @@ if begin1 == "2":
         "Magician" : {"hp" : 7, "mana": 15, "maxmana" : 15, "stre": 2, "luck": 5},
         "Security" : {"hp" : 10, "mana": 3, "maxmana" : 3, "stre": 10, "luck": 3},
         "Foreman" : {"hp" : 30, "mana": 1, "maxmana" : 1, "stre": 4, "luck": 0},
-        "Chef" : {"hp" : 7, "mana": 15, "maxmana" : 15, "stre": 3, "luck": 5}
+        "Chef" : {"hp" : 7, "mana": 15, "maxmana" : 15, "stre": 3, "luck": 5},
+        "Hero" : {"hp" : 8, "mana": 10, "maxmana" : 10, "stre": 5, "luck": 5},
+        "Yakuza" : {"hp" : 10, "mana": 7, "maxmana" : 7, "stre": 8, "luck": 2}
     }
 
     while not classconf:
@@ -204,6 +207,7 @@ while in_map:
         for i in init_stats["party"]:
             if "Gordon" == i["name"]:
                 already_recruit = True
+                print("How about a beer?")
             if already_recruit == False:
                 print("You drink a little bit of beer, before you hear a man grumbling to himself")
                 time.sleep(2)
@@ -212,9 +216,8 @@ while in_map:
                 print("After some time talking you realized he also worked for the same company you got fired from")
                 print("You explain how you know they are corrupt and how you want to take revenge.")
                 print("He thinks you are insane")
-                time.sleep(1)
+                time.sleep(5)
                 print(".")
-                cleaning()
                 time.sleep(1)
                 print("..")
                 time.sleep(1)
@@ -225,6 +228,7 @@ while in_map:
                 print("But he joins your party.")
                 print("Gordon Joined the Party!")
                 init_stats["party"].append(parte["gordon"])
+                init_stats["people_rec"] += 1
 
     elif mapc == "5":
         cleaning()

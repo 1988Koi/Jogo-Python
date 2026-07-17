@@ -4,9 +4,38 @@
         "eid" : 1,
         "hp" : 50,
         "maxhp" : 50,
-        "stre" : 30,
         "xpdrop" : 100,
         "isboss" : false,
+        "status" : "Normal",
+        "moveset" : [
+            {
+            "nameskill" : "Shoot",
+            "chance" : 0.50,
+            "status" : "Bleed",
+            "statuschance" : 0.50,
+            "statustarget" : "ally",
+            "targettype" : "one",
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Reload",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "statustarget" : "self",
+            "targettype" : "self",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Spray",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 1,
+            "statustarget" : "self",
+            "targettype" : "all",
+            "stre" : 15
+            }
+        ],
         "possibledrop" : [
             {
                 "itemid" : "Ammo",
@@ -22,6 +51,30 @@
         "stre" : 4,
         "xpdrop" : 50,
         "isboss" : false,
+        "status" : "Normal",
+        "moveset" : [
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0.50,
+            "targettype" : "one"
+            },
+            {
+            "nameskill" : "Kick",
+            "chance" : 0.40,
+            "status" : "Nothing",
+            "statuschance" : 1,
+            "targettype" : "one"
+            },
+            {
+            "nameskill" : "Basketball throw",
+            "chance" : 0.10,
+            "status" : "Stun",
+            "statuschance" : 0.25,
+            "targettype" : "one"
+            }
+        ],
         "possibledrop" : [
             {
             "itemid" : "Piece of gum",
@@ -41,6 +94,7 @@
         "stre" : 1,
         "xpdrop" : 10,
         "isboss" : false,
+        "status" : "Normal",
         "possibledrop" : [
             {
             "itemid" : "Hero sword",
@@ -60,6 +114,7 @@
         "stre" : 50,
         "xpdrop" : 200,
         "isboss" : true,
+        "status" : "Normal",
         "possibledrop" : [
             {
                 "itemid" : "Katana",
@@ -75,6 +130,7 @@
         "stre" : 50,
         "xpdrop" : 1000,
         "isboss" : true,
+        "status" : "Normal",
         "possibledrop" : [
             {
                 "itemid" : "Anon Sunglasses",

@@ -57,13 +57,14 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                 continue
                 
             turn_completed = False
+            total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
             
             while not turn_completed and not game_over:
                 print("\n" + lang[language1]["combat"])
                 playerturn = input("> ").strip().lower()
                 
                 if playerturn == "1":
-                    total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
+
                     print("\n" + lang[language1]["attack"])
                     for i, enemy in enumerate(presentenemies):
                         if enemy["hp"] > 0:
@@ -101,7 +102,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                     for i, skil in enumerate(class_skills):
                         if skil["lvlreq"] <= combate["lvl"]:
                             available.append(skil)
-                            print(f"{len(available)}: {skil['name']}, cost: {skil['cost']}")
+                            print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {skil['desc']}")
 
                     if not available:
                         print("No skills available!")
@@ -155,39 +156,61 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                                             print (f"{heal_target['name']} cannot be healed due to large damage received!")
                                             continue
 
-                            elif "dmgmlt" in chosen:    
-                                for i, enemy in enumerate(presentenemies):
-                                    if enemy["hp"] > 0:
-                                        print(f"{i + 1}: {enemy['name']}")
-                                    else:
-                                        print(f"{i + 1}: {enemy['name']} DEAD")
-                                        
-                                target_choice = input("> ").strip()
-                                if target_choice.isdigit():
-                                    choice = int(target_choice)
-                                    if 0 < choice <= len(presentenemies):
-                                        target_index = choice - 1
-                                        
-                                        if presentenemies[target_index]["hp"] <= 0:
-                                            print("Enemy already dead! Pick someone else.")
+                            elif "dmgmlt" in chosen:
+                                if chosen["targettype"] == "single":
+                                    for i, enemy in enumerate(presentenemies):
+                                        if enemy["hp"] > 0:
+                                            print(f"{i + 1}: {enemy['name']}")
                                         else:
-                                            if chosen["cost"] <= combate["mana"]:
-                                                damage = round(combate["stre"] * chosen["dmgmlt"])
-                                                presentenemies[target_index]["hp"] -= damage
+                                            print(f"{i + 1}: {enemy['name']} DEAD")
+                                            
+                                    target_choice = input("> ").strip()
+                                    if target_choice.isdigit():
+                                        choice = int(target_choice)
+                                        if 0 < choice <= len(presentenemies):
+                                            target_index = choice - 1
+                                            
+                                            if presentenemies[target_index]["hp"] <= 0:
+                                                print("Enemy already dead! Pick someone else.")
+                                            else:
+                                                if chosen["cost"] <= combate["mana"]:
+                                                    damage = round(total_damage * chosen["dmgmlt"])
+                                                    presentenemies[target_index]["hp"] -= damage
+                                                    combate["mana"] -= chosen["cost"]
+                                                    print(f"Used {chosen['name']}! Dealt {damage} damage.")
+                                                    turn_completed = True
+                                                    break
+                                                else:
+                                                    print("Not enough Mana!")
+                                                    continue
+                                        else:
+                                            print("Invalid number!")
+                                            continue
+                                    else:
+                                        print("Invalid input!")
+                                        continue
+
+                                elif chosen["targettype"] == "all":
+                                    if chosen["cost"] >= combate["mana"]:
+                                        damage = round(total_damage * chosen["dmgmlt"])
+                                        for enemy in presentenemies:
+                                            if enemy["hp"] > 0:
+                                                enemy["hp"] -= damage
                                                 combate["mana"] -= chosen["cost"]
-                                                print(f"Used {chosen['name']}! Dealt {damage} damage.")
+                                                print(f"You used a skill that hit everyone!")
                                                 turn_completed = True
                                                 break
                                             else:
-                                                print("Not enough Mana!")
+                                                print("One of the enemies were already dead!")
                                     else:
-                                        print("Invalid number!")
-                                else:
-                                    print("Invalid input!")
+                                        print("Not enough mana!")
+                                        continue
                             else:
                                 print("Invalid skill number!")
+                                continue
                         else:
                             print("Invalid input!")
+                            continue
 
                 elif playerturn == "3":
                     player_item = list(init_stats["party"][0]["inv"].keys())
@@ -222,11 +245,11 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                     if combate["inv"][item_name] == 0:
                         del(combate["inv"][item_name])
 
-                turn_completed = True
-                    
-            else:
-                print("Invalid choice, try again.")
-                continue
+                    turn_completed = True
+
+                else:
+                    print("Invalid choice, try again.")
+                    continue
                     
             if not any(e["hp"] > 0 for e in presentenemies):
                 break
@@ -238,15 +261,31 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                     continue
 
                 living_party = []
+                chosen_attack = None
 
                 for member in init_stats["party"]:
                     if member["hp"] > 0:
                         living_party.append(member)
 
                 if len(living_party) > 0:
-                    target = random.choice(living_party)
-                    target["hp"] -= eatt["stre"]
-                    print(f"{eatt['name']} attacks {target['name']} for {eatt['stre']} damage!")
+                    runnin_total = 0
+                    randomchance = random.random()
+                    for i in eatt["moveset"]:
+                        runnin_total += i["chance"]
+                        if runnin_total >= randomchance:
+                            chosen_attack = i
+                            if chosen_attack["targettype"] == "one":
+                                unluckyman = random.choice(living_party)
+                                unluckyman["hp"] -= chosen_attack["stre"]
+                                print (f"{unluckyman['name']} got hit by a {chosen_attack['nameskill']}")
+                            elif chosen_attack["targettype"] == "all":
+                                for e in living_party:
+                                    e["hp"] -= chosen_attack["stre"]
+                                print(f"everybody got hit by {chosen_attack['nameskill']}!")
+                            elif chosen_attack["targettype"] == "self":
+                                eatt["status"] = chosen_attack["status"]
+                            break
+
                 else:
                     print ("You died!")
                     game_over = True

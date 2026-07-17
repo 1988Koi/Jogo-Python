@@ -6,7 +6,7 @@
     },
     "Stamina spark": {
         "type" : "heal",
-        "value" : 20,
+        "value" : 30,
         "desc" : "Heals you a lot, hoho... ahhhh..."
     },
     "Frown burger": {
@@ -16,7 +16,7 @@
     },
     "Stamina spork": {
         "type" : "heal",
-        "value" : -20,
+        "value" : -30,
         "desc" : "Heals you a lot, hoho... ahhhh..."
     },
     "Legend katana": {
@@ -48,5 +48,10 @@
         "type" : "weapon",
         "stren" : 0,
         "desc" : "Gordon briefcase, there's not much inside"
+    },
+    "Microphone": {
+        "type" : "weapon",
+        "stren" : 0,
+        "desc" : "Reggie's microphone, kinda bad"
     }
 }

@@ -1,1 +1,1 @@
-{"peoplerec": 0, "party": [{"name": "Roberto", "class": "Security", "maxhp": 10, "hp": 9, "mana": 3, "maxmana": 3, "stre": 10, "luck": 3, "inv": {"Hero sword": 1}, "xp": 0, "lvl": 1, "pts": 0, "eq_wep": "Fists"}, {"name": "Gordon", "class": "salaryman", "maxhp": 15, "hp": 15, "mana": 7, "maxmana": 7, "stre": 5, "lvl": 1, "eq_wep": "Briefcase"}]}
+{"peoplerec": 0, "party": [{"name": "Roberto", "class": "Security", "maxhp": 10, "hp": 10, "mana": 3, "maxmana": 3, "stre": 10, "luck": 3, "inv": {}, "xp": 0, "lvl": 1, "pts": 0, "status" : "Normal", "eq_wep": "Fists"}]}

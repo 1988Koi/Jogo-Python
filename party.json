@@ -8,7 +8,20 @@
         "maxmana" : 7,
         "stre" : 5,
         "lvl" : 1,
+        "status" : "Normal",
         "eq_wep" : "Briefcase"
+    },
+    "Reggie": {
+        "name" : "Gordon",
+        "class" : "Unemplyued",
+        "maxhp" : 15,
+        "hp" : 15,
+        "mana" : 7,
+        "maxmana" : 7,
+        "stre" : 5,
+        "lvl" : 1,
+        "status" : "Normal",
+        "eq_wep" : "Microphone"
     },
     "zhouzhen": {
         "name" : "Zhou Zhen",
@@ -18,6 +31,7 @@
         "mana" : 15,
         "maxmana" : 15,
         "stre" : 10,
+        "status" : "Normal",
         "lvl" : 1
     },
     "yatakeyomai": {
@@ -28,9 +42,10 @@
         "mana" : 10,
         "maxmana" : 10,
         "stre" : 20,
+        "status" : "Normal",
         "lvl" : 5
     },
-    "joryukazama": {
+    "moryukazaki": {
         "name" : "Moryu Kazaki",
         "class" : "legend",
         "maxhp": 30,
@@ -38,6 +53,7 @@
         "mana" : 30,
         "maxmana" : 30,
         "stre" : 30,
+        "status" : "Normal",
         "lvl" : 20
     }
 }

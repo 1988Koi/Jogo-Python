@@ -1,38 +1,38 @@
 {
     "legend": [
-        {"name": "Finishing blow", "Description": "Ldmg", "cost" : 3, "dmgmlt": 1.5, "lvlreq" : 1},
-        {"name": "3 Hit combo", "Description": "Ldmg", "cost" : 1, "dmgmlt": 1.3, "lvlreq": 1},
-        {"name": "Essence of knife", "Description": "Mdmg", "cost": 5, "dmgmlt": 1.7, "lvlreq" : 3}, 
-        {"name": "Essence of gun", "Description": "Mdmg","cost" : 7, "dmgmlt": 2.0, "lvlreq": 5},
-        {"name": "Essence of central mass", "Description": "Hdmg", "cost": 10, "dmgmlt": 2.5, "lvlreq" : 8},
-        {"name": "Essence of remembrance", "Description": "Edmg", "cost": 10, "dmgmlt": 3.0, "lvlreq" : 10}
+        {"name": "Finishing blow", "desc": "Ldmg", "targettype": "single", "cost" : 3, "dmgmlt": 1.5, "lvlreq" : 1},
+        {"name": "3 Hit combo", "desc": "Ldmg", "targettype": "single", "cost" : 1, "dmgmlt": 1.3, "lvlreq": 1},
+        {"name": "Essence of Knife", "desc": "Mdmg", "targettype": "single", "cost": 5, "dmgmlt": 1.7, "lvlreq" : 3}, 
+        {"name": "Essence of Gun", "desc": "Mdmg", "targettype": "single","cost" : 7, "dmgmlt": 2.0, "lvlreq": 5},
+        {"name": "Essence of Central mass", "desc": "Hdmg", "targettype": "single", "cost": 10, "dmgmlt": 2.5, "lvlreq" : 8},
+        {"name": "Essence of Remembrance", "desc": "Edmg", "targettype": "single", "cost": 10, "dmgmlt": 3.0, "lvlreq" : 10}
     ],
     "technician" : [
-        {"name": "Quick fix", "Description": "LHea","cost": 2, "healing": 3, "lvlreq":1},
-        {"name": "Hot fix", "Description": "MHea", "cost": 4, "healing":5, "lvlreq": 3},
-        {"name": "Reboot", "Description": "LHea", "cost": 6, "healing": 9, "lvlreq": 6},
-        {"name": "Rubber banding", "Description": "Bback", "cost": 10, "bringback": 10, "lvlreq": 2},
-        {"name": "Wrench Throw", "Description": "Ldmg", "cost":3, "dmgmlt": 1.5, "lvlreq": 1}
+        {"name": "Quick fix", "desc": "LHea", "targettype": "single","cost": 2, "healing": 3, "lvlreq":1},
+        {"name": "Hot fix", "desc": "MHea", "targettype": "single", "cost": 4, "healing":5, "lvlreq": 3},
+        {"name": "Reboot", "desc": "LHea", "targettype": "single", "cost": 6, "healing": 9, "lvlreq": 6},
+        {"name": "Rubber banding", "desc": "Bback", "targettype": "single", "cost": 10, "bringback": 10, "lvlreq": 2},
+        {"name": "Wrench Throw", "desc": "Ldmg", "targettype": "single", "cost":3, "dmgmlt": 1.5, "lvlreq": 1}
     ],
     "security": [
-        {"name": "Fiendish Slash", "Description": "Ldmg", "cost": 3, "dmgmlt": 1.5, "lvlreq": 1},
-        {"name": "Thoughtless Skewer", "Description": "Mdmg", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
-        {"name": "Simple Slash", "Description": "Ldmg", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
-        {"name": "Devilish Slash", "Description": "Hdmg", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
-        {"name": "Essence of Diabolic Slash", "Description": "Edmg", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
+        {"name": "Fiendish Slash", "desc": "Ldmg", "targettype": "single", "inflict" : "Bleeding", "cost": 3, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Thoughtless Skewer", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleeding", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
+        {"name": "Simple Slash", "desc": "Ldmg", "targettype": "single", "inflict" : "Bleeding", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Devilish Slash", "desc": "Hdmg", "targettype": "single", "inflict" : "Bleeding", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
+        {"name": "Essence of Diabolic Slash", "desc": "Edmg", "targettype": "single", "inflict" : "Bleeding", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
     ],
     "hobo": [
-        {"name": "Snooze", "Description": "Ldmg", "cost": 3, "healing": 1.5, "lvlreq": 1},
-        {"name": "Thoughtless Skewer", "Description": "Mdmg", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
-        {"name": "Simple Slash", "Description": "Ldmg", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
-        {"name": "Devilish Slash", "Description": "Hdmg", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
-        {"name": "Essence of Diabolic Slash", "Description": "Edmg", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
+        {"name": "Snooze", "desc": "Ldmg", "targettype": "single", "cost": 3, "healing": 1.5, "lvlreq": 1},
+        {"name": "Thoughtless Skewer", "desc": "Mdmg", "targettype": "single", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
+        {"name": "Simple Slash", "desc": "Ldmg", "targettype": "single", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Devilish Slash", "desc": "Hdmg", "targettype": "single", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
+        {"name": "Essence of Diabolic Slash", "desc": "Edmg", "targettype": "single", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
     ],
     "salaryman": [
-        {"name": "Briefcase Bash", "Description": "Ldmg", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1},
-        {"name": "Pure worker rage", "Description": "Mdmg", "cost": 7, "dmgmlt": 2, "lvlreq": 1},
-        {"name": "Papercut", "Description": "Mdmg", "cost": 7, "ailment": "None", "dmgmlt": 1.5, "lvlreq": 1},
-        {"name": "Coffee Break", "Description": "MHea", "cost": 12, "healing": 10, "lvlreq": 3},
-        {"name": "Essence of Rush Hour", "Description": "Edmg", "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
+        {"name": "Briefcase Bash", "desc": "Ldmg", "targettype": "single", "inflict" : "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Worker Rage", "desc": "Mdmg", "targettype": "single", "inflict" : "Nothing", "cost": 7, "dmgmlt": 2, "lvlreq": 1},
+        {"name": "Papercut", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleeding", "cost": 7, "dmgmlt": 1.5, "lvlreq": 1},
+        {"name": "Coffee Break", "desc": "MHea", "targettype": "single", "inflict" : "Nothing", "cost": 12, "healing": 10, "lvlreq": 3},
+        {"name": "Essence of Rush Hour", "desc": "EdmgA", "targettype": "all", "inflict" : "Nothing", "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
     ]
 }
