@@ -277,14 +277,45 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                             if chosen_attack["targettype"] == "one":
                                 unluckyman = random.choice(living_party)
                                 unluckyman["hp"] -= chosen_attack["stre"]
-                                print (f"{unluckyman['name']} got hit by a {chosen_attack['nameskill']}")
+                                if "statuschance" in chosen_attack:
+                                    statusroll = random.random()
+                                    if statusroll <= chosen_attack["statuschance"]:
+                                        unluckyman["status"] = chosen_attack["status"]
+                                        print (f"{unluckyman['name']} got hit by a {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
+                                    else: 
+                                        print(f"{unluckyman['name']} got hit by a {chosen_attack['nameskill']} but managed to dodge the debuff!")                                  
+                                else:
+                                    print(f"{unluckyman['name']} was hit with a {chosen_attack['nameskill']}!")  
+                                    break                          
                             elif chosen_attack["targettype"] == "all":
+                                print(f"The enemy used {chosen_attack['nameskill']} on everybody!")
                                 for e in living_party:
                                     e["hp"] -= chosen_attack["stre"]
-                                print(f"everybody got hit by {chosen_attack['nameskill']}!")
+                                    if "statuschance" in chosen_attack:
+                                        if chosen_attack["statustarget"] == "ally":
+                                            statusroll = random.random()
+                                            if statusroll <= chosen_attack["statuschance"]:
+                                                e["status"] = chosen_attack["status"]
+                                                print(f"{e['name']} got hit and was applied {chosen_attack['status']}!")
+                                            else:
+                                                print(f"{e['name']} got hit but it dodged the debuffs!")
+                                                break
+                                            
+                                if "statustarget" in chosen_attack:
+                                    if chosen_attack["statustarget"] == "self":
+                                        eatt["status"] = chosen_attack["status"]
+                                        print(f"The enemy also got applied with {chosen_attack['status']}") 
+                                                
+
                             elif chosen_attack["targettype"] == "self":
-                                eatt["status"] = chosen_attack["status"]
-                            break
+                                if "status" in chosen_attack:
+                                    eatt["status"] = chosen_attack["status"]
+                                    print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
+                                else:
+                                    print(f"The enemy healed himself using {chosen_attack['nameskill']}")
+                                    eatt['hp'] += chosen_attack["heal"]
+                                    break
+
 
                 else:
                     print ("You died!")
