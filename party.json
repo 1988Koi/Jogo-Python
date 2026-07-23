@@ -8,11 +8,14 @@
         "maxmana" : 7,
         "stre" : 5,
         "lvl" : 1,
+        "xptotal" : 0,
+        "luck" : 0,
+        "pts" : 0,
         "status" : "Normal",
         "eq_wep" : "Briefcase"
     },
-    "Reggie": {
-        "name" : "Gordon",
+    "reggie": {
+        "name" : "Reggie",
         "class" : "Unemplyued",
         "maxhp" : 15,
         "hp" : 15,
@@ -20,6 +23,9 @@
         "maxmana" : 7,
         "stre" : 5,
         "lvl" : 1,
+        "xptotal" : 0,
+        "luck" : 0,
+        "pts" : 0,
         "status" : "Normal",
         "eq_wep" : "Microphone"
     },
@@ -32,7 +38,10 @@
         "maxmana" : 15,
         "stre" : 10,
         "status" : "Normal",
-        "lvl" : 1
+        "lvl" : 1,
+        "xptotal" : 0,
+        "luck" : 0,
+        "pts" : 0
     },
     "yatakeyomai": {
         "name" : "Yatake Yomai",
@@ -43,7 +52,10 @@
         "maxmana" : 10,
         "stre" : 20,
         "status" : "Normal",
-        "lvl" : 5
+        "lvl" : 5,
+        "xptotal" : 0,
+        "luck" : 0,
+        "pts" : 0
     },
     "moryukazaki": {
         "name" : "Moryu Kazaki",
@@ -54,6 +66,9 @@
         "maxmana" : 30,
         "stre" : 30,
         "status" : "Normal",
-        "lvl" : 20
+        "lvl" : 20,
+        "xptotal" : 0,
+        "luck" : 0,
+        "pts" : 0
     }
 }

@@ -58,8 +58,13 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                 
             turn_completed = False
             total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
+
+            if combate["status"] == "Stun":
+                print("You are paralyzed")
+                combate["status"] = "Normal"
+                continue
             
-            while not turn_completed and not game_over:
+            while not turn_completed and not game_over and not combate["status"] == "Stun":
                 print("\n" + lang[language1]["combat"])
                 playerturn = input("> ").strip().lower()
                 
@@ -260,6 +265,11 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                 if eatt["hp"] <= 0:
                     continue
 
+                elif eatt["hp"] > 0 and eatt["status"] == "stun":
+                    print(f"{eatt['name']} is paralyzed!")
+                    eatt["status"] = "normal"
+                    continue
+
                 living_party = []
                 chosen_attack = None
 
@@ -286,7 +296,8 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                                         print(f"{unluckyman['name']} got hit by a {chosen_attack['nameskill']} but managed to dodge the debuff!")                                  
                                 else:
                                     print(f"{unluckyman['name']} was hit with a {chosen_attack['nameskill']}!")  
-                                    break                          
+                                break
+
                             elif chosen_attack["targettype"] == "all":
                                 print(f"The enemy used {chosen_attack['nameskill']} on everybody!")
                                 for e in living_party:
@@ -299,12 +310,12 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                                                 print(f"{e['name']} got hit and was applied {chosen_attack['status']}!")
                                             else:
                                                 print(f"{e['name']} got hit but it dodged the debuffs!")
-                                                break
                                             
                                 if "statustarget" in chosen_attack:
                                     if chosen_attack["statustarget"] == "self":
                                         eatt["status"] = chosen_attack["status"]
                                         print(f"The enemy also got applied with {chosen_attack['status']}") 
+                                break
                                                 
 
                             elif chosen_attack["targettype"] == "self":
@@ -314,7 +325,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                                 else:
                                     print(f"The enemy healed himself using {chosen_attack['nameskill']}")
                                     eatt['hp'] += chosen_attack["heal"]
-                                    break
+                            break
 
 
                 else:
@@ -334,7 +345,39 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
             else:
                 player_inv[drop_enemy] = 1
                 print("Debug Backpack:", init_stats["party"][0]["inv"])
-    
+
+    lvldif = init_stats["party"][0]["lvl"] - eatt["lvl"]
+    if lvldif == 0:
+        init_stats["party"][0]["xptotal"] += eatt["xpdrop"]
+    elif lvldif == 1:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 0.8)
+    elif lvldif == 2:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 0.6)
+    elif lvldif == 3:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 0.4)
+    elif lvldif == 4:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 0.2)
+    elif lvldif >= 5:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 0.00001)
+    elif lvldif == -1:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 1.2)
+    elif lvldif == -2:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 1.4)
+    elif lvldif == -3:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 1.6)
+    elif lvldif == -4:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 1.8)
+    elif lvldif <= -5:
+        init_stats["party"][0]["xptotal"] += int(eatt["xpdrop"] * 2.0)
+
+        while init_stats["party"][0]["xptotal"]:
+            for i in init_stats["party"] >= 100:
+                i["lvl"] += 1
+                i[0]["pts"] += 1
+                i["xptotal"] -= 100
+                print(f"{i['name']} leveled up to {i['lvl']}")
+
+
     if game_over:
         return False
     else:

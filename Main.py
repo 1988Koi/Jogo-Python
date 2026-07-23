@@ -90,7 +90,6 @@ print("\n" + lang[language1]["loadgame"] + "\n" + lang[language1]["newgame"])
 begin1 = input("> ").strip().lower()
 if begin1 == "2":
     init_stats = {
-        "peoplerec":  0,
         "party": [
             {
                 "name" : "name",
@@ -104,8 +103,11 @@ if begin1 == "2":
                 "inv" : {},
                 "xp" : 0,
                 "lvl" : 1,
+                "xptotal" : 0,
+                "status" : "Normal",
                 "pts" : 0,
                 "eq_wep" : "Fists",
+                "peoplerec":  0,
             }
         ]
     }
@@ -221,14 +223,12 @@ while in_map:
                 time.sleep(1)
                 print("..")
                 time.sleep(1)
-                cleaning()
                 print("...")
                 time.sleep(2)
-                cleaning()
                 print("But he joins your party.")
                 print("Gordon Joined the Party!")
                 init_stats["party"].append(parte["gordon"])
-                init_stats["people_rec"] += 1
+                init_stats["party"][0]["peoplerec"] += 1
 
     elif mapc == "5":
         cleaning()
@@ -257,3 +257,43 @@ while in_map:
                 item_data = items[item_name]
                 playerOV["eq_wep"] = item_name
                 print (f"You equipped {playerOV['eq_wep']}!")
+
+    elif mapc == "o":
+        currentslot = 0
+        onpts = True
+        while onpts == True:
+            print("Choose what you want to upgrade")
+            active = init_stats["party"][currentslot]
+            print(f"You are currently upgrading {active['name']}")
+            print(f"You currently have {active['pts']} points")
+            print(f"You currently have {active['xptotal']} out of 100 for the next point")
+            print(lang[language1]["upgrade"])
+            choice = input("> ").strip()
+            if choice == "d":
+                currentslot += 1
+                if currentslot - 1 > 4:
+                    currentslot = 0
+            if choice == "a":
+                currentslot -= 1
+                if currentslot - 1 < 0:
+                    currentslot = 4
+            if choice == "o":
+                break
+            if choice == "1" and active["pts"] > 0:
+                print("You upgraded strenght!")
+                active["pts"] -= 1
+                active["strenght"] += 1
+            elif choice == "2" and active["pts"] > 0:
+                print("You upgraded HP!")
+                active["pts"] -= 1
+                active["maxhp"] += 1
+                active["hp"] += 1
+            elif choice == "3" and active["pts"] > 0:
+                print("You upgraded luck!")
+                active["pts"] -= 1
+                active["luck"] += 1
+            elif choice == "4" and active["pts"] > 0:
+                print("You upgraded mana!")
+                active["pts"] -= 1
+                active["maxmana"] += 1
+                active["mana"] += 1

@@ -2,6 +2,7 @@
     "1": {
         "name" : "Gun mobster",
         "eid" : 1,
+        "lvl" : 30,
         "hp" : 50,
         "maxhp" : 50,
         "xpdrop" : 100,
@@ -48,6 +49,7 @@
         "eid" : 2,
         "hp" : 25,
         "maxhp" : 25,
+        "lvl" : 3,
         "stre" : 4,
         "xpdrop" : 50,
         "isboss" : false,
@@ -58,21 +60,24 @@
             "chance" : 0.50,
             "status" : "Nothing",
             "statuschance" : 0.50,
-            "targettype" : "one"
+            "targettype" : "one",
+            "stre" : 4
             },
             {
             "nameskill" : "Kick",
             "chance" : 0.40,
             "status" : "Nothing",
             "statuschance" : 1,
-            "targettype" : "one"
+            "targettype" : "one",
+            "stre" : 3
             },
             {
             "nameskill" : "Basketball throw",
             "chance" : 0.10,
             "status" : "Stun",
             "statuschance" : 0.25,
-            "targettype" : "one"
+            "targettype" : "one",
+            "stre" : 6
             }
         ],
         "possibledrop" : [
@@ -92,9 +97,28 @@
         "hp" : 20,
         "maxhp" : 20,
         "stre" : 1,
-        "xpdrop" : 10,
+        "lvl" : 1,
+        "xpdrop" : 30,
         "isboss" : false,
         "status" : "Normal",
+        "moveset" : [
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0.50,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Kick",
+            "chance" : 0.40,
+            "status" : "Nothing",
+            "statuschance" : 1,
+            "targettype" : "one",
+            "stre" : 2
+            }
+        ],
         "possibledrop" : [
             {
             "itemid" : "Hero sword",
@@ -112,6 +136,7 @@
         "hp" : 100,
         "maxhp" : 100,
         "stre" : 50,
+        "lvl" : 25,
         "xpdrop" : 200,
         "isboss" : true,
         "status" : "Normal",
@@ -128,6 +153,7 @@
         "hp" : 1500,
         "maxhp" : 1500,
         "stre" : 50,
+        "lvl" : 99,
         "xpdrop" : 1000,
         "isboss" : true,
         "status" : "Normal",
