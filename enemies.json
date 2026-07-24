@@ -8,6 +8,7 @@
         "xpdrop" : 100,
         "isboss" : false,
         "status" : "Normal",
+        "speed" : 5,
         "moveset" : [
             {
             "nameskill" : "Shoot",
@@ -54,6 +55,7 @@
         "xpdrop" : 50,
         "isboss" : false,
         "status" : "Normal",
+        "speed" : 6,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -100,6 +102,7 @@
         "lvl" : 1,
         "xpdrop" : 30,
         "isboss" : false,
+        "speed" : 4,
         "status" : "Normal",
         "moveset" : [
             {
@@ -139,6 +142,7 @@
         "lvl" : 25,
         "xpdrop" : 200,
         "isboss" : true,
+        "speed" : 7,
         "status" : "Normal",
         "possibledrop" : [
             {
@@ -156,6 +160,7 @@
         "lvl" : 99,
         "xpdrop" : 1000,
         "isboss" : true,
+        "speed" : 10,
         "status" : "Normal",
         "possibledrop" : [
             {
