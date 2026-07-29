@@ -12,6 +12,7 @@
         "luck" : 0,
         "pts" : 0,
         "speed" : 6,
+        "defe" : 4,
         "status" : "Normal",
         "eq_wep" : "Briefcase"
     },
@@ -27,6 +28,7 @@
         "xptotal" : 0,
         "speed" : 7,
         "luck" : 0,
+        "defe" : 3,
         "pts" : 0,
         "status" : "Normal",
         "eq_wep" : "Microphone"
@@ -44,6 +46,7 @@
         "speed" : 6,
         "xptotal" : 0,
         "luck" : 0,
+        "defe" : 1,
         "pts" : 0
     },
     "yatakeyomai": {
@@ -59,6 +62,7 @@
         "speed" : 7,
         "xptotal" : 0,
         "luck" : 0,
+        "defe" : 10,
         "pts" : 0
     },
     "moryukazaki": {
@@ -74,6 +78,7 @@
         "lvl" : 20,
         "xptotal" : 0,
         "luck" : 0,
+        "defe" : 20,
         "pts" : 0
     }
 }

@@ -109,6 +109,7 @@ if begin1 == "2":
                 "eq_wep" : "Fists",
                 "peoplerec":  0,
                 "speed" : 0,
+                "isplayer" : True,
             }
         ]
     }
