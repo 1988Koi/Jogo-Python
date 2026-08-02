@@ -10,6 +10,7 @@
         "status" : "Normal",
         "speed" : 5,
         "defe" : 4,
+        "money" : 200,
         "moveset" : [
             {
             "nameskill" : "Shoot",
@@ -58,6 +59,7 @@
         "status" : "Normal",
         "speed" : 6,
         "defe" : 2,
+        "money" : 10,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -106,6 +108,7 @@
         "isboss" : false,
         "speed" : 4,
         "defe" : 0,
+        "money" : 5,
         "status" : "Normal",
         "moveset" : [
             {
@@ -147,6 +150,7 @@
         "isboss" : true,
         "speed" : 7,
         "defe" : 20,
+        "money" : 500,
         "status" : "Normal",
         "possibledrop" : [
             {
@@ -166,6 +170,7 @@
         "isboss" : true,
         "speed" : 10,
         "defe" : 30,
+        "money" : 1,
         "status" : "Normal",
         "possibledrop" : [
             {

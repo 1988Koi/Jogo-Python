@@ -110,6 +110,7 @@ if begin1 == "2":
                 "peoplerec":  0,
                 "speed" : 0,
                 "isplayer" : True,
+                "money" : 50,
             }
         ]
     }
@@ -195,7 +196,51 @@ while in_map:
         exit()
     elif mapc == "1":
         if playerlvl >= 1:
-            print(placeholder)
+            print("You enter the cafe...")
+            print("You grab a menu")
+            print("10 dollars for some french fries?????")
+            out = False
+            while not out == True:
+                print("1. Burger with soda - 30 Dollars - Restores 15 health")
+                print("2. French fries - 10 dollars - restores 5 health")
+                print("3. Soda - 5 dollars - restores 2 health")
+                print("Type i to quit.")
+                choice = input ("> ").strip()
+                menu = {
+                    "1" : "Burger with soda",
+                    "2" : "French Fries",
+                    "3" : "Soda",
+                    "i" : "leave"
+                    }
+                
+                menuchoices = {
+                    "Burger with soda" : {"heal": 15, "cost": 30},
+                    "French Fries" : {"heal": 5, "cost": 10},
+                    "Soda" : {"heal": 2, "cost": 5}
+                }
+                if choice == "i":
+                    out = True
+                    break
+                if choice not in menu:
+                    print("We don't serve that here")
+                    continue
+                elif choice in menu:
+                    food_name = menu[choice]
+                    food_stats = menuchoices[food_name]
+                    for names in init_stats["party"]:
+                        print(f"{names['name']}")
+                    print("Who do you want to feed?")
+                    feed = input("> ").strip()
+                    for member in init_stats["party"]:
+                        if member['name'].lower() == feed.lower():
+                            if init_stats["party"][0]["money"] < food_stats["cost"]:
+                                print("You can't buy that!")
+                                break
+                            else:
+                                member["hp"] = min(member["maxhp"], member["hp"] + food_stats["heal"])
+                                init_stats["party"][0]["money"] -= food_stats["cost"]
+
+
         else:
             print("\n" + lang[language1]["lowlv"])
     elif mapc == "2":
