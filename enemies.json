@@ -11,6 +11,8 @@
         "speed" : 5,
         "defe" : 4,
         "money" : 200,
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
         "moveset" : [
             {
             "nameskill" : "Shoot",
@@ -60,6 +62,8 @@
         "speed" : 6,
         "defe" : 2,
         "money" : 10,
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -110,6 +114,8 @@
         "defe" : 0,
         "money" : 5,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -130,12 +136,102 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "Hero sword",
+            "itemid" : "Piece of gum",
             "chance" : 0.90
+            }
+        ]
+    },
+    "4": {
+        "name" : "Pushover",
+        "eid" : 4,
+        "hp" : 15,
+        "maxhp" : 15,
+        "stre" : 1,
+        "lvl" : 1,
+        "xpdrop" : 15,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
+        "moveset" : [
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
             },
             {
-                "itemid" : "Spare change",
-                "chance" : 0.50
+            "nameskill" : "Kick",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 2
+            }
+        ],
+        "possibledrop" : [
+        ]
+    },
+        "5": {
+        "name" : "Low tier Host",
+        "eid" : 5,
+        "hp" : 30,
+        "maxhp" : 15,
+        "stre" : 5,
+        "lvl" : 2,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Pose up",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Shard Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "stre" : 9
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "2Bottle",
+            "chance" : 0.20
             }
         ]
     },
@@ -152,6 +248,8 @@
         "defe" : 20,
         "money" : 500,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
         "possibledrop" : [
             {
                 "itemid" : "Katana",
@@ -172,6 +270,8 @@
         "defe" : 30,
         "money" : 1,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
         "possibledrop" : [
             {
                 "itemid" : "Anon Sunglasses",

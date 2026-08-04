@@ -105,6 +105,8 @@ if begin1 == "2":
                 "lvl" : 1,
                 "xptotal" : 0,
                 "status" : "Normal",
+                "bleed_turns" : 0,
+                "bleed_damage" : 0,
                 "pts" : 0,
                 "eq_wep" : "Fists",
                 "peoplerec":  0,
@@ -128,16 +130,18 @@ if begin1 == "2":
     classconf = False
 
     acceptedclass = {
-            "1" : "Gambler",
+            "1" : "Host",
             "2" : "Yakuza",
             "3" : "Security",
             "4" : "Foreman",
             "5" : "Chef",
-            "6" : "Hero"
+            "6" : "Breaker",
+            "7" : "Hero"
         }
     
     statusclass = {
-        "Gambler" : {"hp" : 5, "maxhp": 5, "mana": 7, "maxmana" : 7, "stre": 3, "luck": 15, "speed" : 10,},
+        "Host" : {"hp" : 5, "maxhp": 5, "mana": 15, "maxmana" : 15, "stre": 3, "luck": 5, "speed" : 7,},
+        "Breaker" : {"hp" : 8, "maxhp": 8, "mana": 5, "maxmana" : 5, "stre": 5, "luck": 2, "speed" : 10,},
         "Security" : {"hp" : 7, "maxhp": 7, "mana": 10, "maxmana" : 10, "stre": 10, "luck": 5, "speed" : 8,},
         "Foreman" : {"hp" : 25, "maxhp": 25, "mana": 7, "maxmana" : 7, "stre": 4, "luck": 0, "speed" : 4,},
         "Chef" : {"hp" : 10, "maxhp": 10, "mana": 15, "maxmana" : 15, "stre": 4, "luck": 5, "speed" : 6,},
@@ -282,6 +286,8 @@ while in_map:
     elif mapc == "5":
         cleaning()
         combat1(init_stats, [3], enemis, lang, language1, skills, items)
+    elif mapc == "6":
+        dungeon([4, 5, 2, 3], [29])
     elif mapc == "i":
         player_itemOV = list(playerOV["inv"].keys())
         weaponlist = []

@@ -14,11 +14,13 @@
         "speed" : 6,
         "defe" : 4,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
         "eq_wep" : "Briefcase"
     },
     "reggie": {
         "name" : "Reggie",
-        "class" : "Unemplyued",
+        "class" : "Unemployed",
         "maxhp" : 15,
         "hp" : 15,
         "mana" : 7,
@@ -31,6 +33,8 @@
         "defe" : 3,
         "pts" : 0,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
         "eq_wep" : "Microphone"
     },
     "zhouzhen": {
@@ -41,13 +45,15 @@
         "mana" : 15,
         "maxmana" : 15,
         "stre" : 10,
-        "status" : "Normal",
         "lvl" : 1,
         "speed" : 6,
         "xptotal" : 0,
         "luck" : 0,
         "defe" : 1,
-        "pts" : 0
+        "pts" : 0,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0
     },
     "yatakeyomai": {
         "name" : "Yatake Yomai",
@@ -57,13 +63,15 @@
         "mana" : 10,
         "maxmana" : 10,
         "stre" : 20,
-        "status" : "Normal",
         "lvl" : 5,
         "speed" : 7,
         "xptotal" : 0,
         "luck" : 0,
         "defe" : 10,
-        "pts" : 0
+        "pts" : 0,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0
     },
     "moryukazaki": {
         "name" : "Moryu Kazaki",
@@ -74,11 +82,13 @@
         "maxmana" : 30,
         "stre" : 30,
         "speed" : 9,
-        "status" : "Normal",
         "lvl" : 20,
         "xptotal" : 0,
         "luck" : 0,
         "defe" : 20,
-        "pts" : 0
+        "pts" : 0,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0
     }
 }

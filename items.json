@@ -22,12 +22,14 @@
     "Legend katana": {
         "type" : "weapon",
         "stren" : 30,
-        "desc" : "A katana forged from rare ores, gives 30 more attack damage"
+        "desc" : "A katana forged from rare ores, gives 30 more attack damage",
+        "usebleby" : ["Security"]
     },
     "Hero sword": {
         "type" : "weapon",
         "stren" : 10,
-        "desc" : "A dusty baseball bat, gives 10 more attack"
+        "desc" : "A dusty baseball bat, gives 10 more attack",
+        "usebleby" : ["Hero"]
     },
     "Fists": {
         "type" : "weapon",
@@ -47,11 +49,19 @@
     "Briefcase": {
         "type" : "weapon",
         "stren" : 0,
-        "desc" : "Gordon briefcase, there's not much inside"
+        "desc" : "Gordon briefcase, there's not much inside",
+        "usebleby" : ["Salaryman"]
     },
     "Microphone": {
         "type" : "weapon",
         "stren" : 0,
-        "desc" : "Reggie's microphone, kinda bad"
+        "desc" : "Reggie's microphone, kinda bad",
+        "usebleby" : ["Unemployed"]
+    },
+    "2Bottle": {
+        "type" : "weapon",
+        "stren" : 6,
+        "desc" : "A premium bottle of champagne",
+        "usebleby" : ["Host"]
     }
 }

@@ -42,7 +42,6 @@ def print_bars(presentenemies, party):
 
 
 def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag):
-    """Runs one player's turn. Returns updated game_over flag."""
     total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
     turn_taken = False
 
@@ -280,8 +279,13 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         if "statuschance" in chosen_attack:
             statusroll = random.random()
             if statusroll <= chosen_attack["statuschance"]:
-                unluckyman["status"] = chosen_attack["status"]
-                print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
+                if chosen_attack["status"] == "Bleed":
+                    unluckyman["bleed_turns"] = chosen_attack["bleedturns"]
+                    unluckyman["bleed_dmg"] = chosen_attack["bleeddmg"]
+                    print(f"{unluckyman['name']} is bleeding!")
+                else:
+                    unluckyman["status"] = chosen_attack["status"]
+                    print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
             else:
                 print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} but managed to dodge the debuff!")
         else:
@@ -348,6 +352,15 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
             activechar["currenttick"] = 1000 // activechar["speed"]
             continue
 
+        if activechar["bleed_turns"] > 0:
+            activechar ["hp"] -= ["bleed_dmg"]
+            activechar["bleed_turns"] -= 1
+            print(f"{activechar['name']} took {activechar['bleed_dmg']} bleed damage!")
+            if activechar <= 0:
+                activechar["currenttick"] = 1000 // activechar["speed"]
+                print(f"{activechar['name']} bled out!")
+
+                continue
         if activechar["status"] == "Stun":
             who = activechar["name"] if not activechar["isplayer"] else "You"
             print(f"{who} {'is' if not activechar['isplayer'] else 'are'} paralyzed!")

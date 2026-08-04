@@ -6,7 +6,7 @@
         "nameusr" : "Impressive... \n Most Impressive... \n I have no record of you... \n What's your name?",
         "nameok" : "...{name}... \n ...{name}...?",
         "class" : "Did you ever had a job...?",
-        "classc" : "Jobs: \n Gambler: Rolls the dice for everything, has a lot of luck somehow. \n Yakuza: Heavy hitting but very slow. \n Security: Focused on raw power while being very frail. \n Foreman: Tank capable of redirecting damage to himself instead of allies. \n Chef: Capable of curing and applying buffs to allies while applying debuffs to enemies. \n Hero: All rounder, can heal and deal damage consistently \n To choose your class by typing 1 to 6.",
+        "classc" : "Jobs: \n Host: Charm your enemies into lowering their defense \n Yakuza: Heavy hitting but very slow. \n Security: Focused on raw power while being very frail. \n Foreman: Tank capable of redirecting damage to himself instead of allies. \n Chef: Capable of curing and applying buffs to allies while applying debuffs to enemies. \n Breaker: breakdances and causes damage in area \n Hero: All rounder, can heal and deal damage consistently \n To choose your class by typing 1 to 7.",
         "classno" : "Unrecognized class, please type 1 to 5",
         "classok" : "A {class}...",
         "sure" : "Are you certain? \n Type 1 for yes or 2 for no.",

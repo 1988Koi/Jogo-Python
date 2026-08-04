@@ -15,23 +15,23 @@
         {"name": "Wrench Throw", "desc": "Ldmg", "targettype": "single", "cost":3, "dmgmlt": 1.5, "lvlreq": 1}
     ],
     "security": [
-        {"name": "Fiendish Slash", "desc": "Ldmg", "targettype": "single", "inflict" : "Bleeding", "cost": 3, "dmgmlt": 1.2, "lvlreq": 1},
-        {"name": "Thoughtless Skewer", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleeding", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
-        {"name": "Simple Slash", "desc": "Ldmg", "targettype": "single", "inflict" : "Bleeding", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
-        {"name": "Devilish Slash", "desc": "Hdmg", "targettype": "single", "inflict" : "Bleeding", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
-        {"name": "Essence of Diabolic Slash", "desc": "Edmg", "targettype": "single", "inflict" : "Bleeding", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
+        {"name": "Fiendish Slash", "desc": "Ldmg", "targettype": "single", "inflict" : "Bleed", "bleeddmg": 1, "bleedturns" : 3, "cost": 3, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Thoughtless Skewer", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleed", "bleeddmg": 3, "bleedturns" : 2, "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
+        {"name": "Simple Slash", "desc": "Ldmg", "targettype": "single", "inflict" : "Bleed", "bleeddmg": 2, "bleedturns" : 3, "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Devilish Slash", "desc": "Hdmg", "targettype": "single", "inflict" : "Bleed", "cost": 12, "bleeddmg": 5, "bleedturns" : 3, "dmgmlt": 2.5, "lvlreq": 3},
+        {"name": "Essence of Diabolic Slash", "desc": "Edmg", "targettype": "single", "inflict" : "Bleed", "bleeddmg": 3, "bleedturns" : 5, "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
     ],
-    "hobo": [
-        {"name": "Snooze", "desc": "Ldmg", "targettype": "single", "cost": 3, "healing": 1.5, "lvlreq": 1},
-        {"name": "Thoughtless Skewer", "desc": "Mdmg", "targettype": "single", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
-        {"name": "Simple Slash", "desc": "Ldmg", "targettype": "single", "cost": 1, "dmgmlt": 1.2, "lvlreq": 1},
-        {"name": "Devilish Slash", "desc": "Hdmg", "targettype": "single", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
-        {"name": "Essence of Diabolic Slash", "desc": "Edmg", "targettype": "single", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
+    "breaker": [
+        {"name": "Maximum Flair", "desc": "Ldmg", "targettype": "single", "cost": 3, "healing": 1.5, "lvlreq": 1},
+        {"name": "Collapsing Chair", "desc": "Mdmg", "targettype": "single", "cost": 10, "dmgmlt": 2.0, "lvlreq": 1},
+        {"name": "WindMill", "desc": "Ldmg", "targettype": "all", "cost": 3, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Spin Sweeper", "desc": "Hdmg", "targettype": "single", "cost": 12, "dmgmlt": 2.5, "lvlreq": 3},
+        {"name": "Essence of Breakerdance Delight", "desc": "Edmg", "targettype": "all", "cost": 20, "dmgmlt": 4.0, "lvlreq": 7}
     ],
     "salaryman": [
         {"name": "Briefcase Bash", "desc": "Ldmg", "targettype": "single", "inflict" : "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1},
         {"name": "Worker Rage", "desc": "Mdmg", "targettype": "single", "inflict" : "Nothing", "cost": 7, "dmgmlt": 2, "lvlreq": 1},
-        {"name": "Papercut", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleeding", "cost": 7, "dmgmlt": 1.5, "lvlreq": 1},
+        {"name": "Papercut", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleed", "cost": 7, "bleeddmg": 1, "bleedturns" : 4, "dmgmlt": 1.5, "lvlreq": 1},
         {"name": "Coffee Break", "desc": "MHea", "targettype": "single", "inflict" : "Nothing", "cost": 12, "healing": 10, "lvlreq": 3},
         {"name": "Essence of Rush Hour", "desc": "EdmgA", "targettype": "all", "inflict" : "Nothing", "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
     ],
@@ -45,8 +45,8 @@
     "yakuza": [
         {"name": "Punch", "desc": "Ldmg", "targettype": "single", "inflict" : "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1},
         {"name": "Guard up", "desc": "Self", "targettype": "self", "inflict" : "guardup", "cost": 5, "dmgmlt": 1.3, "lvlreq": 3},
-        {"name": "Gut punch", "desc": "MHea", "targettype": "single", "inflict" : "stun", "cost": 7, "dmgmlt": 1.5, "lvlreq": 4},
-        {"name": "Shot", "desc": "Hdmg", "targettype": "single", "inflict" : "Bleeding", "cost": 9, "dmgmlt": 2, "lvlreq": 5},
-        {"name": "Essence of Honor", "desc": "EdmgA", "targettype": "all", "inflict" : "Nothing", "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
+        {"name": "Gut punch", "desc": "Mdmg", "targettype": "single", "inflict" : "stun", "cost": 7, "dmgmlt": 1.5, "lvlreq": 4},
+        {"name": "Shot", "desc": "Hdmg", "targettype": "single", "inflict" : "Bleed", "bleeddmg": 2, "bleedturns" : 5, "cost": 9, "dmgmlt": 2, "lvlreq": 5},
+        {"name": "Essence of Honor", "desc": "EdmgA", "targettype": "all", "inflict" : "Bleed", "bleeddmg": 3, "bleedturns" : 4, "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
     ]
 }
