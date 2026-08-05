@@ -63,5 +63,15 @@
         "stren" : 6,
         "desc" : "A premium bottle of champagne",
         "usebleby" : ["Host"]
+    },
+    "Old coins" : {
+        "type" : "junk",
+        "sellvalue" : 5
+    },
+    "Lucky Charm": {
+        "type" : "accessory",
+        "slot" : "accessory",
+        "luck" : 3,
+        "usableby" : ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend"]
     }
 }

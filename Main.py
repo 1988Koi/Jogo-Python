@@ -102,11 +102,13 @@ if begin1 == "2":
                 "luck" : 1,
                 "inv" : {},
                 "xp" : 0,
+                "defe" : 3,
                 "lvl" : 1,
                 "xptotal" : 0,
                 "status" : "Normal",
                 "bleed_turns" : 0,
                 "bleed_damage" : 0,
+                "boostdef" : 0,
                 "pts" : 0,
                 "eq_wep" : "Fists",
                 "peoplerec":  0,
@@ -140,13 +142,13 @@ if begin1 == "2":
         }
     
     statusclass = {
-        "Host" : {"hp" : 5, "maxhp": 5, "mana": 15, "maxmana" : 15, "stre": 3, "luck": 5, "speed" : 7,},
-        "Breaker" : {"hp" : 8, "maxhp": 8, "mana": 5, "maxmana" : 5, "stre": 5, "luck": 2, "speed" : 10,},
-        "Security" : {"hp" : 7, "maxhp": 7, "mana": 10, "maxmana" : 10, "stre": 10, "luck": 5, "speed" : 8,},
-        "Foreman" : {"hp" : 25, "maxhp": 25, "mana": 7, "maxmana" : 7, "stre": 4, "luck": 0, "speed" : 4,},
-        "Chef" : {"hp" : 10, "maxhp": 10, "mana": 15, "maxmana" : 15, "stre": 4, "luck": 5, "speed" : 6,},
-        "Hero" : {"hp" : 10, "maxhp": 10, "mana": 11, "maxmana" : 11, "stre": 6, "luck": 6, "speed" : 7,},
-        "Yakuza" : {"hp" : 15, "maxhp": 15, "mana": 9, "maxmana" : 9, "stre": 8, "luck": 3, "speed" : 5,}
+        "Host" : {"hp" : 5, "maxhp": 5, "mana": 15, "maxmana" : 15, "stre": 3, "luck": 5, "speed" : 7, "defe" : 0,},
+        "Yakuza" : {"hp" : 15, "maxhp": 15, "mana": 9, "maxmana" : 9, "stre": 8, "luck": 3, "speed" : 5, "defe" : 3,},
+        "Security" : {"hp" : 7, "maxhp": 7, "mana": 10, "maxmana" : 10, "stre": 10, "luck": 5, "speed" : 8, "defe" : 1,},
+        "Foreman" : {"hp" : 25, "maxhp": 25, "mana": 7, "maxmana" : 7, "stre": 4, "luck": 0, "speed" : 4, "defe" : 5,},
+        "Chef" : {"hp" : 10, "maxhp": 10, "mana": 15, "maxmana" : 15, "stre": 4, "luck": 5, "speed" : 6, "defe" : 1,},
+        "Breaker" : {"hp" : 8, "maxhp": 8, "mana": 5, "maxmana" : 5, "stre": 5, "luck": 2, "speed" : 10, "defe" : 2,},
+        "Hero" : {"hp" : 10, "maxhp": 10, "mana": 11, "maxmana" : 11, "stre": 6, "luck": 6, "speed" : 7, "defe" : 2,},
     }
 
     while not classconf:
@@ -179,6 +181,7 @@ if begin1 == "2":
     init_stats["party"][0]["stre"] = classst["stre"]
     init_stats["party"][0]["luck"] = classst["luck"]
     init_stats["party"][0]["speed"] = classst["speed"]
+    init_stats["party"][0]["defe"] = classst["defe"]
     save(init_stats)
 else:
     init_stats = load()
@@ -253,41 +256,41 @@ while in_map:
         else: 
             print("\n" + lang[language1]["lowlv"])
     elif mapc == "3":
-        if playerlvl >= 10:
+        if playerlvl >= 5:
             print("")
         else:
             print("\n" + lang[language1]["lowlv"])
     elif mapc == "4":
-        already_recruit = False
-        for i in init_stats["party"]:
-            if "Gordon" == i["name"]:
-                if already_recruit == True:
-                    print("How about a beer?")
-                if already_recruit == False:
-                    print("You drink a little bit of beer, before you hear a man grumbling to himself")
-                    time.sleep(2)
-                    print("You decide to ask him what happened")
-                    time.sleep(2)
-                    print("After some time talking you realized he also worked for the same company you got fired from")
-                    print("You explain how you know they are corrupt and how you want to take revenge.")
-                    print("He thinks you are insane")
-                    time.sleep(5)
-                    print(".")
-                    time.sleep(1)
-                    print("..")
-                    time.sleep(1)
-                    print("...")
-                    time.sleep(2)
-                    print("But he joins your party.")
-                    print("Gordon Joined the Party!")
-                    init_stats["party"].append(parte["gordon"])
-                    init_stats["party"][0]["peoplerec"] += 1
+        if playerlvl >= 1:
+            if "Gordon" in init_stats["party"]:
+                print("How about a beer?")
+            if "Gordon" not in init_stats["party"]:
+                print("You drink a little bit of beer, before you hear a man grumbling to himself")
+                time.sleep(2)
+                print("You decide to ask him what happened")
+                time.sleep(2)
+                print("After some time talking you realized he also worked for the same company you got fired from")
+                print("You explain how you know they are corrupt and how you want to take revenge.")
+                print("He thinks you are insane")
+                time.sleep(5)
+                print(".")
+                time.sleep(1)
+                print("..")
+                time.sleep(1)
+                print("...")
+                time.sleep(2)
+                print("But he joins your party.")
+                print("Gordon Joined the Party!")
+                init_stats["party"].append(parte["gordon"])
+                init_stats["party"][0]["peoplerec"] += 1
+        else:
+            print("How your level < than 1?")
 
     elif mapc == "5":
         cleaning()
         combat1(init_stats, [3], enemis, lang, language1, skills, items)
     elif mapc == "6":
-        dungeon([4, 5, 2, 3], [29])
+        dungeon([4, 5, 2, 3], 29)
     elif mapc == "i":
         player_itemOV = list(playerOV["inv"].keys())
         weaponlist = []
@@ -308,10 +311,15 @@ while in_map:
                 continue
 
             elif choice.isdigit():
-                item_name = weaponlist[int(choice)]
-                item_data = items[item_name]
-                playerOV["eq_wep"] = item_name
-                print (f"You equipped {playerOV['eq_wep']}!")
+                idx = int(choice)
+                if 0 <= idx < len(weaponlist):
+                    item_name = weaponlist[idx]
+                    weapon = items[item_name]
+                    if playerOV["class"] not in weapon["usebleby"]:
+                        print(f"{playerOV['name']} the {playerOV['class']} can't use {item_name}")
+                    else:
+                        playerOV["eq_wep"] = item_name
+                        print(f"You equipped {playerOV['eq_wep']}")
 
     elif mapc == "o":
         currentslot = 0
@@ -325,19 +333,15 @@ while in_map:
             print(lang[language1]["upgrade"])
             choice = input("> ").strip()
             if choice == "d":
-                currentslot += 1
-                if currentslot - 1 > 4:
-                    currentslot = 0
+                currentslot = (currentslot + 1) % len(init_stats["party"])
             if choice == "a":
-                currentslot -= 1
-                if currentslot - 1 < 0:
-                    currentslot = 4
+                currentslot = (currentslot - 1) % len(init_stats["party"])
             if choice == "o":
                 break
             if choice == "1" and active["pts"] > 0:
                 print("You upgraded strenght!")
                 active["pts"] -= 1
-                active["strenght"] += 1
+                active["stre"] += 1
             elif choice == "2" and active["pts"] > 0:
                 print("You upgraded HP!")
                 active["pts"] -= 1

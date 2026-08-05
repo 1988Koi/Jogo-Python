@@ -16,6 +16,7 @@
         "status" : "Normal",
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "eq_wep" : "Briefcase"
     },
     "reggie": {
@@ -35,6 +36,7 @@
         "status" : "Normal",
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "eq_wep" : "Microphone"
     },
     "zhouzhen": {
@@ -53,7 +55,8 @@
         "pts" : 0,
         "status" : "Normal",
         "bleed_turns" : 0,
-        "bleed_damage" : 0
+        "bleed_damage" : 0,
+        "boostdef" : 0
     },
     "yatakeyomai": {
         "name" : "Yatake Yomai",
@@ -71,7 +74,8 @@
         "pts" : 0,
         "status" : "Normal",
         "bleed_turns" : 0,
-        "bleed_damage" : 0
+        "bleed_damage" : 0,
+        "boostdef" : 0
     },
     "moryukazaki": {
         "name" : "Moryu Kazaki",
@@ -89,6 +93,7 @@
         "pts" : 0,
         "status" : "Normal",
         "bleed_turns" : 0,
-        "bleed_damage" : 0
+        "bleed_damage" : 0,
+        "boostdef" : 0
     }
 }

@@ -66,11 +66,14 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                         print("Enemy already dead! Pick someone else.")
                         continue
                     else:
-                        presentenemies[target_index]["hp"] -= total_damage
-                        combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
-                        print(f"Hit! {presentenemies[target_index]['name']} takes {total_damage} damage.")
-                        print("And you got +5 mana!")
-                        turn_taken = True
+                        if total_damage <= (presentenemies[target_index]['defe'] / 2):
+                            print(f"{presentenemies[target_index]['name']} managed to resist {combate['name']} attack!")
+                        else:
+                            presentenemies[target_index]["hp"] -= total_damage
+                            combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
+                            print(f"Hit! {presentenemies[target_index]['name']} takes {total_damage} damage.")
+                            print("And you got +5 mana!")
+                            turn_taken = True
                 else:
                     print("Invalid number!")
             else:
@@ -163,6 +166,12 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                     print("Invalid input!")
                     continue
 
+            elif "defe" in chosen:
+                combate["defe"] += chosen["defe"]
+                combate["boostdef"] += chosen["boostdef"]
+                print(f"{combate['name']} got a defense boost!")
+                continue
+
             elif "dmgmlt" in chosen:
                 if chosen["targettype"] == "single":
                     for i, enemy in enumerate(presentenemies):
@@ -181,10 +190,13 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                                 continue
                             else:
                                 damage = round(total_damage * chosen["dmgmlt"])
-                                presentenemies[target_index]["hp"] -= damage
-                                combate["mana"] -= chosen["cost"]
-                                print(f"Used {chosen['name']}! Dealt {damage} damage.")
-                                turn_taken = True
+                                if damage <= (presentenemies[target_index]["defe"] / 2):
+                                    print(f"{presentenemies[target_index]['name']} managed to resist {combate['name']} attack!")
+                                else:
+                                    presentenemies[target_index]["hp"] -= damage
+                                    combate["mana"] -= chosen["cost"]
+                                    print(f"Used {chosen['name']}! Dealt {damage} damage.")
+                                    turn_taken = True
                         else:
                             print("Invalid number!")
                             continue
@@ -275,21 +287,26 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
 
     if chosen_attack["targettype"] == "one":
         unluckyman = random.choice(living_party)
-        unluckyman["hp"] -= chosen_attack["stre"]
-        if "statuschance" in chosen_attack:
-            statusroll = random.random()
-            if statusroll <= chosen_attack["statuschance"]:
-                if chosen_attack["status"] == "Bleed":
-                    unluckyman["bleed_turns"] = chosen_attack["bleedturns"]
-                    unluckyman["bleed_dmg"] = chosen_attack["bleeddmg"]
-                    print(f"{unluckyman['name']} is bleeding!")
-                else:
-                    unluckyman["status"] = chosen_attack["status"]
-                    print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
-            else:
-                print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} but managed to dodge the debuff!")
+        defenseunluck = unluckyman["defe"] / 2
+        if defenseunluck >= chosen_attack["stre"]:
+            print(f"{unluckyman['name']} managed to resist {eatt['name']} attack!")
         else:
-            print(f"{unluckyman['name']} was hit with {chosen_attack['nameskill']}!")
+            unluckyman["hp"] -= chosen_attack["stre"]
+            if "statuschance" in chosen_attack:
+                statusroll = random.random()
+                effective_chance = max(0.0, chosen_attack["statuschance"] - unluckyman["luck"] * 0.2)
+                if statusroll <= effective_chance:
+                    if chosen_attack["status"] == "Bleed":
+                        unluckyman["bleed_turns"] = chosen_attack["bleedturns"]
+                        unluckyman["bleed_dmg"] = chosen_attack["bleeddmg"]
+                        print(f"{unluckyman['name']} is bleeding!")
+                    else:
+                        unluckyman["status"] = chosen_attack["status"]
+                        print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
+                else:
+                    print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} but managed to dodge the debuff!")
+            else:
+                print(f"{unluckyman['name']} was hit with {chosen_attack['nameskill']}!")
 
     elif chosen_attack["targettype"] == "all":
         print(f"The enemy used {chosen_attack['nameskill']} on everybody!")
@@ -297,7 +314,8 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
             member["hp"] -= chosen_attack["stre"]
             if "statuschance" in chosen_attack and chosen_attack.get("statustarget") == "ally":
                 statusroll = random.random()
-                if statusroll <= chosen_attack["statuschance"]:
+                effective_chance = max(0.0, chosen_attack["statuschance"] - unluckyman["luck"] * 0.2)
+                if statusroll <= effective_chance:
                     member["status"] = chosen_attack["status"]
                     print(f"{member['name']} got hit and was applied {chosen_attack['status']}!")
                 else:
@@ -310,6 +328,10 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
     elif chosen_attack["targettype"] == "self":
         if "status" in chosen_attack:
             eatt["status"] = chosen_attack["status"]
+            print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
+        if "status" == "Defenseup":
+            eatt["defe"] += chosen_attack["defe"]
+            eatt["boostdef"] += chosen_attack["boostdef"]
             print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
         else:
             eatt["hp"] += chosen_attack["heal"]
@@ -334,19 +356,19 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
         order.append(a)
 
     while any(e["hp"] > 0 for e in presentenemies) and not game_over_flag[0]:
-        lowest = min(i["currenttick"] for i in order)
-        for b in order:
+        living = [i for i in order if i["hp"] > 0]
+        lowest = min(i["currenttick"] for i in living)
+        for b in living:
             b["currenttick"] -= lowest
 
-        ready = [i for i in order if i["currenttick"] <= 0]
+        ready = [i for i in living if i ["currenttick"] <= 0]
+        ready.sort(key=lambda x : -x["speed"])
+        activechar = ready [0]
 
-        activechar = ready[0]
-        for i in ready:
-            if i["isplayer"]:
-                activechar = i
-                break
+        activechar["currenttick"] += 1000 // activechar["speed"]
 
         print_bars(presentenemies, init_stats["party"])
+        print(f"It's {activechar['name']} turn!")
 
         if activechar["hp"] <= 0:
             activechar["currenttick"] = 1000 // activechar["speed"]
@@ -354,13 +376,17 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
 
         if activechar["bleed_turns"] > 0:
             activechar ["hp"] -= ["bleed_dmg"]
-            activechar["bleed_turns"] -= 1
+            activechar["bleed_turns"] =- 1
             print(f"{activechar['name']} took {activechar['bleed_dmg']} bleed damage!")
             if activechar <= 0:
                 activechar["currenttick"] = 1000 // activechar["speed"]
                 print(f"{activechar['name']} bled out!")
-
                 continue
+
+        if activechar["boostdef"] > 0:
+            activechar["boostdef"] =- 1
+            continue
+
         if activechar["status"] == "Stun":
             who = activechar["name"] if not activechar["isplayer"] else "You"
             print(f"{who} {'is' if not activechar['isplayer'] else 'are'} paralyzed!")

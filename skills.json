@@ -44,7 +44,14 @@
     ],
     "yakuza": [
         {"name": "Punch", "desc": "Ldmg", "targettype": "single", "inflict" : "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1},
-        {"name": "Guard up", "desc": "Self", "targettype": "self", "inflict" : "guardup", "cost": 5, "dmgmlt": 1.3, "lvlreq": 3},
+        {"name": "Guard up", "desc": "Self", "targettype": "self", "inflict" : "Defenseup", "defe": 1, "boostdef" : 2, "cost": 5, "dmgmlt": 1.3, "lvlreq": 1},
+        {"name": "Gut punch", "desc": "Mdmg", "targettype": "single", "inflict" : "stun", "cost": 7, "dmgmlt": 1.5, "lvlreq": 4},
+        {"name": "Shot", "desc": "Hdmg", "targettype": "single", "inflict" : "Bleed", "bleeddmg": 2, "bleedturns" : 5, "cost": 9, "dmgmlt": 2, "lvlreq": 5},
+        {"name": "Essence of Honor", "desc": "EdmgA", "targettype": "all", "inflict" : "Bleed", "bleeddmg": 3, "bleedturns" : 4, "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
+    ],
+    "host" : [
+        {"name": "Punch", "desc": "Ldmg", "targettype": "single", "inflict" : "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1},
+        {"name": "Pose up", "desc": "Self", "targettype": "self", "inflict" : "Defenseup", "defe": 1, "boostdef" : 2, "cost": 5, "dmgmlt": 1.3, "lvlreq": 3},
         {"name": "Gut punch", "desc": "Mdmg", "targettype": "single", "inflict" : "stun", "cost": 7, "dmgmlt": 1.5, "lvlreq": 4},
         {"name": "Shot", "desc": "Hdmg", "targettype": "single", "inflict" : "Bleed", "bleeddmg": 2, "bleedturns" : 5, "cost": 9, "dmgmlt": 2, "lvlreq": 5},
         {"name": "Essence of Honor", "desc": "EdmgA", "targettype": "all", "inflict" : "Bleed", "bleeddmg": 3, "bleedturns" : 4, "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}

@@ -13,6 +13,7 @@
         "money" : 200,
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "moveset" : [
             {
             "nameskill" : "Shoot",
@@ -28,6 +29,8 @@
             "chance" : 0.25,
             "status" : "Defenseup",
             "statuschance" : 1,
+            "defe" : 3,
+            "boostdef" : 1,
             "statustarget" : "self",
             "targettype" : "self",
             "stre" : 0
@@ -64,6 +67,7 @@
         "money" : 10,
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -116,6 +120,7 @@
         "status" : "Normal",
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -156,6 +161,7 @@
         "status" : "Normal",
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -175,6 +181,10 @@
             }
         ],
         "possibledrop" : [
+            {
+                "itemid" : "Old coins",
+                "chance" : 0.10
+            }
         ]
     },
         "5": {
@@ -192,6 +202,7 @@
         "status" : "Normal",
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "moveset" : [
             {
             "nameskill" : "Bottle Smash",
@@ -204,8 +215,10 @@
             {
             "nameskill" : "Pose up",
             "chance" : 0.25,
-            "status" : "Nothing",
-            "statuschance" : 0,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 2,
+            "boostdef" : 2,
             "targettype" : "one",
             "stre" : 0
             },
@@ -250,6 +263,45 @@
         "status" : "Normal",
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
+        "moveset" : [
+            {
+            "nameskill" : "Katana Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "statuschance" : 1,
+            "bleeddmg": 3,
+            "bleedturns" : 5,
+            "targettype" : "one",
+            "stre" : 15
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 7
+            },
+            {
+            "nameskill" : "Stab",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.75,
+            "targettype" : "one",
+            "stre" : 9
+            },
+            {
+            "nameskill" : "Headbutt",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "stre" : 9
+            }
+        ],
         "possibledrop" : [
             {
                 "itemid" : "Katana",
@@ -272,6 +324,7 @@
         "status" : "Normal",
         "bleed_turns" : 0,
         "bleed_damage" : 0,
+        "boostdef" : 0,
         "possibledrop" : [
             {
                 "itemid" : "Anon Sunglasses",
