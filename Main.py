@@ -28,6 +28,37 @@ def mape():
         map2 = json.load(map1)
         return map2
 
+def byework(character, new_class, statusclass, items):
+    if not character.get("is_main_character",  False):
+        print(f"{character['name']} can't change jobs.")
+        return False
+    
+    if new_class not in character["unlocked_classes"]:
+        print("You haven't unlocked that job yet!")
+        return False
+
+    if new_class == character["class"]:
+        print("You are already on that job!")
+
+    base = statusclass[new_class]
+    character["class"] = new_class
+
+    character["maxhp"] = base["maxhp"] + character["bonus_hp"]
+    character["hp"] = min(character["maxhp"], character["hp"])
+    character["maxmana"] = base["maxmana"] + character["bonus_mana"]
+    character["mana"] = min(character["maxmana"], character["mana"])
+    character["stre"] = base["stre"] + character["bonus_stre"]
+    character["luck"] = base["luck"] + character["bonus_luck"]
+    character["speed"] = base["speed"]
+
+    if character["eq_wep"] != "Fists" and character["class"] not in items[character["eq_wep"]]["usableby"]:
+        print(f"Your {character['eq_wep']} can't be used as a {new_class}, switching to Fists")
+        character["eq_wep"] = "Fists"
+
+    print(f"{character['name']} is now a {new_class}!")
+    return True
+
+
 def dungeon(enemy_pool, boss_id):
     total_room = random.randint(5, 15)
     events = ["enemy", "chest", "break", "echest"]
@@ -72,7 +103,7 @@ def dungeon(enemy_pool, boss_id):
         currentroom += 1
 
     print ("A boss spawned!")
-    sucess = combat1(init_stats, [boss_id], enemis, lang, language1, skills)
+    sucess = combat1(init_stats, [boss_id], enemis, lang, language1, skills, items)
     if not sucess:
         return
     
@@ -113,7 +144,14 @@ if begin1 == "2":
                 "eq_wep" : "Fists",
                 "peoplerec":  0,
                 "speed" : 0,
+                "bonu_stre" : 0,
+                "bonus_hp" : 0,
+                "bonus_mana" : 0,
+                "bonus_luck" : 0,
+                "unlocked_classes": [],
                 "isplayer" : True,
+                "is_main_character" : True,
+                "last_def_boost" : 0,
                 "money" : 50,
             }
         ]
@@ -182,6 +220,7 @@ if begin1 == "2":
     init_stats["party"][0]["luck"] = classst["luck"]
     init_stats["party"][0]["speed"] = classst["speed"]
     init_stats["party"][0]["defe"] = classst["defe"]
+    init_stats["party"][0]["unlocked_classes"] = [chosenclass]
     save(init_stats)
 else:
     init_stats = load()
@@ -262,9 +301,9 @@ while in_map:
             print("\n" + lang[language1]["lowlv"])
     elif mapc == "4":
         if playerlvl >= 1:
-            if "Gordon" in init_stats["party"]:
+            if any(member["name"] == "Gordon" for member in init_stats["party"]):
                 print("How about a beer?")
-            if "Gordon" not in init_stats["party"]:
+            else:
                 print("You drink a little bit of beer, before you hear a man grumbling to himself")
                 time.sleep(2)
                 print("You decide to ask him what happened")
@@ -315,7 +354,7 @@ while in_map:
                 if 0 <= idx < len(weaponlist):
                     item_name = weaponlist[idx]
                     weapon = items[item_name]
-                    if playerOV["class"] not in weapon["usebleby"]:
+                    if playerOV["class"] not in weapon["usableby"]:
                         print(f"{playerOV['name']} the {playerOV['class']} can't use {item_name}")
                     else:
                         playerOV["eq_wep"] = item_name
@@ -339,20 +378,37 @@ while in_map:
             if choice == "o":
                 break
             if choice == "1" and active["pts"] > 0:
-                print("You upgraded strenght!")
+                print("You upgraded strength!")
                 active["pts"] -= 1
+                active["bonus_stre"] += 1
                 active["stre"] += 1
             elif choice == "2" and active["pts"] > 0:
                 print("You upgraded HP!")
                 active["pts"] -= 1
+                active["bonus_hp"] += 1
                 active["maxhp"] += 1
                 active["hp"] += 1
             elif choice == "3" and active["pts"] > 0:
                 print("You upgraded luck!")
                 active["pts"] -= 1
+                active["bonus_luck"] += 1
                 active["luck"] += 1
             elif choice == "4" and active["pts"] > 0:
                 print("You upgraded mana!")
                 active["pts"] -= 1
+                active["bonus_mana"] += 1
                 active["maxmana"] += 1
                 active["mana"] += 1
+
+    elif mapc == "j" :
+        unlocked = playerOV["unlocked_classes"]
+        print("Choose your job")
+        for i, job in enumerate(unlocked, start=1):
+            marker = " (current)" if job == playerOV["class"] else ""
+            print(f"{i}: {job}{marker}")
+
+        choice = input("> ").strip()
+        if choice.isdigit() and 0 < int(choice) <= len(unlocked):
+            byework(playerOV, unlocked[int(choice) - 1], statusclass, items)
+        else:
+            print("Invalid choice!")

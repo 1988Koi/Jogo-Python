@@ -21,6 +21,9 @@ with open("enemies.json", "r", encoding="utf-8") as enemies:
 with open("party.json", "r", encoding="utf-8") as part:
     parte = json.load(part)
 
+def lvlup(lvl):
+    return 100 + (lvl - 1) * 10
+
 
 def print_bars(presentenemies, party):
     for enemy in presentenemies:
@@ -168,8 +171,10 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
             elif "defe" in chosen:
                 combate["defe"] += chosen["defe"]
+                combate["mana"] -= chosen["cost"]
                 combate["boostdef"] += chosen["boostdef"]
                 print(f"{combate['name']} got a defense boost!")
+                turn_taken = True
                 continue
 
             elif "dmgmlt" in chosen:
@@ -314,7 +319,7 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
             member["hp"] -= chosen_attack["stre"]
             if "statuschance" in chosen_attack and chosen_attack.get("statustarget") == "ally":
                 statusroll = random.random()
-                effective_chance = max(0.0, chosen_attack["statuschance"] - unluckyman["luck"] * 0.2)
+                effective_chance = max(0.0, chosen_attack["statuschance"] - member["luck"] * 0.2)
                 if statusroll <= effective_chance:
                     member["status"] = chosen_attack["status"]
                     print(f"{member['name']} got hit and was applied {chosen_attack['status']}!")
@@ -326,16 +331,18 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
             print(f"The enemy also got applied with {chosen_attack['status']}")
 
     elif chosen_attack["targettype"] == "self":
-        if "status" in chosen_attack:
-            eatt["status"] = chosen_attack["status"]
-            print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
-        if "status" == "Defenseup":
+        if chosen_attack.get("status") == "Defenseup":
             eatt["defe"] += chosen_attack["defe"]
             eatt["boostdef"] += chosen_attack["boostdef"]
+            eatt["last_def_boost"] = chosen_attack["defe"]
+            eatt["status"] = chosen_attack["status"]
             print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
-        else:
+        elif "heal" in chosen_attack:
             eatt["hp"] += chosen_attack["heal"]
             print(f"The enemy healed himself using {chosen_attack['nameskill']}")
+        elif "status" in chosen_attack:
+            eatt["status"] = chosen_attack["status"]
+            print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
 
 
 def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
@@ -376,7 +383,7 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
 
         if activechar["bleed_turns"] > 0:
             activechar ["hp"] -= ["bleed_dmg"]
-            activechar["bleed_turns"] =- 1
+            activechar["bleed_turns"] -= 1
             print(f"{activechar['name']} took {activechar['bleed_dmg']} bleed damage!")
             if activechar <= 0:
                 activechar["currenttick"] = 1000 // activechar["speed"]
@@ -384,8 +391,11 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                 continue
 
         if activechar["boostdef"] > 0:
-            activechar["boostdef"] =- 1
-            continue
+            activechar["boostdef"] -= 1
+            if activechar["boostdef"] == 0:
+                activechar["defe"] -= activechar.get("last_def_boost", 0)
+                activechar["last_def_boost"] = 0
+                print(f"{activechar['name']}'s defense boost woere off!")
 
         if activechar["status"] == "Stun":
             who = activechar["name"] if not activechar["isplayer"] else "You"
@@ -446,10 +456,10 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                     total_xp += int(e["xpdrop"] * 2.0)
 
             i["xptotal"] += total_xp
-            while i["xptotal"] >= 100:
+            while i["xptotal"] >= lvlup(i["lvl"]):
+                i["xptotal"] -= lvlup(i["lvl"])
                 i["lvl"] += 1
                 i["pts"] += 1
-                i["xptotal"] -= 100
                 print(f"{i['name']} leveled up to {i['lvl']}")
 
 

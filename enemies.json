@@ -14,6 +14,7 @@
         "bleed_turns" : 0,
         "bleed_damage" : 0,
         "boostdef" : 0,
+        "last_def_boost" : 0,
         "moveset" : [
             {
             "nameskill" : "Shoot",
@@ -68,6 +69,7 @@
         "bleed_turns" : 0,
         "bleed_damage" : 0,
         "boostdef" : 0,
+        "last_def_boost" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -121,6 +123,7 @@
         "bleed_turns" : 0,
         "bleed_damage" : 0,
         "boostdef" : 0,
+        "last_def_boost" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -162,6 +165,7 @@
         "bleed_turns" : 0,
         "bleed_damage" : 0,
         "boostdef" : 0,
+        "last_def_boost" : 0,
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -190,8 +194,8 @@
         "5": {
         "name" : "Low tier Host",
         "eid" : 5,
-        "hp" : 30,
-        "maxhp" : 15,
+        "hp" : 10,
+        "maxhp" : 10,
         "stre" : 5,
         "lvl" : 2,
         "xpdrop" : 60,
@@ -203,6 +207,69 @@
         "bleed_turns" : 0,
         "bleed_damage" : 0,
         "boostdef" : 0,
+        "last_def_boost" : 0,
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Pose up",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 2,
+            "boostdef" : 2,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Shard Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "stre" : 9
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "2Bottle",
+            "chance" : 0.20
+            }
+        ]
+    },
+    "6": {
+        "name" : "Jugallo",
+        "eid" : 5,
+        "hp" : 30,
+        "maxhp" : 15,
+        "stre" : 5,
+        "lvl" : 2,
+        "xpdrop" : 30,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
+        "boostdef" : 0,
+        "last_def_boost" : 0,
         "moveset" : [
             {
             "nameskill" : "Bottle Smash",
@@ -264,6 +331,7 @@
         "bleed_turns" : 0,
         "bleed_damage" : 0,
         "boostdef" : 0,
+        "last_def_boost" : 0,
         "moveset" : [
             {
             "nameskill" : "Katana Slash",
@@ -325,6 +393,7 @@
         "bleed_turns" : 0,
         "bleed_damage" : 0,
         "boostdef" : 0,
+        "last_def_boost" : 0,
         "possibledrop" : [
             {
                 "itemid" : "Anon Sunglasses",
