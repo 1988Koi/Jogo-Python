@@ -2,6 +2,7 @@ import json
 import random
 import subprocess
 import time
+import copy
 from saveload import *
 from combat import *
 
@@ -103,7 +104,7 @@ def dungeon(enemy_pool, boss_id):
         currentroom += 1
 
     print ("A boss spawned!")
-    sucess = combat1(init_stats, [boss_id], enemis, lang, language1, skills, items)
+    sucess = combat1(init_stats, [boss_id], enemis, lang, language1, skills, items, can_flee=False)
     if not sucess:
         return
     
@@ -144,7 +145,7 @@ if begin1 == "2":
                 "eq_wep" : "Fists",
                 "peoplerec":  0,
                 "speed" : 0,
-                "bonu_stre" : 0,
+                "bonus_stre" : 0,
                 "bonus_hp" : 0,
                 "bonus_mana" : 0,
                 "bonus_luck" : 0,
@@ -152,6 +153,7 @@ if begin1 == "2":
                 "isplayer" : True,
                 "is_main_character" : True,
                 "last_def_boost" : 0,
+                "taunt_turns": 0,
                 "money" : 50,
             }
         ]
@@ -160,14 +162,7 @@ if begin1 == "2":
     name1 = input("> ").strip()
 
     init_stats["party"][0]["name"] = name1
-    placeholdername = lang[language1]["nameok"]
-    actualname = placeholdername.replace("{name}", name1)
-    print ("\n" + actualname)
     save(init_stats)
-
-    print("\n" + lang[language1]["class"])
-    print("\n" + lang[language1]["classc"])
-    classconf = False
 
     acceptedclass = {
             "1" : "Host",
@@ -180,34 +175,29 @@ if begin1 == "2":
         }
     
     statusclass = {
-        "Host" : {"hp" : 5, "maxhp": 5, "mana": 15, "maxmana" : 15, "stre": 3, "luck": 5, "speed" : 7, "defe" : 0,},
-        "Yakuza" : {"hp" : 15, "maxhp": 15, "mana": 9, "maxmana" : 9, "stre": 8, "luck": 3, "speed" : 5, "defe" : 3,},
-        "Security" : {"hp" : 7, "maxhp": 7, "mana": 10, "maxmana" : 10, "stre": 10, "luck": 5, "speed" : 8, "defe" : 1,},
-        "Foreman" : {"hp" : 25, "maxhp": 25, "mana": 7, "maxmana" : 7, "stre": 4, "luck": 0, "speed" : 4, "defe" : 5,},
-        "Chef" : {"hp" : 10, "maxhp": 10, "mana": 15, "maxmana" : 15, "stre": 4, "luck": 5, "speed" : 6, "defe" : 1,},
-        "Breaker" : {"hp" : 8, "maxhp": 8, "mana": 5, "maxmana" : 5, "stre": 5, "luck": 2, "speed" : 10, "defe" : 2,},
-        "Hero" : {"hp" : 10, "maxhp": 10, "mana": 11, "maxmana" : 11, "stre": 6, "luck": 6, "speed" : 7, "defe" : 2,},
+        "Host" :      {"hp": 6,  "maxhp": 6,  "mana": 16, "maxmana": 16, "stre": 3, "luck": 6, "speed": 8,  "defe": 0},
+        "Yakuza" :    {"hp": 16, "maxhp": 16, "mana": 8,  "maxmana": 8,  "stre": 8, "luck": 3, "speed": 5,  "defe": 3},
+        "Security" :  {"hp": 8,  "maxhp": 8,  "mana": 8,  "maxmana": 8,  "stre": 9, "luck": 3, "speed": 6,  "defe": 2},
+        "Foreman" :   {"hp": 28, "maxhp": 28, "mana": 5,  "maxmana": 5,  "stre": 5, "luck": 0, "speed": 3,  "defe": 8},
+        "Chef" :      {"hp": 11, "maxhp": 11, "mana": 18, "maxmana": 18, "stre": 3, "luck": 6, "speed": 6,  "defe": 2},
+        "Breaker" :   {"hp": 8,  "maxhp": 8,  "mana": 6,  "maxmana": 6,  "stre": 6, "luck": 3, "speed": 12, "defe": 1},
+        "Hero" :      {"hp": 11, "maxhp": 11, "mana": 11, "maxmana": 11, "stre": 6, "luck": 5, "speed": 7,  "defe": 3},
+        "Freelancer": {"hp": 8,  "maxhp": 8,  "mana": 4,  "maxmana": 4,  "stre": 3, "luck": 2, "speed": 4,  "defe": 1},
     }
 
-    while not classconf:
+    classlvlreq = {
+        "Host": 2,
+        "Yakuza": 5,
+        "Security" : 3,
+        "Foreman" : 2,
+        "Chef" : 4,
+        "Breaker" : 3,
+        "Hero" : 1,
+        "Freelancer" : 0,
+    }
 
-        class1 = input("> ").strip().lower()
-        if class1 not in acceptedclass:
-            print("\n" + lang[language1]["classno"])
-            continue
 
-        placeholderclass = lang[language1]["classok"]
-        classname = acceptedclass[class1]
-        init_stats["party"][0]["class"] = classname
-        actualclass = placeholderclass.replace("{class}", classname)
-        print ("\n" + actualclass)
-        print("\n" + lang[language1]["sure"])
-
-        conf = input("> ").strip().lower()
-        if conf == "1":
-            classconf = True
-        else:
-            print("\n" + lang[language1]["classc"])
+    init_stats["party"][0]["class"] = "Freelancer"
 
     chosenclass = init_stats["party"][0]["class"]
     classst = statusclass[chosenclass]
@@ -300,7 +290,7 @@ while in_map:
         else:
             print("\n" + lang[language1]["lowlv"])
     elif mapc == "4":
-        if playerlvl >= 1:
+        if playerlvl >= 3:
             if any(member["name"] == "Gordon" for member in init_stats["party"]):
                 print("How about a beer?")
             else:
@@ -320,7 +310,8 @@ while in_map:
                 time.sleep(2)
                 print("But he joins your party.")
                 print("Gordon Joined the Party!")
-                init_stats["party"].append(parte["gordon"])
+                new_member = apply_defaults(copy.deepcopy(parte["gordon"]))
+                init_stats["party"].append(new_member)
                 init_stats["party"][0]["peoplerec"] += 1
         else:
             print("How your level < than 1?")
@@ -360,7 +351,7 @@ while in_map:
                         playerOV["eq_wep"] = item_name
                         print(f"You equipped {playerOV['eq_wep']}")
 
-    elif mapc == "o":
+    elif mapc == "p":
         currentslot = 0
         onpts = True
         while onpts == True:
@@ -401,14 +392,17 @@ while in_map:
                 active["mana"] += 1
 
     elif mapc == "j" :
-        unlocked = playerOV["unlocked_classes"]
-        print("Choose your job")
-        for i, job in enumerate(unlocked, start=1):
-            marker = " (current)" if job == playerOV["class"] else ""
-            print(f"{i}: {job}{marker}")
-
-        choice = input("> ").strip()
-        if choice.isdigit() and 0 < int(choice) <= len(unlocked):
-            byework(playerOV, unlocked[int(choice) - 1], statusclass, items)
+        if playerlvl < 4:
+            print("Level too low")
         else:
-            print("Invalid choice!")
+            unlocked = playerOV["unlocked_classes"]
+            print("Choose your job")
+            for i, job in enumerate(unlocked, start=1):
+                marker = " (current)" if job == playerOV["class"] else ""
+                print(f"{i}: {job}{marker}")
+
+            choice = input("> ").strip()
+            if choice.isdigit() and 0 < int(choice) <= len(unlocked):
+                byework(playerOV, unlocked[int(choice) - 1], statusclass, items)
+            else:
+                print("Invalid choice!")

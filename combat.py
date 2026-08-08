@@ -21,8 +21,23 @@ with open("enemies.json", "r", encoding="utf-8") as enemies:
 with open("party.json", "r", encoding="utf-8") as part:
     parte = json.load(part)
 
+
 def lvlup(lvl):
     return 100 + (lvl - 1) * 10
+
+
+def apply_inflict(skill, target):
+    """Applies whatever status a player skill's 'inflict' field specifies to the target."""
+    inflict = skill.get("inflict")
+    if not inflict or inflict == "Nothing":
+        return
+    if inflict == "Bleed":
+        target["bleed_turns"] = skill["bleedturns"]
+        target["bleed_dmg"] = skill["bleeddmg"]
+        print(f"{target['name']} is bleeding!")
+    elif inflict == "Stun":
+        target["status"] = "Stun"
+        print(f"{target['name']} is stunned!")
 
 
 def print_bars(presentenemies, party):
@@ -44,7 +59,7 @@ def print_bars(presentenemies, party):
         print(f"{member['name']}: [\033[95m{'█' * manabarmax}\033[0m{'░' * manabarmin}] {current_mana} / {member['maxmana']}")
 
 
-def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag):
+def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee=True):
     total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
     turn_taken = False
 
@@ -169,13 +184,17 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                     print("Invalid input!")
                     continue
 
-            elif "defe" in chosen:
-                combate["defe"] += chosen["defe"]
+            elif "defe" in chosen or chosen.get("inflict") == "Taunt":
+                if "defe" in chosen:
+                    combate["defe"] += chosen["defe"]
+                    combate["boostdef"] += chosen["boostdef"]
+                    combate["last_def_boost"] = chosen["defe"]
+                    print(f"{combate['name']} got a defense boost!")
+                if chosen.get("inflict") == "Taunt":
+                    combate["taunt_turns"] = chosen["taunt_turns"]
+                    print(f"{combate['name']} is taunting the enemies!")
                 combate["mana"] -= chosen["cost"]
-                combate["boostdef"] += chosen["boostdef"]
-                print(f"{combate['name']} got a defense boost!")
                 turn_taken = True
-                continue
 
             elif "dmgmlt" in chosen:
                 if chosen["targettype"] == "single":
@@ -201,6 +220,7 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                                     presentenemies[target_index]["hp"] -= damage
                                     combate["mana"] -= chosen["cost"]
                                     print(f"Used {chosen['name']}! Dealt {damage} damage.")
+                                    apply_inflict(chosen, presentenemies[target_index])
                                     turn_taken = True
                         else:
                             print("Invalid number!")
@@ -215,6 +235,7 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                     for enemy in presentenemies:
                         if enemy["hp"] > 0:
                             enemy["hp"] -= damage
+                            apply_inflict(chosen, enemy)
                     print("You used a skill that hit everyone!")
                     turn_taken = True
             else:
@@ -262,6 +283,26 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
             turn_taken = True
 
+        elif playerturn == "4":
+            if not can_flee:
+                print("You cannot flee from this combat")
+                continue
+
+            living_enemies = [e for e in presentenemies if e["hp"] > 0]
+            avg_enemy_speed = sum(e["speed"] for e in living_enemies) / len(living_enemies)
+            escape_chance = 0.5 + (combate["speed"] - avg_enemy_speed) * 0.02 + combate["luck"] * 0.01
+            escape_chance = max(0.1, min(0.9, escape_chance))
+
+            roll = random.random()
+            if roll <= escape_chance:
+                print(f"{combate['name']} got the party away but lost 25 bucks in the process!")
+                init_stats["party"][0]["money"] = max(0, init_stats["party"][0]["money"] - 25)
+                fled_flag[0] = True
+                turn_taken = True
+            else:
+                print(f"{combate['name']} tried to run, but couldn't get away!")
+                turn_taken = True
+
         else:
             print("Invalid choice, try again.")
             continue
@@ -277,6 +318,8 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         game_over_flag[0] = True
         return
 
+    taunting = [m for m in living_party if m.get("taunt_turns", 0) > 0]
+
     randomchance = random.random()
     running_total = 0
     chosen_attack = None
@@ -291,7 +334,7 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         return
 
     if chosen_attack["targettype"] == "one":
-        unluckyman = random.choice(living_party)
+        unluckyman = random.choice(taunting) if taunting else random.choice(living_party)
         defenseunluck = unluckyman["defe"] / 2
         if defenseunluck >= chosen_attack["stre"]:
             print(f"{unluckyman['name']} managed to resist {eatt['name']} attack!")
@@ -345,12 +388,13 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
             print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
 
 
-def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
+def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, can_flee=True):
     presentenemies = []
     for eids in enemy_ids:
         presentenemies.append(enemies_db[str(eids)].copy())
 
     game_over_flag = [False]
+    fled_flag = [False]
 
     order = []
     for i in init_stats["party"]:
@@ -362,30 +406,30 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
         a["isplayer"] = False
         order.append(a)
 
-    while any(e["hp"] > 0 for e in presentenemies) and not game_over_flag[0]:
+    while any(e["hp"] > 0 for e in presentenemies) and not game_over_flag[0] and not fled_flag[0]:
         living = [i for i in order if i["hp"] > 0]
         lowest = min(i["currenttick"] for i in living)
         for b in living:
             b["currenttick"] -= lowest
 
-        ready = [i for i in living if i ["currenttick"] <= 0]
-        ready.sort(key=lambda x : -x["speed"])
-        activechar = ready [0]
+        ready = [i for i in living if i["currenttick"] <= 0]
+        ready.sort(key=lambda x: -x["speed"])
+        activechar = ready[0]
 
         activechar["currenttick"] += 1000 // activechar["speed"]
 
         print_bars(presentenemies, init_stats["party"])
-        print(f"It's {activechar['name']} turn!")
+        print(f"It's {activechar['name']}'s turn!")
 
         if activechar["hp"] <= 0:
             activechar["currenttick"] = 1000 // activechar["speed"]
             continue
 
         if activechar["bleed_turns"] > 0:
-            activechar ["hp"] -= ["bleed_dmg"]
+            activechar["hp"] -= activechar["bleed_dmg"]
             activechar["bleed_turns"] -= 1
             print(f"{activechar['name']} took {activechar['bleed_dmg']} bleed damage!")
-            if activechar <= 0:
+            if activechar["hp"] <= 0:
                 activechar["currenttick"] = 1000 // activechar["speed"]
                 print(f"{activechar['name']} bled out!")
                 continue
@@ -395,7 +439,10 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
             if activechar["boostdef"] == 0:
                 activechar["defe"] -= activechar.get("last_def_boost", 0)
                 activechar["last_def_boost"] = 0
-                print(f"{activechar['name']}'s defense boost woere off!")
+                print(f"{activechar['name']}'s defense boost wore off!")
+
+        if activechar.get("taunt_turns", 0) > 0:
+            activechar["taunt_turns"] -= 1
 
         if activechar["status"] == "Stun":
             who = activechar["name"] if not activechar["isplayer"] else "You"
@@ -405,13 +452,17 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
             continue
 
         if activechar["isplayer"]:
-            player_turn(activechar, presentenemies, init_stats, lang, language1, skills, items, game_over_flag)
+            player_turn(activechar, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee)
         else:
             enemy_turn(activechar, presentenemies, init_stats, game_over_flag)
 
         activechar["currenttick"] = 1000 // activechar["speed"]
 
     print("Combat Finished!")
+
+    if fled_flag[0]:
+        print("You managed to get away safely!")
+        return "fled"
 
     if not game_over_flag[0]:
         for enemy in presentenemies:
@@ -461,6 +512,5 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items):
                 i["lvl"] += 1
                 i["pts"] += 1
                 print(f"{i['name']} leveled up to {i['lvl']}")
-
 
     return not game_over_flag[0]
