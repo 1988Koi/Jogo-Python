@@ -24,7 +24,34 @@
         "bonus_mana" : 0,
         "bonus_luck" : 0,
         "eq_wep" : "Briefcase",
-        "is_main_character" : "False"
+        "is_main_character" : false
+    },
+    "kanae": {
+        "name" : "Kanae",
+        "class" : "host",
+        "maxhp" : 6,
+        "hp" : 6,
+        "mana" : 16,
+        "maxmana" : 16,
+        "stre" : 3,
+        "lvl" : 3,
+        "xptotal" : 0,
+        "luck" : 0,
+        "pts" : 0,
+        "speed" : 8,
+        "defe" : 4,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_damage" : 0,
+        "boostdef" : 0,
+        "last_def_boost" : 0,
+        "taunt_turns": 0,
+        "bonus_stre" : 0,
+        "bonus_hp" : 0,
+        "bonus_mana" : 0,
+        "bonus_luck" : 0,
+        "eq_wep" : "bottle",
+        "is_main_character" : false
     },
     "reggie": {
         "name" : "Reggie",
@@ -42,7 +69,7 @@
         "pts" : 0,
         "status" : "Normal",
         "bleed_turns" : 0,
-        "bleed_damage" : 0,
+        "bleed_dmg" : 0,
         "boostdef" : 0,
         "last_def_boost" : 0,
         "taunt_turns": 0,
@@ -51,7 +78,7 @@
         "bonus_mana" : 0,
         "bonus_luck" : 0,
         "eq_wep" : "Microphone",
-        "is_main_character" : "False"
+        "is_main_character" : false
     },
     "zhouzhen": {
         "name" : "Zhou Zhen",
@@ -69,7 +96,7 @@
         "pts" : 0,
         "status" : "Normal",
         "bleed_turns" : 0,
-        "bleed_damage" : 0,
+        "bleed_dmg" : 0,
         "last_def_boost" : 0,
         "boostdef" : 0,
         "taunt_turns": 0,
@@ -77,7 +104,7 @@
         "bonus_hp" : 0,
         "bonus_mana" : 0,
         "bonus_luck" : 0,
-        "is_main_character" : "False"
+        "is_main_character" : false
     },
     "yatakeyomai": {
         "name" : "Yatake Yomai",
@@ -95,7 +122,7 @@
         "pts" : 0,
         "status" : "Normal",
         "bleed_turns" : 0,
-        "bleed_damage" : 0,
+        "bleed_dmg" : 0,
         "last_def_boost" : 0,
         "boostdef" : 0,
         "taunt_turns": 0,
@@ -103,7 +130,7 @@
         "bonus_hp" : 0,
         "bonus_mana" : 0,
         "bonus_luck" : 0,
-        "is_main_character" : "False"
+        "is_main_character" : false
     },
     "moryukazaki": {
         "name" : "Moryu Kazaki",
@@ -121,7 +148,7 @@
         "pts" : 0,
         "status" : "Normal",
         "bleed_turns" : 0,
-        "bleed_damage" : 0,
+        "bleed_dmg" : 0,
         "last_def_boost" : 0,
         "boostdef" : 0,
         "taunt_turns": 0,
@@ -129,6 +156,6 @@
         "bonus_hp" : 0,
         "bonus_mana" : 0,
         "bonus_luck" : 0,
-        "is_main_character" : "False"
+        "is_main_character" : false
     }
 }

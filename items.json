@@ -14,7 +14,7 @@
         "value" : 15,
         "desc" :"Heals you a lot, a frown in each box"
     },
-    "Stamina spork": {
+    "Stomina spork": {
         "type" : "heal",
         "value" : -30,
         "desc" : "Heals you a lot, hoho... ahhhh..."
@@ -72,6 +72,72 @@
         "type" : "accessory",
         "slot" : "accessory",
         "luck" : 3,
-        "usableby" : ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend"]
+        "usableby" : ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer"]
+    },
+    "Mall katana": {
+        "type" : "weapon",
+        "stren" : 10,
+        "desc" : "A mall katana, the edges are very dull.",
+        "usableby" : ["Security"]
+    },
+    "Hero's Bat" : {
+        "type" : "weapon",
+        "stren" : 200,
+        "desc" : "The bat of all bat's",
+        "usableby" : ["Hero"]
+    },
+    "Legendary Bat" : {
+        "type": "weapon",
+        "stren" : 150,
+        "desc" : "A bat that once hit a game winning home run",
+        "usableby" : ["Hero"]
+    },
+    "Pipe Wrench" : {
+        "type" : "weapon",
+        "stren" : 50,
+        "desc" : "A brand new pipe wrench",
+        "usableby" : ["technician"]
+    },
+    "Clair" : {
+        "type" : "weapon",
+        "stren" : 250,
+        "desc" : "Clair",
+        "usableby" : ["Hero"]
+    },
+    "Obscur" : {
+        "type" : "weapon",
+        "stren" : 250,
+        "desc" : "Obscur",
+        "usableby" : ["Legend"]
+    },
+    "Clair-Obscur" : {
+        "type" : "weapon",
+        "stren" : 500,
+        "desc" : "ensemble au Clair-Obscur",
+        "usableby" : ["Hero", "Legend"]
+    },
+    "Brass Knuckles" : {
+        "type" : "weapon",
+        "stren" : 30,
+        "desc" : "Simple brass knuckles",
+        "usableby" : ["Yakuza"]
+    },
+    "Spiked Brass Knuckles" : {
+        "type" : "weapon",
+        "stren" : 60,
+        "desc" : "a brass knuckles with some spikes on it",
+        "usableby" : ["Yakuza"]
+    },
+    "Scrap Metal": {
+        "type" : "material"
+    },
+    "Processed Metal": {
+        "type" : "material"
+    },
+    "Polished Metal" : {
+        "type" : "material"
+    },
+    "Perfect Metal" : {
+        "type" : "material"
     }
 }

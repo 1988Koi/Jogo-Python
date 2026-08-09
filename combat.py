@@ -266,7 +266,7 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
             item_data = items[item_name]
 
             if item_data["type"] == "heal":
-                if item_name == "Stamina Spork":
+                if item_name == "Stomina Spork":
                     combate["hp"] = combate["hp"] + item_data["value"]
                     print(f"You feel ill -{item_data['value']}")
                 else:
@@ -317,6 +317,20 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         print("You died!")
         game_over_flag[0] = True
         return
+
+    if "moveset2" in eatt and not eatt.get("phase2_triggered", False):
+        if eatt["hp"] <= eatt["maxhp"] * eatt.get("phase2_threshold", 0.5):
+            eatt["moveset"] = eatt["moveset2"]
+            eatt["phase2_triggered"] = True
+            flavor = eatt.get("phase2_text", "changes stance...")
+            print(f"\n{eatt['name']} {flavor}")
+
+    if "moveset3" in eatt and not eatt.get("phase3_triggered", False):
+        if eatt["hp"] <= eatt["maxhp"] * eatt.get("phase3_threshold", 0.3):
+            eatt["moveset"] = eatt["moveset3"]
+            eatt["phase3_triggered"] = True
+            flavor = eatt.get("phase3_text", "shifts tactics once more...")
+            print(f"\n{eatt['name']} {flavor}")
 
     taunting = [m for m in living_party if m.get("taunt_turns", 0) > 0]
 
@@ -382,7 +396,17 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
             print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
         elif "heal" in chosen_attack:
             eatt["hp"] += chosen_attack["heal"]
-            print(f"The enemy healed himself using {chosen_attack['nameskill']}")
+            if "message" in chosen_attack:
+                print(chosen_attack["message"])
+            else:
+                print(f"The {eatt['name']} healed himself using {chosen_attack['nameskill']}")
+        elif chosen_attack.get("status") == "AttackUp":
+            eatt["attackup_turns"] = chosen_attack["bonusattackturn"]
+            eatt["attackup_bonus"] = chosen_attack["bonusattack"]
+            if "message" in chosen_attack:
+                print(chosen_attack["message"])
+            else:
+                print(f"{eatt['name']} used {chosen_attack['nameskill']} is getting pumped up!")
         elif "status" in chosen_attack:
             eatt["status"] = chosen_attack["status"]
             print(f"The enemy used {chosen_attack['nameskill']} and got {chosen_attack['status']}!")
