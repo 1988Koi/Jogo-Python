@@ -319,7 +319,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "5":
             cleaning()
-            combat1(init_stats, [3], enemis, lang, language1, skills, items)
+            combat1(init_stats, [6], enemis, lang, language1, skills, items)
 
         elif mapc == "6":
             cleared = dungeon(pool, boss, init_stats, lang, language1, skills, items, enemis)
