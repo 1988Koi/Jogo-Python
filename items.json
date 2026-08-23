@@ -145,5 +145,14 @@
     },
     "Perfect Metal" : {
         "type" : "material"
+    },
+    "Empty Cough Drop" : {
+        "type" : "material"
+    },
+    "Squid Tentacle" : {
+        "type" : "material"
+    },
+    "Shark Fin" : {
+        "type" : "material"
     }
 }
