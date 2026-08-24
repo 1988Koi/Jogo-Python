@@ -42,14 +42,14 @@ acceptedclass = {
 }
 
 statusclass = {
-    "Host":       {"hp": 6,  "maxhp": 6,  "mana": 16, "maxmana": 16, "stre": 3, "luck": 6, "speed": 8,  "defe": 0},
-    "Yakuza":     {"hp": 16, "maxhp": 16, "mana": 8,  "maxmana": 8,  "stre": 8, "luck": 3, "speed": 5,  "defe": 3},
-    "Security":   {"hp": 8,  "maxhp": 8,  "mana": 8,  "maxmana": 8,  "stre": 9, "luck": 3, "speed": 6,  "defe": 2},
-    "Foreman":    {"hp": 28, "maxhp": 28, "mana": 5,  "maxmana": 5,  "stre": 5, "luck": 0, "speed": 3,  "defe": 8},
-    "Chef":       {"hp": 11, "maxhp": 11, "mana": 18, "maxmana": 18, "stre": 3, "luck": 6, "speed": 6,  "defe": 2},
-    "Breaker":    {"hp": 8,  "maxhp": 8,  "mana": 6,  "maxmana": 6,  "stre": 6, "luck": 3, "speed": 12, "defe": 1},
-    "Hero":       {"hp": 11, "maxhp": 11, "mana": 11, "maxmana": 11, "stre": 6, "luck": 5, "speed": 7,  "defe": 3},
-    "Freelancer": {"hp": 8,  "maxhp": 8,  "mana": 4,  "maxmana": 4,  "stre": 3, "luck": 2, "speed": 4,  "defe": 1},
+    "Host":       {"hp": 6,  "maxhp": 6,  "mana": 16, "maxmana": 16, "stre": 3, "luck": 6, "speed": 8,  "defe": 0, "weakness": ["bash", "fire"], "strong" : ["slash"]},
+    "Yakuza":     {"hp": 16, "maxhp": 16, "mana": 8,  "maxmana": 8,  "stre": 8, "luck": 3, "speed": 5,  "defe": 3, "weakness": ["shot", "stab"], "strong" : ["slash", "bash"]},
+    "Security":   {"hp": 8,  "maxhp": 8,  "mana": 8,  "maxmana": 8,  "stre": 9, "luck": 3, "speed": 6,  "defe": 2, "weakness": ["bash", "stab"], "strong" : ["slash"]},
+    "Foreman":    {"hp": 28, "maxhp": 28, "mana": 5,  "maxmana": 5,  "stre": 5, "luck": 0, "speed": 3,  "defe": 8, "weakness": ["fire"], "strong" : ["bash"]},
+    "Chef":       {"hp": 11, "maxhp": 11, "mana": 18, "maxmana": 18, "stre": 3, "luck": 6, "speed": 6,  "defe": 2, "weakness": ["stab", "bash"], "strong" : ["fire", "slash"]},
+    "Breaker":    {"hp": 8,  "maxhp": 8,  "mana": 6,  "maxmana": 6,  "stre": 6, "luck": 3, "speed": 12, "defe": 1, "weakness": ["bash", "stab"], "strong" : []},
+    "Hero":       {"hp": 11, "maxhp": 11, "mana": 11, "maxmana": 11, "stre": 6, "luck": 5, "speed": 7,  "defe": 3, "weakness": ["slash", "bash"], "strong" : ["shot", "stab"]},
+    "Freelancer": {"hp": 8,  "maxhp": 8,  "mana": 4,  "maxmana": 4,  "stre": 3, "luck": 2, "speed": 4,  "defe": 1, "weakness": [], "strong" : []},
 }
 
 classlvlreq = {
@@ -284,7 +284,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "3":
             if playerlvl >= 5:
-                print("")
+                cleaning()
+                combat1(init_stats, [6], enemis, lang, language1, skills, items)
             else:
                 print("\n" + lang[language1]["lowlv"])
 
@@ -318,9 +319,55 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("How your level < than 1?")
 
         elif mapc == "5":
-            cleaning()
-            combat1(init_stats, [6], enemis, lang, language1, skills, items)
+            if playerlvl >= 4:
+                cleaning()
+                print("The pawn shop is dim, smells like dust in here.")
+                inv = init_stats["party"][0]["inv"]
+                closeshop = False
 
+                while not closeshop:
+                    sellable = list(inv.keys())
+                    if not sellable:
+                        print("There's nothing I can sell...")
+                        break
+
+                    for i, item_name in enumerate(sellable, start=1):
+                        item_data = items[item_name]
+                        value = item_data.get("sellvalue")
+                        if value is None:
+                            value = item_data.get("stren", 0) * 2
+                        count = inv[item_name]
+                        print(f"{i}: {item_name} (x{count}) - sells for {value} each, mate!")
+                    print("Type i to quit")
+
+                    choice = input("> ").strip()
+                    if choice.lower() == "i":
+                        closeshop = True
+                        continue
+
+                    if choice.isdigit() and 0 < int(choice) <= len(sellable):
+                        item_name = sellable[int(choice) - 1]
+
+                        if item_name == init_stats["party"][0]["eq_wep"]:
+                            print("You can't sell your currenly equiped weapon!")
+                            continue
+
+                        item_data = items[item_name]
+                        value = item_data.get("sellvalue")
+                        if value is None:
+                            value = item_data.get("stren", 0) * 2
+
+                        inv [item_name] -= 1
+                        if inv[item_name] == 0:
+                            del inv[item_name]
+
+                        init_stats["party"][0]["money"] += value
+                        print(f"Sold 1x {item_name} for {value} money")
+                    else:
+                        print("invalid choice.")
+            else:
+                print("\n" + lang[language1]["lowlv"])
+                
         elif mapc == "6":
             cleared = dungeon(pool, boss, init_stats, lang, language1, skills, items, enemis)
             if cleared and not init_stats["story_flags"].get("Maluchi_Defeated"):

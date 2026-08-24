@@ -243,13 +243,14 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                 continue
 
         elif playerturn == "3":
-            player_item = list(combate["inv"].keys())
+            leader_inv = init_stats["party"][0]["inv"]
+            player_item = list(leader_inv.keys())
             if not player_item:
                 print("Your inventory is empty!")
                 continue
 
             for i, itemname in enumerate(player_item):
-                count = combate["inv"][itemname]
+                count = leader_inv[itemname]
                 print(f"{i + 1}: {itemname}(x{count})")
 
             item_choice = input("> ").strip()
@@ -277,9 +278,9 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                 combate["mana"] = min(combate["maxmana"], combate["mana"] + item_data["value"])
                 print(f"You consumed a nice {item_name} and got + {item_data['value']}")
 
-            combate["inv"][item_name] -= 1
-            if combate["inv"][item_name] == 0:
-                del combate["inv"][item_name]
+            leader_inv[item_name] -= 1
+            if leader_inv[item_name] == 0:
+                del leader_inv[item_name]
 
             turn_taken = True
 

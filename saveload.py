@@ -26,7 +26,6 @@ DEFAULT_MEMBER = {
     "luck": 1,
     "defe": 0,
     "speed": 5,
-    "inv": {},
     "xp": 0,
     "lvl": 1,
     "xptotal": 0,
@@ -46,6 +45,8 @@ DEFAULT_MEMBER = {
     "bonus_mana": 0,
     "bonus_luck": 0,
     "is_main_character": False,
+    "weakness": [],
+    "strong" : []
 }
 
 def apply_defaults(member):
@@ -65,6 +66,8 @@ def fill_missing_fields(stats):
 
     if party:
         party[0]["is_main_character"] = True
+        if "inv" not in party[0]:
+            party[0]["inv"] = {}
 
     return stats
 
