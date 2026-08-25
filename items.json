@@ -23,7 +23,8 @@
         "type" : "weapon",
         "stren" : 30,
         "desc" : "A katana forged from rare ores, gives 30 more attack damage",
-        "usebleby" : ["Security"]
+        "usebleby" : ["Security"],
+        "effect" : ["slash"]
     },
     "Hero sword": {
         "type" : "weapon",
@@ -70,9 +71,15 @@
     },
     "Lucky Charm": {
         "type" : "accessory",
-        "slot" : "accessory",
+        "desc" : "A simple lucky charm, probably doesn't work",
         "luck" : 3,
-        "usableby" : ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer"]
+        "usableby" : ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
+    },
+    "Baseball hat" : {
+        "type" : "headgear",
+        "defe" : 20,
+        "desc" : "A simple baseball hat",
+        "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
     },
     "Mall katana": {
         "type" : "weapon",

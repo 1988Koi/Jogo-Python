@@ -37,6 +37,7 @@ DEFAULT_MEMBER = {
     "last_def_boost": 0,
     "taunt_turns": 0,
     "eq_wep": "Fists",
+    "eq_head" : "Nothing",
     "peoplerec": 0,
     "isplayer": True,
     "money": 50,

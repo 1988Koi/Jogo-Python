@@ -39,6 +39,7 @@ acceptedclass = {
     "6": "Breaker",
     "7": "Hero",
     "8": "Freelancer",
+    "9": "Gentleman",
 }
 
 statusclass = {
@@ -47,9 +48,10 @@ statusclass = {
     "Security":   {"hp": 8,  "maxhp": 8,  "mana": 8,  "maxmana": 8,  "stre": 9, "luck": 3, "speed": 6,  "defe": 2, "weakness": ["bash", "stab"], "strong" : ["slash"]},
     "Foreman":    {"hp": 28, "maxhp": 28, "mana": 5,  "maxmana": 5,  "stre": 5, "luck": 0, "speed": 3,  "defe": 8, "weakness": ["fire"], "strong" : ["bash"]},
     "Chef":       {"hp": 11, "maxhp": 11, "mana": 18, "maxmana": 18, "stre": 3, "luck": 6, "speed": 6,  "defe": 2, "weakness": ["stab", "bash"], "strong" : ["fire", "slash"]},
-    "Breaker":    {"hp": 8,  "maxhp": 8,  "mana": 6,  "maxmana": 6,  "stre": 6, "luck": 3, "speed": 12, "defe": 1, "weakness": ["bash", "stab"], "strong" : []},
+    "Breaker":    {"hp": 8,  "maxhp": 8,  "mana": 6,  "maxmana": 6,  "stre": 6, "luck": 3, "speed": 12, "defe": 1, "weakness": ["bash", "stab"], "strong" : ["fire", "ice"]},
     "Hero":       {"hp": 11, "maxhp": 11, "mana": 11, "maxmana": 11, "stre": 6, "luck": 5, "speed": 7,  "defe": 3, "weakness": ["slash", "bash"], "strong" : ["shot", "stab"]},
     "Freelancer": {"hp": 8,  "maxhp": 8,  "mana": 4,  "maxmana": 4,  "stre": 3, "luck": 2, "speed": 4,  "defe": 1, "weakness": [], "strong" : []},
+    "Gentleman": {"hp": 8,  "maxhp": 8,  "mana": 10,  "maxmana": 10,  "stre": 8, "luck": 3, "speed": 4,  "defe": 1, "weakness": ["bash", "fire"], "strong" : ["slash", "stab"]},
 }
 
 classlvlreq = {
@@ -61,6 +63,7 @@ classlvlreq = {
     "Breaker": 3,
     "Hero": 1,
     "Freelancer": 0,
+    "Gentleman" : 4,
 }
 
 
@@ -408,14 +411,17 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "i":
             player_itemOV = list(playerOV["inv"].keys())
             weaponlist = []
+            headgearlist = []
             closeinv = False
             for i in player_itemOV:
                 print("\n to close inventory type I")
                 currentitem = items[i]
                 if currentitem["type"] == "weapon":
                     weaponlist.append(i)
+                if currentitem["type"] == "headgear":
+                    headgearlist.append(i)
             while not closeinv:
-                for i, itemname in enumerate(weaponlist):
+                for i, itemname in enumerate(weaponlist, headgearlist):
                     count = playerOV["inv"][itemname]
                     print(f"{i}: {itemname}(x{count})")
                 choice = input("> ").strip()
@@ -434,14 +440,22 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                         else:
                             playerOV["eq_wep"] = item_name
                             print(f"You equipped {playerOV['eq_wep']}")
+                    if 0 <= idx < len(headgearlist):
+                        item_name = headgearlist[idx]
+                        headgear = items[item_name]
+                        if playerOV["class"] not in headgear["usableby"]:
+                            print(f"{playerOV['name']} the {playerOV['class']} can't use {item_name}")
+                        else: 
+                            playerOV["eq_head"] = item_name
+                            print(f"You equipped {playerOV['name']}")
                     else:
                         print("Invalid number!")
 
-        elif map == "u":
+        elif mapc == "u":
             cleaning()
             print("You ambushed a random passerby for some quick cash.")
-            num_enemies = random.randint(1, 2)
-            select_enemy_id = random.choices(pool, k=num_enemies)
+            num_enemies = random.randint(1, 3)
+            select_enemy_id = random.choices(pool[5], k=num_enemies)
             combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
 
         elif mapc == "h":
@@ -550,8 +564,8 @@ if begin1 == "2":
             {
                 "name": "name",
                 "class": "class",
-                "maxhp": 10,
-                "hp": 10,
+                "maxhp": 18,
+                "hp": 18,
                 "mana": 3,
                 "maxmana": 3,
                 "stre": 1,
