@@ -1,13 +1,131 @@
 {
     "1": {
-        "name" : "Gun mobster",
+        "name" : "New hire",
         "eid" : 1,
+        "lvl" : 5,
+        "hp" : 20,
+        "maxhp" : 20,
+        "xpdrop" : 50,
+        "isboss" : false,
+        "status" : "Normal",
+        "speed" : 5,
+        "defe" : 4,
+        "money" : 0,
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUpTurn" : 0,
+        "AttackUp" : 0,
+        "last_def_boost" : 0,
+        "weakness": [], 
+        "strong" : [],
+        "moveset" : [
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0.50,
+            "statustarget" : "ally",
+            "targettype" : "one",
+            "stre" : 5
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 3,
+            "boostdef" : 1,
+            "statustarget" : "self",
+            "targettype" : "self",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Kick",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 1,
+            "statustarget" : "self",
+            "targettype" : "all",
+            "stre" : 15
+            }
+        ]
+    },
+    "2": {
+        "name" : "Debtor",
+        "eid" : 1,
+        "lvl" : 1,
+        "hp" : 20,
+        "maxhp" : 20,
+        "xpdrop" : 25,
+        "isboss" : false,
+        "status" : "Normal",
+        "speed" : 3,
+        "defe" : 5,
+        "money" : 0,
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": [], 
+        "strong" : [],
+        "moveset" : [
+            {
+            "nameskill" : "Pipe attack",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0.50,
+            "statustarget" : "ally",
+            "targettype" : "one",
+            "stre" : 5
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 3,
+            "boostdef" : 1,
+            "statustarget" : "self",
+            "targettype" : "self",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "quick attack",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 1,
+            "statustarget" : "one",
+            "targettype" : "all",
+            "stre" : 3
+            }
+        ]
+    },
+    "3": {
+        "name" : "Gun mobster",
+        "eid" : 3,
         "lvl" : 30,
         "hp" : 50,
         "maxhp" : 50,
         "xpdrop" : 100,
         "isboss" : false,
         "status" : "Normal",
+        "speed" : 5,
+        "defe" : 4,
+        "money" : 200,
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": [], 
+        "strong" : [],
         "moveset" : [
             {
             "nameskill" : "Shoot",
@@ -15,6 +133,7 @@
             "status" : "Bleed",
             "statuschance" : 0.50,
             "statustarget" : "ally",
+            "effect" : ["shot"],
             "targettype" : "one",
             "stre" : 30
             },
@@ -23,6 +142,8 @@
             "chance" : 0.25,
             "status" : "Defenseup",
             "statuschance" : 1,
+            "defe" : 3,
+            "boostdef" : 1,
             "statustarget" : "self",
             "targettype" : "self",
             "stre" : 0
@@ -34,6 +155,7 @@
             "statuschance" : 1,
             "statustarget" : "self",
             "targettype" : "all",
+            "effect" : ["shot"],
             "stre" : 15
             }
         ],
@@ -44,16 +166,27 @@
             }
         ]
     },
-    "2": {
+    "4": {
         "name" : "Bully",
-        "eid" : 2,
-        "hp" : 25,
-        "maxhp" : 25,
+        "eid" : 4,
+        "hp" : 20,
+        "maxhp" : 20,
         "lvl" : 3,
-        "stre" : 4,
         "xpdrop" : 50,
         "isboss" : false,
         "status" : "Normal",
+        "speed" : 6,
+        "defe" : 2,
+        "money" : 10,
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": [], 
+        "strong" : [],
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -91,16 +224,27 @@
             }
         ]
     },
-    "3": {
+    "5": {
         "name" : "Low life Bully",
-        "eid" : 3,
-        "hp" : 20,
-        "maxhp" : 20,
-        "stre" : 1,
+        "eid" : 5,
+        "hp" : 15,
+        "maxhp" : 15,
         "lvl" : 1,
         "xpdrop" : 30,
         "isboss" : false,
+        "speed" : 4,
+        "defe" : 0,
+        "money" : 5,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["bash", "shot"], 
+        "strong" : [],
         "moveset" : [
             {
             "nameskill" : "Punch",
@@ -121,12 +265,244 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "Hero sword",
+            "itemid" : "Piece of gum",
             "chance" : 0.90
             },
             {
-                "itemid" : "Spare change",
-                "chance" : 0.50
+            "itemid" : "Baseball hat",
+            "chance" : 1
+            }
+        ]
+    },
+    "6": {
+        "name" : "Pushover",
+        "eid" : 6,
+        "hp" : 7,
+        "maxhp" : 7,
+        "lvl" : 1,
+        "xpdrop" : 15,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": [], 
+        "strong" : [],
+        "moveset" : [
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Kick",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 2
+            }
+        ],
+        "possibledrop" : [
+            {
+                "itemid" : "Old coins",
+                "chance" : 0.10
+            }
+        ]
+    },
+        "7": {
+        "name" : "Low tier Host",
+        "eid" : 7,
+        "hp" : 10,
+        "maxhp" : 10,
+        "lvl" : 2,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Pose up",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 2,
+            "boostdef" : 2,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Cork Pop",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["ice"],
+            "stre" : 5
+            },
+            {
+            "nameskill" : "Shard Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 9
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "2Bottle",
+            "chance" : 0.20
+            }
+        ]
+    },
+    "8": {
+        "name" : "Jugallo",
+        "eid" : 8,
+        "hp" : 20,
+        "maxhp" : 20,
+        "lvl" : 2,
+        "xpdrop" : 30,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["shot"], 
+        "strong" : ["bash"],
+        "moveset" : [
+            {
+            "nameskill" : "Ball throw",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Focus",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 2,
+            "boostdef" : 2,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Trip up",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.5,
+            "targettype" : "self",
+            "stre" : 7
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "2Bottle",
+            "chance" : 0.20
+            }
+        ]
+    },
+    "12": {
+        "name" : "Majima",
+        "eid" : 12,
+        "lvl" : 1,
+        "hp" : 2,
+        "maxhp" : 20,
+        "xpdrop" : 25,
+        "isboss" : false,
+        "status" : "Normal",
+        "speed" : 3,
+        "defe" : 5,
+        "money" : 0,
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": [], 
+        "strong" : [],
+        "moveset" : [
+            {
+            "nameskill" : "Pipe attack",
+            "chance" : 0.50,
+            "status" : "Nothing",
+            "statuschance" : 0.50,
+            "statustarget" : "ally",
+            "targettype" : "one",
+            "stre" : 5
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 3,
+            "boostdef" : 1,
+            "statustarget" : "self",
+            "targettype" : "self",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "quick attack",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 1,
+            "statustarget" : "one",
+            "targettype" : "all",
+            "stre" : 3
             }
         ]
     },
@@ -135,11 +511,64 @@
         "eid" : 29,
         "hp" : 100,
         "maxhp" : 100,
-        "stre" : 50,
         "lvl" : 25,
         "xpdrop" : 200,
         "isboss" : true,
+        "speed" : 7,
+        "defe" : 20,
+        "money" : 500,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "AttackUp" : 0,
+        "taunt_turns": 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["shot", "stab"], 
+        "strong" : ["ice", "bash"],
+        "moveset" : [
+            {
+            "nameskill" : "Katana Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "statuschance" : 1,
+            "bleeddmg": 3,
+            "bleedturns" : 5,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 15
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 7
+            },
+            {
+            "nameskill" : "Stab",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.75,
+            "effect" : ["stab"],
+            "targettype" : "one",
+            "stre" : 9
+            },
+            {
+            "nameskill" : "Headbutt",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 9
+            }
+        ],
         "possibledrop" : [
             {
                 "itemid" : "Katana",
@@ -147,16 +576,394 @@
             }
         ]
     },
-    "30" : {
+    "98" : {
+        "name" : "Toshiaki Kine",
+        "eid" : 98,
+        "hp" : 750,
+        "maxhp" : 750,
+        "lvl" : 90,
+        "xpdrop" : 10000,
+        "isboss" : true,
+        "speed" : 7,
+        "defe" : 125,
+        "money" : 20000,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire", "ice"], 
+        "strong" : ["bash", "stab"],
+        "moveset" : [
+            {
+            "nameskill" : "Rush Combo",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "bleeddmg": 0,
+            "bleedturns" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 20
+            },
+            {
+            "nameskill" : "Roundhouse Kick",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.5,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 15
+            },
+            {
+            "nameskill" : "Running Right Knee",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Low Left Roundhouse-Kick Right Cross Combo ",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "targettype" : "self",
+            "effect": ["bash"],
+            "stre" : 20
+            }
+        ],
+        "phase2_threshold" : 0.75,
+        "phase2_triggered" : false,
+        "phase2_text" : "Kine emits a yellow aura...",
+        "moveset2" : [
+            {
+            "nameskill" : "Rush Combo",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "bleeddmg": 0,
+            "bleedturns" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 35
+            },
+            {
+            "nameskill" : "Left Knee",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.5,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 15
+            },
+            {
+            "nameskill" : "Right Axe Kick",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "bleeddmg": 0,
+            "bleedturns" : 0,
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Right Haymaker",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 20
+            }
+        ],
+        "phase3_threshold" : 0.50,
+        "speed3" : 4,
+        "phase3_triggered" : false,
+        "phase3_text" : "Kine emits a red aura...",
+        "moveset3" : [
+            {
+            "nameskill" : "Rush Combo",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0.75,
+            "bleeddmg": 3,
+            "bleedturns" : 5,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Double Spinning Right Backfist",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 35
+            },
+            {
+            "nameskill" : "Right Haymaker",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 35
+            },
+            {
+            "nameskill" : "Running Attack",
+            "chance" : 0.25,
+            "status" : "Normal",
+            "statuschance" : 0,
+            "targettype": "one",
+            "effect" : ["bash"],
+            "stre" : 30
+            }
+        ],
+        "phase4_threshold" : 0.30,
+        "phase4_triggered" : false,
+        "pahse4_text" : "Kine emits a blue aura...",
+        "moveset4": [
+            {
+            "nameskill" : "Rush Combo",
+            "chance" : 0.25,
+            "status" : "Normal",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 20
+            },
+            {
+            "nameskill" : "Flying Armbar",
+            "chance" : 0.25,
+            "status" : "Normal",
+            "statuschance" : 0,
+            "targettype": "one",
+            "effect" : ["bash"],
+            "stre": 20
+            },
+            {
+            "nameskill" : "Feel the heat",
+            "chance" : 0.10,
+            "heal" : 250,
+            "statuschance" : 1,
+            "targettype" : "self",
+            "stre" : 0,
+            "message" : "Kine feel's the heat and regains health."
+            },
+            {
+            "nameskill" : "Right Axe Kick",
+            "chance" : 0.15,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["stab"],
+            "stre" : 30
+            }
+        ],
+        "possibledrop" : [
+            {
+                "itemid" : "Perfect Knuckles",
+                "chance" : 1
+            },
+            {
+                "itemid" : "Empty Cough Drop",
+                "chance" : 1
+            },
+            {
+                "itemid" : "Empty Cough Drop",
+                "chance" : 1
+            }
+        ]
+    },
+        "99" : {
+        "name" : "Sho Kawashiro",
+        "eid" : 99,
+        "hp" : 500,
+        "maxhp" : 500,
+        "lvl" : 80,
+        "xpdrop" : 5000,
+        "isboss" : true,
+        "speed" : 6,
+        "defe" : 100,
+        "money" : 10000,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["electricity", "slash"], 
+        "strong" : ["bash", "ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Katana Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "statuschance" : 1,
+            "bleeddmg": 3,
+            "bleedturns" : 5,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 25
+            },
+            {
+            "nameskill" : "Katana Whirlwind",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "all",
+            "effect" : ["slash"],
+            "stre" : 20
+            },
+            {
+            "nameskill" : "Stab",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.75,
+            "targettype" : "one",
+            "effect" : ["stab"],
+            "stre" : 9
+            },
+            {
+            "nameskill" : "Blood Up",
+            "chance" : 0.25,
+            "status" : "AttackUp",
+            "AttackUp" : 20,
+            "AttackUpTurn" : 2,
+            "statuschance" : 1,
+            "targettype" : "self",
+            "stre" : 20,
+            "message" : "Kawashiro covers his katana in a bit of his own blood"
+            }
+        ],
+        "phase2_threshold" : 0.50,
+        "phase2_triggered" : false,
+        "phase2_text" : "Kawashiro picks up a Cane",
+        "moveset2" : [
+            {
+            "nameskill" : "Cane Strike",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.75,
+            "bleeddmg": 3,
+            "bleedturns" : 5,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 15
+            },
+            {
+            "nameskill" : "Cane Poke",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 10
+            },
+            {
+            "nameskill" : "Cane Sweep",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.75,
+            "targettype" : "all",
+            "effect" : ["bash"],
+            "stre" : 10
+            },
+            {
+            "nameskill" : "Cane Beatdown",
+            "chance" : 0.25,
+            "status" : "Normal",
+            "statuschance" : 0,
+            "targettype": "one",
+            "effect" : ["bash"],
+            "stre" : 15
+            }
+        ],
+        "phase3_threshold" : 0.30,
+        "phase3_triggered" : false,
+        "pahse3_text" : "Kawashiro cane snaps, so he uses it as a club and grabs a discarded blade.",
+        "moveset3": [
+            {
+            "nameskill" : "Broken Cane Strike",
+            "chance" : 0.25,
+            "status" : "Normal",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 20
+            },
+            {
+            "nameskill" : "Blade Decimator",
+            "chance" : 0.25,
+            "status" : "Normal",
+            "statuschance" : 0,
+            "targettype": "one",
+            "effect" : ["stab"],
+            "stre": 40
+            },
+            {
+            "nameskill" : "Eyes closed",
+            "chance" : 0.10,
+            "heal" : 100,
+            "statuschance" : 1,
+            "targettype" : "self",
+            "stre" : 0,
+            "message" : "Kawashiro closes his eyes and breathes."
+            },
+            {
+            "nameskill" : "Devilish Slash",
+            "chance" : 0.15,
+            "status" : "Bleed",
+            "statuschance" : 0.90,
+            "targettype" : "all",
+            "effect" : ["stab"],
+            "stre" : 30
+            }
+        ],
+        "possibledrop" : [
+            {
+                "itemid" : "Izo's Katana",
+                "chance" : 1
+            },
+            {
+                "itemid" : "Empty Cough Drop",
+                "chance" : 1
+            }
+        ]
+    },
+    "100" : {
         "name" : "Sanjo Anon",
-        "eid" : 30,
-        "hp" : 1500,
-        "maxhp" : 1500,
-        "stre" : 50,
+        "eid" : 100,
+        "hp" : 10000,
+        "maxhp" : 10000,
         "lvl" : 99,
         "xpdrop" : 1000,
         "isboss" : true,
+        "speed" : 10,
+        "defe" : 30,
+        "money" : 1,
         "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "AttackUp" : 0,
+        "taunt_turns": 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
         "possibledrop" : [
             {
                 "itemid" : "Anon Sunglasses",

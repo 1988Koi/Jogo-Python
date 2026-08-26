@@ -1,10 +1,36 @@
 {
-    "city": {
-        "mapID" : 0,
-        "name" : "City",
-        "lvlrq" : 1,
-        "enemyspawn" : [
-            1, 2, 3
-        ]
+    "tutorial": {
+        "name": "Someicho - Under the Patriarch",
+        "lvlreq": 1,
+        "enemy_pool": [
+            1, 2
+        ],
+        "boss" : null
+    },
+    "someicho": {
+        "name": "Someicho",
+        "lvlreq": 1,
+        "enemy_pool": [
+            1, 2, 3, 4, 5
+        ],
+        "boss" : 29
+    },
+    "feizhua" : {
+        "name" : "Feizhua",
+        "lvlreq": 10,
+        "enemy_pool": [6, 7, 8],
+        "boss" : 30
+    },
+    "jianqyang_ryu": {
+        "name" : "Jiangyang Ryu",
+        "lvlreq": 15,
+        "enemy_pool": [9, 10, 11],
+        "boss": 31
+    },
+    "fuxi_donzen": {
+        "name": "Fuxi Donzen",
+        "lvlreq": 20,
+        "enemy_pool": [12, 13, 14],
+        "boss": 32
     }
 }
