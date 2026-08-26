@@ -2,22 +2,32 @@
     "Piece of gum": {
         "type": "heal",
         "value" : 5,
-        "desc" : "Heals you a little, the flavor is long gone"
+        "desc" : "Heals you a little, the flavor is long gone",
+        "sellvalue" : 1
+    },
+    "Energy Drink": {
+        "type": "heal",
+        "value" : 10,
+        "desc": "Heals you now, will kill you later...",
+        "sellvalue" : 2
     },
     "Stamina spark": {
         "type" : "heal",
         "value" : 30,
-        "desc" : "Heals you a lot, hoho... ahhhh..."
+        "desc" : "Heals you a lot, hoho... ahhhh...",
+        "sellvalue" : 15
     },
     "Frown burger": {
         "type" : "heal",
         "value" : 15,
-        "desc" :"Heals you a lot, a frown in each box"
+        "desc" :"Heals you a lot, a frown in each box",
+        "sellvalue" : 3
     },
     "Stomina spork": {
         "type" : "heal",
         "value" : -30,
-        "desc" : "Heals you a lot, hoho... ahhhh..."
+        "desc" : "Heals you a lot, hoho... ahhhh...",
+        "sellvalue" : 200
     },
     "Legend katana": {
         "type" : "weapon",
@@ -77,9 +87,33 @@
     },
     "Baseball hat" : {
         "type" : "headgear",
-        "defe" : 20,
+        "defen" : 3,
         "desc" : "A simple baseball hat",
         "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
+    },
+    "Nothing" : {
+        "type" : "headgear",
+        "defen" : 0,
+        "desc": "There's nothing.",
+        "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
+    },
+    "Broken Hard Hat" : {
+        "type" : "headgear",
+        "defen" : 5,
+        "desc": "A hard hat, it's broken.",
+        "usableby": ["Foreman"]
+    },
+    "Top Hat" : {
+        "type" : "headgear",
+        "defen" : 8,
+        "desc": "Remarkable.",
+        "usableby": ["Gentleman"]
+    },
+    "Old Cane" : {
+        "type" : "weapon",
+        "stren" : "3",
+        "desc" : "Old run down cane.",
+        "usableby" : ["Gentleman"]
     },
     "Mall katana": {
         "type" : "weapon",
@@ -133,6 +167,12 @@
         "type" : "weapon",
         "stren" : 60,
         "desc" : "a brass knuckles with some spikes on it",
+        "usableby" : ["Yakuza"]
+    },
+    "Perfect Knuckles" : {
+        "type" : "weapon",
+        "stren": 120,
+        "desc" : "A perfectly made brass knuckles",
         "usableby" : ["Yakuza"]
     },
     "Knuckles of Someicho's Fist" : {

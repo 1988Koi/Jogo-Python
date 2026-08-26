@@ -24,6 +24,9 @@ with open("enemies.json", "r", encoding="utf-8") as enemies:
 with open("party.json", "r", encoding="utf-8") as part:
     parte = json.load(part)
 
+with open("shops.json", "r", encoding="utf-8") as shope:
+    shops = json.load(shope)
+
 def mape():
     with open("map.json", "r", encoding="utf-8") as map1:
         map2 = json.load(map1)
@@ -40,6 +43,7 @@ acceptedclass = {
     "7": "Hero",
     "8": "Freelancer",
     "9": "Gentleman",
+    "0" : "Dragon",
 }
 
 statusclass = {
@@ -50,8 +54,9 @@ statusclass = {
     "Chef":       {"hp": 11, "maxhp": 11, "mana": 18, "maxmana": 18, "stre": 3, "luck": 6, "speed": 6,  "defe": 2, "weakness": ["stab", "bash"], "strong" : ["fire", "slash"]},
     "Breaker":    {"hp": 8,  "maxhp": 8,  "mana": 6,  "maxmana": 6,  "stre": 6, "luck": 3, "speed": 12, "defe": 1, "weakness": ["bash", "stab"], "strong" : ["fire", "ice"]},
     "Hero":       {"hp": 11, "maxhp": 11, "mana": 11, "maxmana": 11, "stre": 6, "luck": 5, "speed": 7,  "defe": 3, "weakness": ["slash", "bash"], "strong" : ["shot", "stab"]},
-    "Freelancer": {"hp": 8,  "maxhp": 8,  "mana": 4,  "maxmana": 4,  "stre": 3, "luck": 2, "speed": 4,  "defe": 1, "weakness": [], "strong" : []},
+    "Freelancer": {"hp": 15,  "maxhp": 15,  "mana": 4,  "maxmana": 4,  "stre": 4, "luck": 2, "speed": 4,  "defe": 1, "weakness": [], "strong" : []},
     "Gentleman": {"hp": 8,  "maxhp": 8,  "mana": 10,  "maxmana": 10,  "stre": 8, "luck": 3, "speed": 4,  "defe": 1, "weakness": ["bash", "fire"], "strong" : ["slash", "stab"]},
+    "Dragon": {"hp": 20,  "maxhp": 20,  "mana": 10,  "maxmana": 10,  "stre": 8, "luck": 3, "speed": 4,  "defe": 1, "weakness": ["ice"], "strong" : ["slash", "stab", "shot"]},
 }
 
 classlvlreq = {
@@ -64,6 +69,11 @@ classlvlreq = {
     "Hero": 1,
     "Freelancer": 0,
     "Gentleman" : 4,
+    "Dragon": 0,
+}
+
+Majimaencounters = {
+    "Dragon" : 2,
 }
 
 
@@ -80,13 +90,18 @@ def apply_class_stats(character, new_class):
     character["defe"] = base["defe"]
 
 
-def byework(character, new_class, statusclass, classlvlreq, items):
+def byework(character, new_class, statusclass, classlvlreq, items, Majimaencounters):
     if not character.get("is_main_character", False):
         print(f"{character['name']} can't change jobs.")
         return False
 
     if new_class not in character["unlocked_classes"]:
         print("You haven't unlocked that job yet!")
+        return False
+
+    required = Majimaencounters.get(new_class, 0)
+    if character["Majima_encounter"] < required:
+        print(f"You didn't fight Him, enough times.")
         return False
 
     if character["lvl"] < classlvlreq[new_class]:
@@ -130,7 +145,7 @@ def cast_out_transition(init_stats, lang, language1):
 
     p = init_stats["party"][0]
     apply_class_stats(p, "Freelancer")
-    p["hp"] = 1
+    p["hp"] = p["maxhp"]
     p["mana"] = p["maxmana"]
     p["unlocked_classes"] = ["Freelancer"]
     init_stats["story_flags"]["current_map"] = "someicho"
@@ -322,52 +337,82 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("How your level < than 1?")
 
         elif mapc == "5":
-            if playerlvl >= 4:
+            if playerlvl >= 1:
                 cleaning()
-                print("The pawn shop is dim, smells like dust in here.")
+                print("The pawn shop is dim, smells like dust and old money.")
                 inv = init_stats["party"][0]["inv"]
                 closeshop = False
 
                 while not closeshop:
-                    sellable = list(inv.keys())
-                    if not sellable:
-                        print("There's nothing I can sell...")
-                        break
+                    print("1: Buy\n2: Sell\nType i to leave")
+                    action = input("> ").strip().lower()
 
-                    for i, item_name in enumerate(sellable, start=1):
-                        item_data = items[item_name]
-                        value = item_data.get("sellvalue")
-                        if value is None:
-                            value = item_data.get("stren", 0) * 2
-                        count = inv[item_name]
-                        print(f"{i}: {item_name} (x{count}) - sells for {value} each, mate!")
-                    print("Type i to quit")
-
-                    choice = input("> ").strip()
-                    if choice.lower() == "i":
+                    if action == "i":
                         closeshop = True
                         continue
 
-                    if choice.isdigit() and 0 < int(choice) <= len(sellable):
-                        item_name = sellable[int(choice) - 1]
+                    elif action == "1":
+                        stock = list(shops["PAWN_SHOP"].keys())
+                        for i, item_name in enumerate(stock, start=1):
+                            price = shops["PAWN_SHOP"][item_name]
+                            print(f"{i}: {item_name} - {price} money")
+                        print("Type i to go back")
 
-                        if item_name == init_stats["party"][0]["eq_wep"]:
-                            print("You can't sell your currenly equiped weapon!")
+                        choice = input("> ").strip()
+                        if choice.lower() == "i":
+                            continue
+                        if choice.isdigit() and 0 < int(choice) <= len(stock):
+                            item_name = stock[int(choice) - 1]
+                            price = shops["PAWN_SHOP"][item_name]
+                            if init_stats["party"][0]["money"] >= price:
+                                init_stats["party"][0]["money"] -= price
+                                inv[item_name] = inv.get(item_name, 0) + 1
+                                print(f"Bought 1x {item_name}!")
+                            else:
+                                print("You can't afford that.")
+                        else:
+                            print("Invalid choice!")
+
+                    elif action == "2":
+                        sellable = list(inv.keys())
+                        if not sellable:
+                            print("You don't have anything to sell.")
                             continue
 
-                        item_data = items[item_name]
-                        value = item_data.get("sellvalue")
-                        if value is None:
-                            value = item_data.get("stren", 0) * 2
+                        for i, item_name in enumerate(sellable, start=1):
+                            item_data = items[item_name]
+                            value = item_data.get("sellvalue")
+                            if value is None:
+                                value = item_data.get("stre", 0) * 2
+                            count = inv[item_name]
+                            print(f"{i}: {item_name} (x{count}) - sells for {value} each")
+                        print("Type i to go back")
 
-                        inv [item_name] -= 1
-                        if inv[item_name] == 0:
-                            del inv[item_name]
+                        choice = input("> ").strip()
+                        if choice.lower() == "i":
+                            continue
+                        if choice.isdigit() and 0 < int(choice) <= len(sellable):
+                            item_name = sellable[int(choice) - 1]
 
-                        init_stats["party"][0]["money"] += value
-                        print(f"Sold 1x {item_name} for {value} money")
+                            if item_name == init_stats["party"][0]["eq_wep"]:
+                                print("You can't sell your equipped weapon!")
+                                continue
+
+                            item_data = items[item_name]
+                            value = item_data.get("sellvalue")
+                            if value is None:
+                                value = item_data.get("stren", 0) * 2
+
+                            inv[item_name] -= 1
+                            if inv[item_name] == 0:
+                                del inv[item_name]
+
+                            init_stats["party"][0]["money"] += value
+                            print(f"Sold 1x {item_name} for {value} money!")
+                        else:
+                            print("Invalid choice!")
                     else:
-                        print("invalid choice.")
+                        print("Invalid choice!")
             else:
                 print("\n" + lang[language1]["lowlv"])
                 
@@ -421,7 +466,10 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 if currentitem["type"] == "headgear":
                     headgearlist.append(i)
             while not closeinv:
-                for i, itemname in enumerate(weaponlist, headgearlist):
+                for i, itemname in enumerate(weaponlist):
+                    count = playerOV["inv"][itemname]
+                    print(f"{i}: {itemname}(x{count})")
+                for i, itemname in enumerate(headgearlist):
                     count = playerOV["inv"][itemname]
                     print(f"{i}: {itemname}(x{count})")
                 choice = input("> ").strip()
@@ -447,15 +495,16 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                             print(f"{playerOV['name']} the {playerOV['class']} can't use {item_name}")
                         else: 
                             playerOV["eq_head"] = item_name
-                            print(f"You equipped {playerOV['name']}")
+                            print(f"You equipped {playerOV['eq_head']}")
                     else:
                         print("Invalid number!")
 
         elif mapc == "u":
             cleaning()
+            testpool = [6]
             print("You ambushed a random passerby for some quick cash.")
             num_enemies = random.randint(1, 3)
-            select_enemy_id = random.choices(pool[5], k=num_enemies)
+            select_enemy_id = random.choices(testpool, k=num_enemies)
             combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
 
         elif mapc == "h":
@@ -480,7 +529,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 init_stats["story_flags"]["kanae_recruited"] = True
                 init_stats["story_flags"]["chapter2_lead_found"] = True
             else:
-                print("The club seems closed...")
+                print("The club seems closed... \n Maybe I should come back later...")
 
         elif mapc == "j":
             currentslot = 0
@@ -531,9 +580,16 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
             choice = input("> ").strip()
             if choice.isdigit() and 0 < int(choice) <= len(unlocked):
-                byework(playerOV, unlocked[int(choice) - 1], statusclass, classlvlreq, items)
+                byework(playerOV, unlocked[int(choice) - 1], statusclass, classlvlreq, items, Majimaencounters)
             else:
                 print("Invalid choice!")
+
+        elif mapc == "m":
+            majimachanmce = random.randint(0, 10)
+            majimapool = [12]
+            if majimachanmce > 4:
+                select_enemy_id = random.choices(majimapool, k=1)
+                combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
 
         else:
             print("Invalid choice!")
@@ -593,6 +649,11 @@ if begin1 == "2":
                 "isplayer": True,
                 "is_main_character": True,
                 "money": 50,
+                "AttackUp" : 20,
+                "AttackUpTurn" : 2,
+                "weakness": [],
+                "strong" : [],
+                "Majima_encounter" : 0,
             }
         ],
         "story_flags": {

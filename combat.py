@@ -73,6 +73,7 @@ def print_bars(presentenemies, party):
 def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee=True):
 
     total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
+    total_defense = combate["defe"] + items[combate["eq_head"]]["defen"]
     turn_taken = False
 
     while not game_over_flag[0] and not turn_taken:
@@ -172,6 +173,14 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                     print("Invalid input!")
                     continue
 
+            elif "AttackUp" in chosen:
+                init_stats["attackup_turns"] = chosen["bonusattackturn"]
+                init_stats["attackup_bonus"] = chosen["bonusattack"]
+                if "message" in chosen:
+                    print(chosen["message"])
+                else:
+                    print(f"{init_stats['name']} used {chosen['nameskill']} is getting pumped up!")
+
             elif "healing" in chosen:
                 for i, ally in enumerate(init_stats["party"]):
                     if ally["hp"] > 0:
@@ -202,7 +211,7 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
             elif "defe" in chosen or chosen.get("inflict") == "Taunt":
                 if "defe" in chosen:
-                    combate["defe"] += chosen["defe"]
+                    total_defense += items[combate["eq_head"]]["defen"]
                     combate["boostdef"] += chosen["boostdef"]
                     combate["last_def_boost"] = chosen["defe"]
                     print(f"{combate['name']} got a defense boost!")
@@ -338,17 +347,25 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         return
 
     if "moveset2" in eatt and not eatt.get("phase2_triggered", False):
-        if eatt["hp"] <= eatt["maxhp"] * eatt.get("phase2_threshold", 0.5):
+        if eatt["hp"] <= eatt["maxhp"] * eatt.get("phase2_threshold", 0.75):
             eatt["moveset"] = eatt["moveset2"]
             eatt["phase2_triggered"] = True
             flavor = eatt.get("phase2_text", "changes stance...")
             print(f"\n{eatt['name']} {flavor}")
 
     if "moveset3" in eatt and not eatt.get("phase3_triggered", False):
-        if eatt["hp"] <= eatt["maxhp"] * eatt.get("phase3_threshold", 0.3):
+        if eatt["hp"] <= eatt["maxhp"] * eatt.get("phase3_threshold", 0.50):
             eatt["moveset"] = eatt["moveset3"]
+            eatt["speed"] = eatt.get("speed3", eatt["speed"])
             eatt["phase3_triggered"] = True
             flavor = eatt.get("phase3_text", "shifts tactics once more...")
+            print(f"\n{eatt['name']} {flavor}")
+
+    if "moveset4" in eatt and not eatt.get("phase4_triggered", False):
+        if eatt["hp"] <= eatt["maxhp"] * eatt.get("phase4_threshold", 0.25):
+            eatt["moveset"] = eatt["moveset4"]
+            eatt["phase4_triggered"] = True
+            flavor = eatt.get("phase4_text", "shifts tactics one last time...")
             print(f"\n{eatt['name']} {flavor}")
 
     taunting = [m for m in living_party if m.get("taunt_turns", 0) > 0]
@@ -369,8 +386,9 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
     if chosen_attack["targettype"] == "one":
         unluckyman = random.choice(taunting) if taunting else random.choice(living_party)
         mult = get_mult(chosen_attack.get("type", []), unluckyman)
+        total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"]
         effective_stre = chosen_attack["stre"] * mult
-        defenseunluck = unluckyman["defe"] / 2
+        defenseunluck = total_defense / 2
         if defenseunluck >= chosen_attack["stre"]:
             print(f"{unluckyman['name']} managed to resist {eatt['name']} attack!")
         else:
@@ -395,6 +413,7 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
     elif chosen_attack["targettype"] == "all":
         print(f"The enemy used {chosen_attack['nameskill']} on everybody!")
         for member in living_party:
+            total_defense = member["defe"] + items[member["eq_head"]["defe"]]
             mult = get_mult(chosen_attack.get("type", []), member)
             effective_stre = chosen_attack["stre"] * mult
             totaldmg = round(effective_stre)
@@ -516,14 +535,19 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
     if not game_over_flag[0]:
         for enemy in presentenemies:
             if "possibledrop" in enemy:
-                drop_enemy = enemy["possibledrop"][0]["itemid"]
-                print(f"You got a {drop_enemy}!")
-                player_inv = init_stats["party"][0]["inv"]
-                if drop_enemy in player_inv:
-                    player_inv[drop_enemy] += 1
-                else:
-                    player_inv[drop_enemy] = 1
-                print("Debug Backpack:", init_stats["party"][0]["inv"])
+                for drop in enemy["possibledrop"]:
+                    roll = random.random()
+                    if roll <= drop["chance"]:
+                        drop_enemy = drop["itemid"]
+                        print(f"You got a {drop_enemy}!")
+                        player_inv = init_stats["party"][0]["inv"]
+                        if drop_enemy in player_inv:
+                            player_inv[drop_enemy] += 1
+                        else:
+                            player_inv[drop_enemy] = 1
+                        print("Debug Backpack:", init_stats["party"][0]["inv"])
+            if enemy["eid"] == 12:
+                init_stats["party"][0]["Majima_encounter"] += 1
 
             init_stats["party"][0]["money"] += enemy["money"]
 

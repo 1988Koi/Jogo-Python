@@ -47,7 +47,10 @@ DEFAULT_MEMBER = {
     "bonus_luck": 0,
     "is_main_character": False,
     "weakness": [],
-    "strong" : []
+    "strong" : [],
+    "AttackUp" : 20,
+    "AttackUpTurn" : 2,
+    "Majima_encounter" : 0,
 }
 
 def apply_defaults(member):

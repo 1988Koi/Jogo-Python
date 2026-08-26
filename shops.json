@@ -1,0 +1,13 @@
+{
+    "PAWN_SHOP" : {
+        "Piece of gum": 2,
+        "Energy Drink": 5,
+        "Toy Pistol": 20,
+        "Sturdy Bottle": 50,
+        "Fancy Watch": 100,
+        "Premium Watch": 1000,
+        "Top Hat": 250,
+        "Checkered Suit": 400,
+        "Renoir's Suit": 500
+    }
+}

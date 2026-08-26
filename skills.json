@@ -36,10 +36,10 @@
     ],
     "freelancer": [
         {"name": "Tenacious Fist", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1, "effect": ["bash"]},
-        {"name": "Rock Swing", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 4, "dmgmlt": 1.3, "lvlreq": 2, "effect": ["bash"]},
-        {"name": "Dropkick", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 6, "dmgmlt": 1.5, "lvlreq": 4, "effect": ["bash"]},
-        {"name": "Atomic drop", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 8, "dmgmlt": 1.7, "lvlreq": 6, "effect": ["bash"]},
-        {"name": "Essence of Roadside Weapon", "desc": "Hdmg", "targettype": "single", "inflict": "Bleed", "bleeddmg": 2, "bleedturns": 3, "cost": 14, "dmgmlt": 2.0, "lvlreq": 9, "effect": ["bash"]}
+        {"name": "Rock Swing", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 6, "dmgmlt": 1.5, "lvlreq": 2, "effect": ["bash"]},
+        {"name": "Dropkick", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 10, "dmgmlt": 2, "lvlreq": 4, "effect": ["bash"]},
+        {"name": "Atomic drop", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 15, "dmgmlt": 2.5, "lvlreq": 6, "effect": ["bash"]},
+        {"name": "Essence of Roadside Weapon", "desc": "Hdmg", "targettype": "single", "inflict": "Bleed", "bleeddmg": 2, "bleedturns": 3, "cost": 14, "dmgmlt": 2.3, "lvlreq": 9, "effect": ["bash"]}
     ],
     "foreman": [
         {"name": "Shoulder Bash", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1, "effect": ["bash"]},
@@ -50,16 +50,24 @@
     ],
     "chef": [
         {"name": "Quick Chop", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1, "effect": ["slash"]},
-        {"name": "Frozen Salmon", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 2, "dmgmlt": 1.75, "lvlreq": 3, "effect": ["ice"]},
+        {"name": "Frozen Salmon", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 7, "dmgmlt": 1.75, "lvlreq": 3, "effect": ["ice"]},
         {"name": "Simmer", "desc": "LHea", "targettype": "single", "healing": 6, "cost": 4, "lvlreq": 1},
         {"name": "Full Course", "desc": "MHea", "targettype": "single", "healing": 12, "cost": 8, "lvlreq": 3},
         {"name": "Second Helping", "desc": "Bback", "targettype": "single", "bringback": 15, "cost": 12, "lvlreq": 4},
         {"name": "Essence of the Feast", "desc": "EHea", "targettype": "single", "healing": 25, "cost": 18, "lvlreq": 8}
     ],
+    "gentleman": [
+        {"name": "Cane Beatdown", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 2, "dmgmlt": 1.2, "lvlreq": 1, "effect": ["bash"]},
+        {"name": "Frozen Salmon", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 5, "dmgmlt": 1.75, "lvlreq": 3, "effect": ["bash"]},
+        {"name": "Fix tie", "desc": "LHea", "targettype": "self", "healing": 6, "cost": 4, "lvlreq": 1},
+        {"name": "Cane Strike", "desc": "MHea", "targettype": "single", "dmgmlt": 2.3, "cost": 8, "lvlreq": 5, "effect" : ["bash"]},
+        {"name": "Fix Hair", "desc": "Ddown", "targettype": "single", "inflict": "AttackUp", "cost": 4, "lvlreq": 4, "AttackUp" : 20, "AttackUpTurn" : 2},
+        {"name": "Essence of Cane", "desc": "EHea", "targettype": "single", "dmgmlt": 3, "cost": 18, "lvlreq": 8, "effect" : ["bash"]}
+    ],
     "legend": [
         {"name": "Finishing blow", "desc": "Ldmg", "targettype": "single", "cost" : 3, "dmgmlt": 1.5, "lvlreq" : 1, "effect": ["bash"]},
         {"name": "3 Hit combo", "desc": "Ldmg", "targettype": "single", "cost" : 1, "dmgmlt": 1.3, "lvlreq": 1, "effect": ["bash"]},
-        {"name": "Essence of Knife", "desc": "Mdmg", "targettype": "single", "cost": 5, "dmgmlt": 1.7, "lvlreq" : 3},
+        {"name": "Essence of Knife", "desc": "Mdmg", "targettype": "single", "cost": 5, "dmgmlt": 1.7, "lvlreq" : 3, "effect": ["slash"]},
         {"name": "Essence of Gun", "desc": "Mdmg", "targettype": "single","cost" : 7, "dmgmlt": 2.0, "lvlreq": 5, "effect": ["shot"]},
         {"name": "Essence of Central mass", "desc": "Hdmg", "targettype": "single", "cost": 10, "dmgmlt": 2.5, "lvlreq" : 8},
         {"name": "Essence of Remembrance", "desc": "Edmg", "targettype": "single", "cost": 10, "dmgmlt": 3.0, "lvlreq" : 10}
