@@ -452,6 +452,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "7":
             if playerlvl >= map_data["feizhua"]["lvlreq"]:
                 cleared = dungeon(map_data["feizhua"]["enemy_pool"], map_data["feizhua"]["boss"], init_stats, lang, language1, skills, items, enemis)
+                if cleared and not init_stats["story_flags"].get("Kawashiro_Defeated"):
+                    print("placeholder")
             else:
                 print("\n" + lang[language1]["lowlv"])
 
@@ -509,7 +511,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     continue
 
                 if not current_list:
-                    print("There's nothing here.")
+                    print("You don't own anything of this type.")
                     continue
                 
                 print()
@@ -681,6 +683,10 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "test":
             majimapool = [9]
             select_enemy_id = random.choices(majimapool, k=1)
+            combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+        elif mapc == "mine":
+            minepool = [98]
+            select_enemy_id = random.choices(minepool, k=1)
             combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
 
 

@@ -42,6 +42,10 @@
         "desc" : "A dusty baseball bat, gives 10 more attack",
         "usebleby" : ["Hero"]
     },
+    "Juggling ball": {
+        "type" : "junk",
+        "sellvalue" : 10
+    },
     "Fists": {
         "type" : "weapon",
         "stren" : 0,

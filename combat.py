@@ -4,7 +4,7 @@ import subprocess
 from saveload import *
 
 def cleaning():
-    subprocess.run("cls", shell=True)
+    subprocess.run("cls" if subprocess.os.name == "nt" else "clear", shell=True)
 
 with open("items.json", "r", encoding="utf-8") as thingamajing:
     items = json.load(thingamajing)
@@ -52,22 +52,40 @@ def get_mult(attack_type, target):
     return 1.0
 
 def print_bars(presentenemies, party):
+    cleaning()
+
     for enemy in presentenemies:
+        color = "\033[91m"
+        phrase = ""
+        if enemy.get("phase4_triggered"):
+            color = "\033[94m"
+            phrase = enemy.get("phase4_text")
+        elif enemy.get("phase3_triggered"):
+            phrase = enemy.get("phase3_text")
+            color = "\033[91m"
+        elif enemy.get("phase2_triggered"):
+            color = "\033[93m"
+            phrase = enemy.get("phase2_text")
+
         current_hp = max(0, enemy["hp"])
         enemyhpmax = max(0, min(10, (10 * current_hp) // enemy["maxhp"]))
         enemyhpmin = 10 - enemyhpmax
-        print(f"{enemy['name']}:  [\033[91m{'█' * enemyhpmax}\033[0m{'░' * enemyhpmin}] {current_hp} / {enemy['maxhp']}")
+
+        print(f"{enemy['name']}:"f"[{color}{'█' * enemyhpmax}\033[0m{'░' * enemyhpmin}]"f"{current_hp} / {enemy['maxhp']}")
+        print(f"{phrase}")
 
     for member in party:
         current_hp = max(0, member["hp"])
         hpbarmax = max(0, min(10, (current_hp * 10) // member["maxhp"]))
         hpbarmin = 10 - hpbarmax
-        print(f"{member['name']}:[\033[92m{'█' * hpbarmax}\033[0m{'░' * hpbarmin}] {current_hp} / {member['maxhp']}")
+
+        print(f"{member['name']}:"f"[\033[92m{'█' * hpbarmax}\033[0m{'░' * hpbarmin}]"f"{current_hp} / {member['maxhp']}")
 
         current_mana = max(0, member["mana"])
         manabarmax = max(0, min(10, (current_mana * 10) // member["maxmana"]))
         manabarmin = 10 - manabarmax
-        print(f"{member['name']}: [\033[95m{'█' * manabarmax}\033[0m{'░' * manabarmin}] {current_mana} / {member['maxmana']}")
+
+        print(f"{member['name']}:"f"[\033[95m{'█' * manabarmax}\033[0m{'░' * manabarmin}] "f"{current_mana} / {member['maxmana']}")
 
 
 def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee=True):
@@ -180,6 +198,7 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                     print(chosen["message"])
                 else:
                     print(f"{init_stats['name']} used {chosen['nameskill']} is getting pumped up!")
+                turn_taken = True
 
             elif "healing" in chosen:
                 for i, ally in enumerate(init_stats["party"]):
@@ -549,14 +568,14 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
             if enemy["eid"] == 12:
                 init_stats["party"][0]["Majima_encounter"] += 1
 
-        for i in range(len(init_stats["party"])):
-            if "Charismatic Photo" in init_stats["party"][i]["eq_accessory"]:
-                init_stats["party"][0]["hp"] -= 2
-                print(f"You got hit, brah {init_stats["party"][0]["hp"]}")
-                #init_stats["party"][0]["money"] += (enemy["money"] * 2)
-            else:
-                init_stats["party"][0]["money"] += enemy["money"]
-                print(f"You got money, brah {init_stats["party"][0]["money"]}")
+                has_charismatic = any("Charismatic Photo" in member["eq_accessory"] for member in init_stats["party"])
+
+                if has_charismatic:
+                    init_stats["party"][0]["money"] += enemy["money"] * 2
+                else:
+                    init_stats["party"][0]["money"] += enemy["money"]
+
+                print(f"You got {enemy['money']} bucks!")
 
         defeated = presentenemies
         for i in init_stats["party"]:

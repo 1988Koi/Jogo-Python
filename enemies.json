@@ -448,7 +448,7 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "2Bottle",
+            "itemid" : "Juggling ball",
             "chance" : 0.20
             }
         ]
@@ -519,9 +519,74 @@
             {
             "itemid" : "Charismatic Photo",
             "chance" : 1
+            }
+        ]
+    },
+        "10": {
+        "name" : "Low tier Fighter",
+        "eid" : 7,
+        "hp" : 10,
+        "maxhp" : 10,
+        "lvl" : 2,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 3
             },
             {
-            "itemid" : "Baseball hat",
+            "nameskill" : "Pose up",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 2,
+            "boostdef" : 2,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Cork Pop",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["ice"],
+            "stre" : 5
+            },
+            {
+            "nameskill" : "Shard Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 9
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Charismatic Photo",
             "chance" : 1
             }
         ]
@@ -872,9 +937,9 @@
             }
         ]
     },
-        "99" : {
+        "95" : {
         "name" : "Sho Kawashiro",
-        "eid" : 99,
+        "eid" : 95,
         "hp" : 500,
         "maxhp" : 500,
         "lvl" : 80,
