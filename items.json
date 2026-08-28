@@ -91,8 +91,14 @@
         "desc" : "A simple baseball hat",
         "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
     },
-    "Nothing" : {
+    "glasses" : {
         "type" : "headgear",
+        "defen" : 0,
+        "desc" : "Glasses... makes you look like a dork.",
+        "usableby": ["Salaryman"]
+    },
+    "Nothing" : {
+        "type" : "headgear, accessory",
         "defen" : 0,
         "desc": "There's nothing.",
         "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
@@ -180,6 +186,36 @@
         "stren" : 200,
         "desc" : "a brass knuckles with some spikes on it",
         "usableby" : ["Yakuza"]
+    },
+    "Old Suitcase" : {
+        "type" : "weapon",
+        "stren" : 6,
+        "desc" : "An old beatdown suitcase",
+        "usableby" : ["Salaryman"]
+    },
+    "Old Magazine" : {
+        "type" : "junk",
+        "sellvalue" : 7
+    },
+    "Joto Family Pin" : {
+        "type" : "accessory",
+        "sellvalue" : 15,
+        "desc" : "Old family pin, the family no longer exists.",
+        "defen" : 15
+    },
+    "Charismatic Photo" : {
+        "type" : "accessory",
+        "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"],
+        "sellvalue" : 0,
+        "moneyincrease" : 2,
+        "desc" : "Everyone wants this.",
+        "defen": -15
+    },
+    "Dull Edged Knife" : {
+        "type" : "accessory",
+        "usableby": ["Chef"],
+        "desc" : "Old knife, very dull",
+        "stre": 15
     },
     "Scrap Metal": {
         "type" : "material"

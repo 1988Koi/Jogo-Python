@@ -453,12 +453,87 @@
             }
         ]
     },
+    "9": {
+        "name" : "Low tier Host",
+        "eid" : 7,
+        "hp" : 10,
+        "maxhp" : 10,
+        "lvl" : 2,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 3
+            },
+            {
+            "nameskill" : "Pose up",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 2,
+            "boostdef" : 2,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Cork Pop",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["ice"],
+            "stre" : 5
+            },
+            {
+            "nameskill" : "Shard Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 9
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Charismatic Photo",
+            "chance" : 1
+            },
+            {
+            "itemid" : "Baseball hat",
+            "chance" : 1
+            }
+        ]
+    },
     "12": {
-        "name" : "Majima",
-        "eid" : 12,
+        "name" : "Zoro Hashima",
+        "eid" : 20,
         "lvl" : 1,
-        "hp" : 2,
-        "maxhp" : 20,
+        "hp" : 10,
+        "basehp" : 10,
+        "maxhp" : 10,
+        "basemaxhp" : 10,
         "xpdrop" : 25,
         "isboss" : false,
         "status" : "Normal",
@@ -474,18 +549,20 @@
         "last_def_boost" : 0,
         "weakness": [], 
         "strong" : [],
+        "scaling" : 1.25,
         "moveset" : [
             {
-            "nameskill" : "Pipe attack",
-            "chance" : 0.50,
+            "nameskill" : "Spin Kick Slash",
+            "chance" : 0.25,
             "status" : "Nothing",
             "statuschance" : 0.50,
             "statustarget" : "ally",
             "targettype" : "one",
-            "stre" : 5
+            "basestre" : 7,
+            "stre" : 7
             },
             {
-            "nameskill" : "Block",
+            "nameskill" : "Reverse Kick Slash",
             "chance" : 0.25,
             "status" : "Defenseup",
             "statuschance" : 1,
@@ -493,16 +570,28 @@
             "boostdef" : 1,
             "statustarget" : "self",
             "targettype" : "self",
-            "stre" : 0
+            "basestre" : 5,
+            "stre" : 5
             },
             {
-            "nameskill" : "quick attack",
+            "nameskill" : "Tornado Slash",
             "chance" : 0.25,
-            "status" : "Stun",
+            "status" : "Nothing",
             "statuschance" : 1,
             "statustarget" : "one",
             "targettype" : "all",
-            "stre" : 3
+            "basestre" : 4,
+            "stre" : 4
+            },
+            {
+            "nameskill" : "Evasive Slash",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 1,
+            "statustarget" : "one",
+            "targettype" : "all",
+            "basestre" : 10,
+            "stre" : 10
             }
         ]
     },

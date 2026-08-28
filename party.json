@@ -25,6 +25,7 @@
         "bonus_luck" : 0,
         "eq_wep" : "Briefcase",
         "eq_head" : "glasses",
+        "eq_accessory" : "Nothing",
         "is_main_character" : false
     },
     "kanae": {
@@ -53,6 +54,7 @@
         "bonus_luck" : 0,
         "eq_wep" : "bottle",
         "eq_head" : "sunglasses",
+        "eq_accessory" : "Nothing",
         "is_main_character" : false
     },
     "reggie": {
@@ -81,6 +83,7 @@
         "bonus_luck" : 0,
         "eq_wep" : "Microphone",
         "eq_head" : "hat",
+        "eq_accessory" : "Nothing",
         "is_main_character" : false
     },
     "zhouzhen": {
@@ -108,6 +111,7 @@
         "bonus_mana" : 0,
         "bonus_luck" : 0,
         "eq_head" : "hat",
+        "eq_accessory" : "Nothing",
         "is_main_character" : false
     },
     "yatakeyomai": {
@@ -134,6 +138,7 @@
         "bonus_hp" : 0,
         "bonus_mana" : 0,
         "bonus_luck" : 0,
+        "eq_accessory" : "Nothing",
         "is_main_character" : false
     },
     "moryukazaki": {
@@ -160,6 +165,7 @@
         "bonus_hp" : 0,
         "bonus_mana" : 0,
         "bonus_luck" : 0,
+        "eq_accessory" : "Nothing",
         "is_main_character" : false
     }
 }

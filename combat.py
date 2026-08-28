@@ -73,7 +73,7 @@ def print_bars(presentenemies, party):
 def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee=True):
 
     total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
-    total_defense = combate["defe"] + items[combate["eq_head"]]["defen"]
+    total_defense = combate["defe"] + items[combate["eq_head"]]["defen"] + items[combate["eq_accessory"]]["defen"]
     turn_taken = False
 
     while not game_over_flag[0] and not turn_taken:
@@ -549,7 +549,14 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
             if enemy["eid"] == 12:
                 init_stats["party"][0]["Majima_encounter"] += 1
 
-            init_stats["party"][0]["money"] += enemy["money"]
+        for i in range(len(init_stats["party"])):
+            if "Charismatic Photo" in init_stats["party"][i]["eq_accessory"]:
+                init_stats["party"][0]["hp"] -= 2
+                print(f"You got hit, brah {init_stats["party"][0]["hp"]}")
+                #init_stats["party"][0]["money"] += (enemy["money"] * 2)
+            else:
+                init_stats["party"][0]["money"] += enemy["money"]
+                print(f"You got money, brah {init_stats["party"][0]["money"]}")
 
         defeated = presentenemies
         for i in init_stats["party"]:

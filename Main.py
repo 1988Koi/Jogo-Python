@@ -27,6 +27,9 @@ with open("party.json", "r", encoding="utf-8") as part:
 with open("shops.json", "r", encoding="utf-8") as shope:
     shops = json.load(shope)
 
+with open("chest.json", "r", encoding="utf-8") as cheste:
+    chest = json.load(cheste)
+
 def mape():
     with open("map.json", "r", encoding="utf-8") as map1:
         map2 = json.load(map1)
@@ -187,6 +190,17 @@ def dungeon(enemy_pool, boss_id, init_stats, lang, language1, skills, items, ene
         elif event == "chest":
             cleaning()
             print(lang[language1]["chest"])
+            for drop in chest:
+                roll = random.random()
+                if roll <= drop["chance"]:
+                    drop_enemy = drop["itemid"]
+                    print(f"You got a {drop_enemy}!")
+                    player_inv = init_stats["party"][0]["inv"]
+                    if drop_enemy in player_inv:
+                        player_inv[drop_enemy] += 1
+                    else:
+                        player_inv[drop_enemy] = 1
+                        print("Debug Backpack:", init_stats["party"][0]["inv"])
         elif event == "break":
             cleaning()
             print(lang[language1]["break"])
@@ -455,57 +469,99 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "i":
             player_itemOV = list(playerOV["inv"].keys())
+
             weaponlist = []
             headgearlist = []
-            closeinv = False
+            accesorylist = []
+
             for i in player_itemOV:
-                print("\n to close inventory type I")
                 currentitem = items[i]
+
                 if currentitem["type"] == "weapon":
                     weaponlist.append(i)
-                if currentitem["type"] == "headgear":
+                elif currentitem["type"] == "headgear":
                     headgearlist.append(i)
+                elif currentitem["type"] == "accessory":
+                    accesorylist.append(i)
+
+            closeinv = False
+
             while not closeinv:
-                for i, itemname in enumerate(weaponlist):
-                    count = playerOV["inv"][itemname]
-                    print(f"{i}: {itemname}(x{count})")
-                for i, itemname in enumerate(headgearlist):
-                    count = playerOV["inv"][itemname]
-                    print(f"{i}: {itemname}(x{count})")
-                choice = input("> ").strip()
+                print("\nType I to quit")
+                print("Type A for accessories")
+                print("Type H for headgear")
+                print("Type W for weapons")
+
+                choice = input("> ").strip().lower()
 
                 if choice == "i":
                     closeinv = True
                     continue
 
-                elif choice.isdigit():
-                    idx = int(choice)
-                    if 0 <= idx < len(weaponlist):
-                        item_name = weaponlist[idx]
-                        weapon = items[item_name]
-                        if playerOV["class"] not in weapon["usableby"]:
-                            print(f"{playerOV['name']} the {playerOV['class']} can't use {item_name}")
-                        else:
-                            playerOV["eq_wep"] = item_name
-                            print(f"You equipped {playerOV['eq_wep']}")
-                    if 0 <= idx < len(headgearlist):
-                        item_name = headgearlist[idx]
-                        headgear = items[item_name]
-                        if playerOV["class"] not in headgear["usableby"]:
-                            print(f"{playerOV['name']} the {playerOV['class']} can't use {item_name}")
-                        else: 
-                            playerOV["eq_head"] = item_name
-                            print(f"You equipped {playerOV['eq_head']}")
-                    else:
-                        print("Invalid number!")
+                if choice == "w":
+                    current_list = weaponlist
+                elif choice == "h":
+                    current_list = headgearlist
+                elif choice == "a":
+                    current_list = accesorylist
+                else:
+                    print("Invalid choice!")
+                    continue
+
+                if not current_list:
+                    print("There's nothing here.")
+                    continue
+                
+                print()
+
+                for i, itemname in enumerate(current_list):
+                    count = playerOV["inv"][itemname]
+                    print(f"{i}: {itemname} (x{count})")
+
+                print("Type the number of what you want to equip.")
+                equip = input("> ").strip()
+
+                if not equip.isdigit():
+                    print("Please enter a number.")
+                    continue
+
+                idx = int(equip)
+
+                if idx < 0 or idx >= len(current_list):
+                    print("Invalid number!")
+                    continue
+
+                item_name = current_list[idx]
+                item = items[item_name]
+
+                if playerOV["class"] not in item["usableby"]:
+                    print(f"{playerOV['name']} the {playerOV['class']}" f"can't use {item_name}")
+                    continue
+                if choice == "w":
+                    playerOV["eq_wep"] = item_name
+                    print(f"You equipped {item_name}")
+
+                elif choice == "h":
+                    playerOV["eq_head"] = item_name
+                    print(f"You equipped {item_name}")
+
+                elif choice == "a":
+                    playerOV["eq_accessory"] = item_name
+                    print(f"{playerOV['name']} equipped {item_name}")
 
         elif mapc == "u":
             cleaning()
             testpool = [6]
+            majima_pool= [12]
             print("You ambushed a random passerby for some quick cash.")
             num_enemies = random.randint(1, 3)
             select_enemy_id = random.choices(testpool, k=num_enemies)
             combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+            chancemaima = random.randint(1, 10)
+            if chancemaima > 1:
+                print(f"Nhehehehe! Got you again, {init_stats['party'][0]['name']}!")
+                select_enemy_id = random.choices(majima_pool, k=1)
+                combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
 
         elif mapc == "h":
             already_recruited = any(member["name"] == "Kanae" for member in init_stats["party"])
@@ -539,14 +595,14 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 active = init_stats["party"][currentslot]
                 print(f"You are currently upgrading {active['name']}")
                 print(f"You currently have {active['pts']} points")
-                print(f"You currently have {active['xptotal']} out of 100 for the next point")
+                print(f"You currently have {active['xptotal']} out of {lvlup(active["lvl"])} for the next point")
                 print(lang[language1]["upgrade"])
                 choice = input("> ").strip()
                 if choice == "d":
                     currentslot = (currentslot + 1) % len(init_stats["party"])
                 if choice == "a":
                     currentslot = (currentslot - 1) % len(init_stats["party"])
-                if choice == "o":
+                if choice == "j":
                     break
                 if choice == "1" and active["pts"] > 0:
                     print("You upgraded strength!")
@@ -584,12 +640,50 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             else:
                 print("Invalid choice!")
 
-        elif mapc == "m":
-            majimachanmce = random.randint(0, 10)
+        elif mapc == "s":
+            print("You decide to take a stroll around town.")
+            chance = random.randint(1, 10)
+            print(f"roll: {chance}")
+            jumppool = [4, 5, 6, 7, 8]
             majimapool = [12]
-            if majimachanmce > 4:
+            if chance == 1:
                 select_enemy_id = random.choices(majimapool, k=1)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                enemis["12"]["hp"] = round(enemis["12"]["hp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
+                enemis["12"]["maxhp"] = round(enemis["12"]["maxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
+                enemis["12"]["moveset"]["stre"] = round(enemis["12"]["moveset"]["stre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
+            elif chance == 2:
+                print("You found an item lying around!")
+                running_chance = 0
+                roll = random.random()
+                items1 = list(chest["STROLL1"].keys())
+                for i, item_name in enumerate(items1, start=1):
+                    chance = chest["STROLL1"][item_name]
+                    running_chance += chance
+                    if running_chance >= roll:
+                        print(f"You got a {item_name}")
+                        player_inv = init_stats["party"][0]["inv"]
+                        if item_name in player_inv:
+                            player_inv[item_name] += 1
+                        else:
+                            player_inv[item_name] = 1
+                        break
+            elif chance >= 3 or chance <= 4:
+                print("You got jumped!")
+                select_enemy_id = random.choices(jumppool, k=1)
+                combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+            elif chance >= 5 or chance <= 8:
+                print("You found some money laying around")
+                monay = random.randint(1, 10)
+                init_stats["party"][0]["money"] += monay
+            elif chance >= 8 or chance <= 10:
+                print("You took the stroll.")
+        elif mapc == "test":
+            majimapool = [9]
+            select_enemy_id = random.choices(majimapool, k=1)
+            combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+
+
 
         else:
             print("Invalid choice!")

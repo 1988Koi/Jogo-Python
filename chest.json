@@ -3,5 +3,13 @@
         "Broken Blade": 0.10,
         "Dull Blade": 0.10,
         "Scarecrow Mask": 0.10
+    },
+    "STROLL1": {
+        "Energy Drink": 0.25,
+        "Old Suitcase" : 0.25,
+        "Old Magazine" : 0.25,
+        "Joto Family Pin" : 0.10,
+        "Charismatic Photo": 0.10,
+        "Dull edged Knife" : 0.05
     }
 }

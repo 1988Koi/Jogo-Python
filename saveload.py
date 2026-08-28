@@ -38,6 +38,7 @@ DEFAULT_MEMBER = {
     "taunt_turns": 0,
     "eq_wep": "Fists",
     "eq_head" : "Nothing",
+    "eq_accessory" : "Nothing",
     "peoplerec": 0,
     "isplayer": True,
     "money": 50,

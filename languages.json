@@ -29,7 +29,7 @@
         "MHea" : "Medium healing to selected Member (5 HP pts)",
         "Hhea" : "High healing to selected Member (9 HP pts)",
         "Ehea" : "Extreme healing to selected Member (15 HP) pts",
-        "upgrade" : "What do you want to spend your points on ? \n 1 for strenght \n 2 for HP \n 3 for luck \n 4 for mana \n and type o to close the Inventory"
+        "upgrade" : "What do you want to spend your points on ? \n 1 for strenght \n 2 for HP \n 3 for luck \n 4 for mana \n A and D to browse between party members \n and type j to close the Inventory"
     },
     "pt":
     {
