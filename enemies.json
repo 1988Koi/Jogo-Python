@@ -591,6 +591,75 @@
             }
         ]
     },
+    "11": {
+        "name" : "Bar Brawler",
+        "eid" : 7,
+        "hp" : 10,
+        "maxhp" : 10,
+        "lvl" : 2,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 6
+            },
+            {
+            "nameskill" : "Drink Up",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 2,
+            "boostdef" : 2,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Billard Throw",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.4,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 10
+            },
+            {
+            "nameskill" : "Shard Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 12
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Billard Stick",
+            "chance" : 1
+            }
+        ]
+    },
     "12": {
         "name" : "Zoro Hashima",
         "eid" : 20,

@@ -215,6 +215,13 @@
         "desc" : "Everyone wants this.",
         "defen": -15
     },
+    "Bandana" : {
+        "type" : "headgear",
+        "usableby": ["Foreman", "Yakuza", "Breaker", "Unemployed", "Freelancer"],
+        "sellvalue" : 6,
+        "desc" : "Everyone wants this.",
+        "defen": 5
+    },
     "Dull Edged Knife" : {
         "type" : "accessory",
         "usableby": ["Chef"],

@@ -248,6 +248,8 @@ def tutorial_map(init_stats, lang, language1, map_data):
 def someicho_map(init_stats, lang, language1, map_data, playerOV):
     pool = map_data["someicho"]["enemy_pool"]
     boss = map_data["someicho"]["boss"]
+    mission1Started = False
+    mission1Complete = False
     in_here = True
 
     while in_here:
@@ -261,7 +263,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             return "quit"
 
         elif mapc == "1":
-            if playerlvl >= 1:
+            if playerlvl >= 1 and (mission1Started == False or mission1Complete == True):
                 print("You enter the cafe...")
                 print("You grab a menu")
                 print("10 dollars for some french fries?????")
@@ -305,6 +307,64 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                                 else:
                                     member["hp"] = min(member["maxhp"], member["hp"] + food_stats["heal"])
                                     init_stats["party"][0]["money"] -= food_stats["cost"]
+            elif playerlvl >= 1 and (mission1Started == True and mission1Complete == False):
+                print("You enter the cafe...")
+                print("You grab a menu")
+                print("10 dollars for some french fries?????")
+                print("At the corner of your eye you see someone...")
+                print("You pull the evnelope with the info")
+                print("You see that everything matches perfectly...")
+                print("Do you attack him?")
+                print("Type y for yes and n for no.")
+                choice1 = input("> ").strip()
+                if choice1 == "yes" or choice1 == "y":
+                    print("You approach the guy...")
+                    print("You start discussing with him")
+                    time.sleep(2)
+                    barpool = [11]
+                    select_enemy_id = random.choices(barpool, k=1)
+                    combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                elif choice1 == "no" or choice1 == "n":
+                    out = False
+                    print("You decide that now is not the time.")
+                    while not out:
+                        print("1. Burger with soda - 30 Dollars - Restores 15 health")
+                        print("2. French fries - 10 dollars - restores 5 health")
+                        print("3. Soda - 5 dollars - restores 2 health")
+                        print("Type i to quit.")
+                        choice = input("> ").strip()
+                        menu = {
+                                "1": "Burger with soda",
+                                "2": "French Fries",
+                                "3": "Soda",
+                                "i": "leave"
+                                }
+                        menuchoices = {
+                                "Burger with soda": {"heal": 15, "cost": 30},
+                                "French Fries": {"heal": 5, "cost": 10},
+                                "Soda": {"heal": 2, "cost": 5}
+                                }
+                        if choice == "i":
+                            out = True
+                            break
+                        if choice not in menu:
+                            print("We don't serve that here")
+                            continue
+                        elif choice in menu:
+                            food_name = menu[choice]
+                            food_stats = menuchoices[food_name]
+                            for names in init_stats["party"]:
+                                print(f"{names['name']}")
+                            print("Who do you want to feed?")
+                            feed = input("> ").strip()
+                            for member in init_stats["party"]:
+                                if member['name'].lower() == feed.lower():
+                                    if init_stats["party"][0]["money"] < food_stats["cost"]:
+                                        print("You can't buy that!")
+                                        break
+                                    else:
+                                        member["hp"] = min(member["maxhp"], member["hp"] + food_stats["heal"])
+                                        init_stats["party"][0]["money"] -= food_stats["cost"]
             else:
                 print("\n" + lang[language1]["lowlv"])
 
@@ -324,8 +384,29 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "4":
             if playerlvl >= 1:
                 already_recruited = any(member["name"] == "Gordon" for member in init_stats["party"])
-                if already_recruited:
+                if already_recruited and mission1Complete:
                     print("How about a beer?")
+                if mission1Complete == False and already_recruited and mission1Started == False:
+                    print("The bartender calls you over")
+                    print("You approach and he says")
+                    print("Hey, you are one of Gordon's friend? \n You nod")
+                    print("Look um... I got a... job... for you, if you know what I mean... \n I'll pay nicely.")
+                    print("Just take out an old rival of mine, sounds good?")
+                    print("Type y for yes and n to no.")
+                    print("Suggested level to be: 5")
+                    choice = input("> ").strip()
+                    if choice == "yes" or choice == "y":
+                        print("Good choice kid, here's the info on where to find him and what he looks like.")
+                        print("He hands you a envelope containing some places, you are likely to find him at the cafe.")
+                        print("Don't kill him, just rough him up real good, ok? And also if he has anything in his person you may have it, I don't care...")
+                        mission1Started = True
+                    elif choice == "no" or choice == "n":
+                        print("That's a shame... if you change your mind you know where to find me.")
+                if mission1Started == True and already_recruited and mission1Started == True:
+                    print("Hey, you did pretty good kid, here, your payment \n you got 250 bucks!")
+                    init_stats["party"][0]["money"] += 250
+                    print("And a little something as a bonus")
+                    player_itemOV.append("Bandana")
                 else:
                     print("You drink a little bit of beer, before you hear a man grumbling to himself")
                     time.sleep(2)
@@ -453,13 +534,43 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             if playerlvl >= map_data["feizhua"]["lvlreq"]:
                 cleared = dungeon(map_data["feizhua"]["enemy_pool"], map_data["feizhua"]["boss"], init_stats, lang, language1, skills, items, enemis)
                 if cleared and not init_stats["story_flags"].get("Kawashiro_Defeated"):
-                    print("placeholder")
+                    init_stats["story_flags"]["Kawashiro_defeated"] = True
+                    cleaning()
+                    print("You managed to defeat Malushi.")
+                    time.sleep(2)
+                    print("You beat him down for answers. \n and he tells you how it wasn't him who shot you.")
+                    time.sleep(2)
+                    print("But before he finishes...")
+                    time.sleep(2)
+                    print("He gets shot by a man wearing a raincoat that vanishes by jumping out of a window")
+                    time.sleep(2)
+                    print("You try to catch him but he is too fast.")
+                    print("You contemplate what to do now...")
+                    time.sleep(1)
+                    print("Chapter 3: By the books")
+                    time.sleep(3)
             else:
                 print("\n" + lang[language1]["lowlv"])
 
         elif mapc == "8":
             if playerlvl >= map_data["jianqyang_ryu"]["lvlreq"]:
-                cleared = dungeon(map_data["jianqyang_ryu"]["enemy_pool"], map_data["jianqyang_ryu"]["boss"], init_stats, lang, language1, skills, items, enemis)
+                cleared = dungeon(map_data["feizhua"]["enemy_pool"], map_data["feizhua"]["boss"], init_stats, lang, language1, skills, items, enemis)
+                if cleared and not init_stats["story_flags"].get("Kawashiro_Defeated"):
+                    init_stats["story_flags"]["Kawashiro_defeated"] = True
+                    cleaning()
+                    print("You managed to defeat Malushi.")
+                    time.sleep(2)
+                    print("You beat him down for answers. \n and he tells you how it wasn't him who shot you.")
+                    time.sleep(2)
+                    print("But before he finishes...")
+                    time.sleep(2)
+                    print("He gets shot by a man wearing a raincoat that vanishes by jumping out of a window")
+                    time.sleep(2)
+                    print("You try to catch him but he is too fast.")
+                    print("You contemplate what to do now...")
+                    time.sleep(1)
+                    print("Chapter 3: By the books")
+                    time.sleep(3)
             else:
                 print("\n" + lang[language1]["lowlv"])
 
