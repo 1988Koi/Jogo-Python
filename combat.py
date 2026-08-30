@@ -52,7 +52,6 @@ def get_mult(attack_type, target):
     return 1.0
 
 def print_bars(presentenemies, party):
-    cleaning()
 
     for enemy in presentenemies:
         color = "\033[91m"
@@ -89,9 +88,7 @@ def print_bars(presentenemies, party):
 
 
 def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee=True):
-
     total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
-    total_defense = combate["defe"] + items[combate["eq_head"]]["defen"] + items[combate["eq_accessory"]]["defen"]
     turn_taken = False
 
     while not game_over_flag[0] and not turn_taken:
@@ -405,7 +402,7 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
     if chosen_attack["targettype"] == "one":
         unluckyman = random.choice(taunting) if taunting else random.choice(living_party)
         mult = get_mult(chosen_attack.get("type", []), unluckyman)
-        total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"]
+        total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"] + items[unluckyman["eq_accessory"]]
         effective_stre = chosen_attack["stre"] * mult
         defenseunluck = total_defense / 2
         if defenseunluck >= chosen_attack["stre"]:
@@ -432,10 +429,10 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
     elif chosen_attack["targettype"] == "all":
         print(f"The enemy used {chosen_attack['nameskill']} on everybody!")
         for member in living_party:
-            total_defense = member["defe"] + items[member["eq_head"]["defe"]]
             mult = get_mult(chosen_attack.get("type", []), member)
             effective_stre = chosen_attack["stre"] * mult
             totaldmg = round(effective_stre)
+            total_defense = member["defe"] + items[member["eq_head"]]["defen"] + items[member["eq_accessory"]]["defen"]
             member["hp"] -= totaldmg
             if "statuschance" in chosen_attack and chosen_attack.get("statustarget") == "ally":
                 statusroll = random.random()
@@ -449,6 +446,12 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         if chosen_attack.get("statustarget") == "self":
             eatt["status"] = chosen_attack["status"]
             print(f"The enemy also got applied with {chosen_attack['status']}")
+
+        if chosen_attack.get("statustarget") == "enemy":
+            chosen = random.choice(eatt)
+            if chosen_attack.get("status") == "heal":
+                chosen["hp"] += chosen_attack["heal"]
+
 
     elif chosen_attack["targettype"] == "self":
         if chosen_attack.get("status") == "Defenseup":

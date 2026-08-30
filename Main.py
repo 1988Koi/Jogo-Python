@@ -30,6 +30,9 @@ with open("shops.json", "r", encoding="utf-8") as shope:
 with open("chest.json", "r", encoding="utf-8") as cheste:
     chest = json.load(cheste)
 
+with open("recipes.json", "r", encoding="utf-8") as recipese:
+    recipes = json.load(recipese)
+
 def mape():
     with open("map.json", "r", encoding="utf-8") as map1:
         map2 = json.load(map1)
@@ -369,8 +372,41 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("\n" + lang[language1]["lowlv"])
 
         elif mapc == "2":
-            if playerlvl >= 10:
-                print("\n" + lang[language1]["inaid"])
+            if playerlvl >= 5:
+                cleaning()
+                print("The workshop is cluttered with scrap and half-finished frames.")
+                craftable = list(recipes.keys())
+                for i, item_name in enumerate(craftable, start=1):
+                    recipe = recipes[item_name]
+                    mats_str = ", ".join(f"{qty}x {mat}" for mat, qty in recipe["materials"].items())
+                    print(f"{i}: {item_name} - needs {mats_str}, {recipe['cost']} money")
+                print("Type i to leave")
+
+                choice = input("> ").strip()
+                if choice.lower() == "i":
+                    pass
+                elif choice.isdigit() and 0 < int(choice) <= len(craftable):
+                    item_name = craftable[int(choice) - 1]
+                    recipe = recipes[item_name]
+                    inv = init_stats["party"][0]["inv"]
+
+                    has_materials = all(inv.get(mat, 0) >= qty for mat, qty in recipe["materials"].items())
+                    has_money = init_stats["party"][0]["money"] >= recipe["cost"]
+
+                    if has_materials and has_money:
+                        for mat, qty in recipe["materials"].items():
+                            inv[mat] -= qty
+                            if inv[mat] == 0:
+                                del inv[mat]
+                        init_stats["party"][0]["money"] -= recipe["cost"]
+                        inv[item_name] = inv.get(item_name, 0) + 1
+                        print(f"You crafted a {item_name}!")
+                    elif not has_materials:
+                        print("You don't have the materials for that.")
+                    else:
+                        print("You can't afford that.")
+                else:
+                    print("Invalid choice!")
             else:
                 print("\n" + lang[language1]["lowlv"])
 
@@ -402,11 +438,14 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                         mission1Started = True
                     elif choice == "no" or choice == "n":
                         print("That's a shame... if you change your mind you know where to find me.")
-                if mission1Started == True and already_recruited and mission1Started == True:
+                        break
+                if mission1Started == True and already_recruited and mission1Complete == True:
+                    inv = init_stats["party"][0]["inv"]
                     print("Hey, you did pretty good kid, here, your payment \n you got 250 bucks!")
                     init_stats["party"][0]["money"] += 250
                     print("And a little something as a bonus")
-                    player_itemOV.append("Bandana")
+                    init_stats["party"][0]["inv"]["Bandana"] = init_stats["party"][0]["inv"].get("Bandana", 0) + 1
+
                 else:
                     print("You drink a little bit of beer, before you hear a man grumbling to himself")
                     time.sleep(2)
@@ -533,8 +572,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "7":
             if playerlvl >= map_data["feizhua"]["lvlreq"]:
                 cleared = dungeon(map_data["feizhua"]["enemy_pool"], map_data["feizhua"]["boss"], init_stats, lang, language1, skills, items, enemis)
-                if cleared and not init_stats["story_flags"].get("Kawashiro_Defeated"):
-                    init_stats["story_flags"]["Kawashiro_defeated"] = True
+                if cleared and not init_stats["story_flags"].get("Izu_Defeated"):
+                    init_stats["story_flags"]["Izu_Defeated"] = True
                     cleaning()
                     print("You managed to defeat Malushi.")
                     time.sleep(2)
@@ -700,12 +739,32 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             else:
                 print("The club seems closed... \n Maybe I should come back later...")
 
+        elif mapc == "p":
+            currentslot = 0
+            onsts = True
+            while onsts:
+                active = init_stats["party"][currentslot]
+                total_damage = active["stre"] + items[active["eq_wep"]]["stren"]
+                total_defense = active["defe"] + items[active["eq_head"]]["defen"] + items[active["eq_accessory"]]["defen"]
+                print("Type A and D to change between party members and P to quit")
+                print(f"{init_stats["party"][currentslot]["name"]} Stats")
+                print(f"HP: {init_stats["party"][currentslot]["hp"]} out of {init_stats["party"][currentslot]["maxhp"]}")
+                print(f"Mana: {init_stats["party"][currentslot]["mana"]} out of {init_stats["party"][currentslot]["maxmana"]}")
+                print(f"Strenght: {total_damage}")
+                print(f"Defense: {total_defense}")
+                choice = input("> ").strip()
+                if choice == "d":
+                    currentslot = (currentslot + 1) % len(init_stats["party"])
+                if choice == "a":
+                    currentslot = (currentslot - 1) % len(init_stats["party"])
+                if choice == "p":
+                    break
+
         elif mapc == "j":
             currentslot = 0
             onpts = True
             while onpts:
                 print("Choose what you want to upgrade")
-                active = init_stats["party"][currentslot]
                 print(f"You are currently upgrading {active['name']}")
                 print(f"You currently have {active['pts']} points")
                 print(f"You currently have {active['xptotal']} out of {lvlup(active["lvl"])} for the next point")
@@ -758,13 +817,15 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             chance = random.randint(1, 10)
             print(f"roll: {chance}")
             jumppool = [4, 5, 6, 7, 8]
-            majimapool = [12]
+            majimapool = [86, 87, 88, 89]
             if chance == 1:
                 select_enemy_id = random.choices(majimapool, k=1)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
-                enemis["12"]["hp"] = round(enemis["12"]["hp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
-                enemis["12"]["maxhp"] = round(enemis["12"]["maxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
-                enemis["12"]["moveset"]["stre"] = round(enemis["12"]["moveset"]["stre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
+                for enemy_id in ["86", "87", "88", "89"]:
+                    enemis[enemy_id]["hp"] = round(enemis[enemy_id]["hp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
+                    enemis[enemy_id]["maxhp"] = round(enemis[enemy_id]["maxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
+                    for move in enemis[enemy_id]["moveset"]["stre"]: 
+                        move["stre"] = round(move["stre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
             elif chance == 2:
                 print("You found an item lying around!")
                 running_chance = 0
@@ -788,11 +849,12 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             elif chance >= 5 or chance <= 8:
                 print("You found some money laying around")
                 monay = random.randint(1, 10)
-                init_stats["party"][0]["money"] += monay
+                coolmonay = monay + (init_stats["party"][0]["lvl"] * 1.5)
+                init_stats["party"][0]["money"] += coolmonay
             elif chance >= 8 or chance <= 10:
                 print("You took the stroll.")
         elif mapc == "test":
-            majimapool = [9]
+            majimapool = [80]
             select_enemy_id = random.choices(majimapool, k=1)
             combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
         elif mapc == "mine":
