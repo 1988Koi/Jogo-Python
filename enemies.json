@@ -724,7 +724,7 @@
     },
     "62": {
         "name" : "Low Tier Mobster",
-        "eid" : 7,
+        "eid" : 62,
         "hp" : 10,
         "maxhp" : 10,
         "lvl" : 2,
@@ -780,6 +780,73 @@
             "targettype" : "all",
             "effect" : ["bash"],
             "stre" : 24
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "2Bottle",
+            "chance" : 0.20
+            }
+        ]
+    },
+    "63": {
+        "name" : "Mid tier Mobster",
+        "eid" : 63,
+        "hp" : 10,
+        "maxhp" : 10,
+        "lvl" : 2,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 10,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["bash"], 
+        "strong" : ["shot", "slash", "stab"],
+        "moveset" : [
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "all",
+            "effect" : ["bash"],
+            "stre" : 20
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 5,
+            "boostdef" : 5,
+            "targettype" : "all",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Grapple attack",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "all",
+            "effect" : ["bash"],
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Two Combo",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0.90,
+            "targettype" : "all",
+            "effect" : ["bash"],
+            "stre" : 30
             }
         ],
         "possibledrop" : [
