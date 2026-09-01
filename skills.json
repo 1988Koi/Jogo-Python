@@ -64,6 +64,30 @@
         {"name": "Fix Hair", "desc": "Ddown", "targettype": "single", "inflict": "AttackUp", "cost": 4, "lvlreq": 4, "AttackUp" : 20, "AttackUpTurn" : 2},
         {"name": "Essence of Cane", "desc": "EHea", "targettype": "single", "dmgmlt": 3, "cost": 18, "lvlreq": 8, "effect" : ["bash"]}
     ],
+    "dragon": [
+        {"name": "Jab Combo", "style": "Brawler", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 2, "dmgmlt": 1.2, "encounterreq": 4, "effect": ["bash"]},
+        {"name": "Heavy Punch", "style": "Brawler", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 3, "dmgmlt": 1.4, "encounterreq": 4, "effect": ["bash"]},
+        {"name": "Haymaker", "style": "Brawler", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 5, "dmgmlt": 1.7, "encounterreq": 5, "effect": ["bash"]},
+        {"name": "Groin Kick", "style": "Brawler", "desc": "Mdmg", "targettype": "single", "inflict": "Stun", "cost": 5, "dmgmlt": 1.5, "encounterreq": 6, "effect": ["bash"]},
+        {"name": "Left Knee", "style": "Brawler", "desc": "Mdmg", "targettype": "single", "inflict": "Stun", "cost": 6, "dmgmlt": 1.8, "encounterreq": 7, "effect": ["bash"]},
+        {"name": "Charged Attack", "style": "Brawler", "desc": "Hdmg", "targettype": "single", "inflict": "Nothing", "cost": 9, "dmgmlt": 2.2, "encounterreq": 6, "effect": ["bash"]},
+        {"name": "Essence of Face Twisting", "style": "Brawler", "desc": "Hdmg", "targettype": "single", "inflict": "Nothing", "cost": 12, "dmgmlt": 2.6, "encounterreq": 8, "effect": ["bash"]},
+        {"name": "Essence of Power", "style": "Brawler", "desc": "Edmg", "targettype": "single", "inflict": "Stun", "cost": 16, "dmgmlt": 3.1, "encounterreq": 10, "effect": ["bash"]},
+        {"name": "Quick Combo", "style": "Rush", "desc": "Ldmg", "targettype": "single", "inflict": "Nothing", "cost": 2, "dmgmlt": 1.2, "encounterreq": 3, "effect": ["bash"]},
+        {"name": "Sucker Punch", "style": "Rush", "desc": "Ldmg", "targettype": "single", "inflict": "Stun", "cost": 4, "dmgmlt": 1.3, "encounterreq": 3, "effect": ["bash"]},
+        {"name": "Knife Poke", "style": "Rush", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 5, "dmgmlt": 1.5, "encounterreq": 4, "effect": ["slash"]},
+        {"name": "Sway Counter", "style": "Rush", "desc": "Mdmg", "targettype": "single", "inflict": "Stun", "cost": 6, "dmgmlt": 1.7, "encounterreq": 4, "effect": ["bash"]},
+        {"name": "Shoot", "style": "Rush", "desc": "Mdmg", "targettype": "single", "inflict": "Bleed", "cost": 8, "bleeddmg": 1.7, "bleedturns": 3, "dmgmlt": 1.9, "encounterreq": 6, "effect": ["slash"]},
+        {"name": "Essence of Speed", "style": "Rush", "desc": "Hdmg", "targettype": "single", "inflict": "Nothing", "cost": 11, "dmgmlt": 2.5, "encounterreq": 8, "effect": ["bash"]},
+        {"name": "Essence of Sway", "style": "Rush", "desc": "Edmg", "targettype": "single", "inflict": "Bleed", "cost": 15, "bleeddmg": 2.0, "bleedturns": 3, "dmgmlt": 3.0, "encounterreq": 10, "effect": ["slash"]},
+        {"name": "Grapple Toss", "style": "Beast", "desc": "Mdmg", "targettype": "single", "inflict": "Nothing", "cost": 6, "dmgmlt": 1.8, "encounterreq": 4, "effect": ["bash"]},
+        {"name": "Object Throw", "style": "Beast", "desc": "Mdmg", "targettype": "all", "inflict": "Nothing", "cost": 8, "dmgmlt": 1.6, "encounterreq": 6, "effect": ["bash"]},
+        {"name": "Counter Throw", "style": "Beast", "desc": "Mdmg", "targettype": "single", "inflict": "Stun", "cost": 8, "dmgmlt": 1.9, "encounterreq": 6, "effect": ["bash"]},
+        {"name": "Iron Grip Slam", "style": "Beast", "desc": "Hdmg", "targettype": "single", "inflict": "Stun", "cost": 9, "dmgmlt": 2.2, "encounterreq": 7, "effect": ["bash"]},
+        {"name": "Boulder Toss", "style": "Beast", "desc": "Hdmg", "targettype": "all", "inflict": "Nothing", "cost": 12, "dmgmlt": 2.0, "encounterreq": 8, "effect": ["bash"]},
+        {"name": "Essence of Destruction", "style": "Beast", "desc": "Hdmg", "targettype": "all", "inflict": "Stun", "cost": 14, "dmgmlt": 2.3, "encounterreq": 9, "effect": ["bash"]},
+        {"name": "Essence of the Rampage", "style": "Beast", "desc": "Edmg", "targettype": "single", "inflict": "Stun", "cost": 18, "dmgmlt": 3.3, "encounterreq": 11, "effect": ["bash"]}
+    ],
     "legend": [
         {"name": "Finishing blow", "desc": "Ldmg", "targettype": "single", "cost" : 3, "dmgmlt": 1.5, "lvlreq" : 1, "effect": ["bash"]},
         {"name": "3 Hit combo", "desc": "Ldmg", "targettype": "single", "cost" : 1, "dmgmlt": 1.3, "lvlreq": 1, "effect": ["bash"]},
@@ -85,5 +109,12 @@
         {"name": "Papercut", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleed", "cost": 7, "bleeddmg": 1, "bleedturns" : 4, "dmgmlt": 1.5, "lvlreq": 1, "effect": ["slash"]},
         {"name": "Coffee Break", "desc": "MHea", "targettype": "single", "inflict" : "Nothing", "cost": 12, "healing": 10, "lvlreq": 3},
         {"name": "Essence of Rush Hour", "desc": "EdmgA", "targettype": "all", "inflict" : "Nothing", "cost": 20, "dmgmlt": 3.0, "lvlreq": 8}
+    ],
+    "barman": [
+        {"name": "Clean Glass", "desc": "LHea", "targettype": "single", "inflict" : "Nothing", "cost": 2, "healing": 4, "lvlreq" : 1},
+        {"name": "Glass Smash", "desc": "Mdmg", "targettype": "single", "inflict" : "Nothing", "cost": 3, "dmgmlt": 1.5, "lvlreq": 1, "effect": ["slash"]},
+        {"name": "Shard Throw", "desc": "Mdmg", "targettype": "single", "inflict" : "Bleed", "cost": 5, "bleeddmg": 1, "bleedturns" : 4, "dmgmlt": 1.2, "lvlreq": 1, "effect": ["slash"]},
+        {"name": "Cocktail Drink", "desc": "MHea", "targettype": "single", "inflict" : "Nothing", "cost": 8, "healing": 7, "lvlreq": 3},
+        {"name": "Essence of Barman", "desc": "Mhea", "targettype": "all", "inflict" : "Nothing", "cost": 20, "healing": 40, "lvlreq": 8}
     ]
 }

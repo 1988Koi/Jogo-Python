@@ -535,8 +535,8 @@
     "11": {
         "name" : "Bar Brawler",
         "eid" : 7,
-        "hp" : 10,
-        "maxhp" : 10,
+        "hp" : 35,
+        "maxhp" : 35,
         "lvl" : 2,
         "xpdrop" : 60,
         "isboss" : false,
@@ -601,6 +601,73 @@
             }
         ]
     },
+    "12": {
+        "name" : "Shady Host",
+        "eid" : 7,
+        "hp" : 70,
+        "maxhp" : 70,
+        "lvl" : 15,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 26
+            },
+            {
+            "nameskill" : "Pose Up",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 6,
+            "boostdef" : 6,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.4,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 20
+            },
+            {
+            "nameskill" : "Ice Breaker",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["ice"],
+            "stre" : 25
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Chilled Bottle",
+            "chance" : 1
+            }
+        ]
+    },
     "60": {
         "name" : "Gun mobster",
         "eid" : 60,
@@ -659,6 +726,10 @@
             {
                 "itemid" : "Ammo",
                 "chance" : 1
+            },
+            {
+                "itemid" : "Tommy Gun",
+                "chance" : 0.2
             }
         ]
     },
@@ -727,7 +798,7 @@
         "eid" : 62,
         "hp" : 10,
         "maxhp" : 10,
-        "lvl" : 2,
+        "lvl" : 48,
         "xpdrop" : 60,
         "isboss" : false,
         "speed" : 10,
@@ -1057,7 +1128,8 @@
             "boostdef" : 1,
             "statustarget" : "self",
             "targettype" : "self",
-            "stre" : 0
+            "stre" : 0,
+            "basestre" : 0
             }
         ]
     },
@@ -1808,29 +1880,287 @@
         ]
     },
     "commentS" : "SuperBoss",
-    "100" : {
-        "name" : "Sanjo Anon",
-        "eid" : 100,
-        "hp" : 10000,
-        "maxhp" : 10000,
-        "lvl" : 99,
-        "xpdrop" : 1000,
-        "isboss" : true,
-        "speed" : 10,
-        "defe" : 30,
-        "money" : 1,
-        "status" : "Normal",
-        "bleed_turns" : 0,
-        "bleed_dmg" : 0,
-        "boostdef" : 0,
-        "AttackUp" : 0,
+    "100": {
+        "name": "Sanjo Anon",
+        "eid": 100,
+        "hp": 10000,
+        "maxhp": 10000,
+        "lvl": 99,
+        "xpdrop": 1000,
+        "isboss": true,
+        "speed": 10,
+        "defe": 30,
+        "money": 1,
+        "status": "Normal",
+        "bleed_turns": 0,
+        "bleed_dmg": 0,
+        "boostdef": 0,
+        "AttackUp": 0,
         "taunt_turns": 0,
-        "AttackUpTurn" : 0,
-        "last_def_boost" : 0,
-        "possibledrop" : [
+        "AttackUpTurn": 0,
+        "last_def_boost": 0,
+        "moveset": [
             {
-                "itemid" : "Anon Sunglasses",
-                "chance" : 1
+                "nameskill": "New Hire's Kick",
+                "status": "Nothing",
+                "statuschance": 1,
+                "targettype": "all",
+                "stre": 26,
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Debtor's Quick Attack",
+                "status": "Stun",
+                "statuschance": 1,
+                "targettype": "all",
+                "stre": 16,
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Bully's Basketball Throw",
+                "status": "Stun",
+                "statuschance": 0.25,
+                "targettype": "one",
+                "stre": 18,
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Low Life Bully's Punch",
+                "status": "Nothing",
+                "statuschance": 0.5,
+                "targettype": "one",
+                "stre": 16,
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Pushover's Kick",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 15,
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Low Tier Host's Shard Slash",
+                "status": "Bleed",
+                "statuschance": 0.9,
+                "targettype": "one",
+                "stre": 21,
+                "effect": ["slash"],
+                "bleeddmg": 2,
+                "bleedturns": 3,
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Jugallo's Ball Throw",
+                "status": "Stun",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 16,
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Low Tier Host's Cork Pop",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 18,
+                "effect": ["ice"],
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Low Tier Fighter's Bottle Smash",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 16,
+                "effect": ["bash"],
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Bar Brawler's Billard Throw",
+                "status": "Stun",
+                "statuschance": 0.4,
+                "targettype": "one",
+                "stre": 22,
+                "effect": ["bash"],
+                "chance": 0.091
+            },
+            {
+                "nameskill": "Shady Host's Ice Breaker",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 35,
+                "effect": ["ice"],
+                "chance": 0.09
+            }
+        ],
+        "phase2_threshold": 0.75,
+        "phase2_triggered": false,
+        "phase2_text": "Sanjo Anon cracks his neck. \"The mob taught me a few things too.\"",
+        "moveset2": [
+            {
+                "nameskill": "Gun Mobster's Shoot",
+                "status": "Bleed",
+                "statuschance": 0.5,
+                "targettype": "one",
+                "stre": 55,
+                "effect": ["shot"],
+                "chance": 0.125
+            },
+            {
+                "nameskill": "Knife Mobster's Stab",
+                "status": "Bleed",
+                "statuschance": 0.5,
+                "targettype": "one",
+                "stre": 50,
+                "effect": ["stab"],
+                "chance": 0.125
+            },
+            {
+                "nameskill": "Low Tier Mobster's Two Combo",
+                "status": "Nothing",
+                "statuschance": 0.9,
+                "targettype": "all",
+                "stre": 48,
+                "effect": ["bash"],
+                "chance": 0.125
+            },
+            {
+                "nameskill": "Mid Tier Mobster's Grapple Attack",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "all",
+                "stre": 55,
+                "effect": ["bash"],
+                "chance": 0.125
+            },
+            {
+                "nameskill": "Zoro Hashima's Evasive Slash",
+                "status": "Nothing",
+                "statuschance": 1,
+                "targettype": "one",
+                "stre": 33,
+                "chance": 0.125
+            },
+            {
+                "nameskill": "Zoro Hashima's Neck Snap",
+                "status": "Nothing",
+                "statuschance": 1,
+                "targettype": "one",
+                "stre": 39,
+                "chance": 0.125
+            },
+            {
+                "nameskill": "Zoro Hashima's Hard Hit",
+                "status": "Nothing",
+                "statuschance": 1,
+                "targettype": "one",
+                "stre": 40,
+                "chance": 0.125
+            },
+            {
+                "nameskill": "Zoro Hashima's Running Rush Combo",
+                "status": "Stun",
+                "statuschance": 1,
+                "targettype": "all",
+                "stre": 30,
+                "chance": 0.125
+            }
+        ],
+        "phase3_threshold": 0.5,
+        "phase3_triggered": false,
+        "phase3_text": "Let's end this already.",
+        "moveset3": [
+            {
+                "nameskill": "Ornery Yakuza's Katana Slash",
+                "status": "Bleed",
+                "statuschance": 1,
+                "targettype": "one",
+                "stre": 47,
+                "effect": ["slash"],
+                "bleeddmg": 3,
+                "bleedturns": 5,
+                "chance": 0.25
+            },
+            {
+                "nameskill": "Scarred Yakuza's Shot",
+                "status": "Bleed",
+                "statuschance": 1,
+                "targettype": "one",
+                "stre": 45,
+                "effect": ["shot"],
+                "bleeddmg": 3,
+                "bleedturns": 5,
+                "chance": 0.25
+            },
+            {
+                "nameskill": "Deisuki Kezu's Pendulum Stepping Left Jab",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 47,
+                "effect": ["bash"],
+                "chance": 0.25
+            },
+            {
+                "nameskill": "Akila Maluchi's Divine Dragon Breaker",
+                "status": "Stun",
+                "statuschance": 0.9,
+                "targettype": "one",
+                "stre": 75,
+                "effect": ["bash"],
+                "chance": 0.25
+            }
+        ],
+        "phase4_threshold": 0.25,
+        "phase4_triggered": false,
+        "phase4_text": "Sanjo changes to a familiar stance.",
+        "moveset4": [
+            {
+                "nameskill": "Sho Kawashiro's Katana Slash",
+                "status": "Bleed",
+                "statuschance": 1,
+                "targettype": "one",
+                "stre": 70,
+                "effect": ["slash"],
+                "bleeddmg": 3,
+                "bleedturns": 5,
+                "chance": 0.25
+            },
+            {
+                "nameskill": "Sho Kawashiro's Blade Decimator",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 120,
+                "effect": ["stab"],
+                "chance": 0.25
+            },
+            {
+                "nameskill": "Toshiaki Kine's Running Right Knee",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 87,
+                "effect": ["bash"],
+                "chance": 0.25
+            },
+            {
+                "nameskill": "Toshiaki Kine's Double Spinning Right Backfist",
+                "status": "Nothing",
+                "statuschance": 0,
+                "targettype": "one",
+                "stre": 70,
+                "effect": ["bash"],
+                "chance": 0.25
+            }
+        ],
+        "possibledrop": [
+            {
+                "itemid": "Anon Sunglasses",
+                "chance": 1
             }
         ]
     }

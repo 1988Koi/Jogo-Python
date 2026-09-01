@@ -52,6 +52,8 @@ DEFAULT_MEMBER = {
     "AttackUp" : 20,
     "AttackUpTurn" : 2,
     "Majima_encounter" : 0,
+    "style": "brawler",
+    "allstyles": ["brawler", "beast", "rush"]
 }
 
 def apply_defaults(member):

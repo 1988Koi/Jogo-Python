@@ -2,6 +2,7 @@ import json
 import random
 import subprocess
 from saveload import *
+from classdata import classlvlreq, Majimaencounters
 
 def cleaning():
     subprocess.run("cls" if subprocess.os.name == "nt" else "clear", shell=True)
@@ -92,8 +93,12 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
     turn_taken = False
 
     while not game_over_flag[0] and not turn_taken:
-        print("\n" + lang[language1]["combat"])
-        playerturn = input("> ").strip().lower()
+        if combate["class"] == "Dragon":
+            print("\n" + lang[language1]["combat1"])
+            playerturn = input("> ").strip().lower()
+        else:
+            print("\n" + lang[language1]["combat"])
+            playerturn = input("> ").strip().lower()
 
         if playerturn == "1":
             print("\n" + lang[language1]["attack"])
@@ -131,14 +136,21 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
         elif playerturn == "2":
             print("\n" + lang[language1]["attack"])
+
             current = combate["class"].lower()
             class_skills = skills[current]
             available = []
+            currentstyle = "brawler"
 
             for skil in class_skills:
-                if skil["lvlreq"] <= combate["lvl"]:
-                    available.append(skil)
-                    print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {skil['desc']}")
+                if combate["class"] == "Dragon":
+                    if skil["style"] == combate["style"] and skil["encounterreq"] <= combate["encounterreq"]:
+                        available.append(skil)
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {skil['desc']}")
+                else:
+                    if skil["lvlreq"] <= combate["lvl"]:
+                        available.append(skil)
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {skil['desc']}")
 
             if not available:
                 print("No skills available!")
@@ -347,6 +359,23 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                 print(f"{combate['name']} tried to run, but couldn't get away!")
                 turn_taken = True
 
+        elif playerturn == "5" and combate["class"] == "Dragon":
+            styles = combate["allstyles"]
+            pos = styles.index(combate["style"])
+            print("Type a and d to cycle between styles")
+            thedecision = input("> ").strip()
+            if thedecision == "a":
+                stylesewpos = (pos + 1) % len(styles)
+                combate["style"] =styles[stylesewpos]
+                print(f"You are now in {styles[stylesewpos]} style")
+            if thedecision == "d":
+                stylesewpos = (pos - 1) % len(styles)
+                combate["style"] = styles[stylesewpos]
+                print(f"You are now in {styles[stylesewpos]} style")
+            continue
+        elif playerturn == "5" and combate["class"] != "Dragon":
+            print("You can't change styles")
+
         else:
             print("Invalid choice, try again.")
             continue
@@ -402,7 +431,7 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
     if chosen_attack["targettype"] == "one":
         unluckyman = random.choice(taunting) if taunting else random.choice(living_party)
         mult = get_mult(chosen_attack.get("type", []), unluckyman)
-        total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"] + items[unluckyman["eq_accessory"]]
+        total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"] + items[unluckyman["eq_accessory"]]["defen"]
         effective_stre = chosen_attack["stre"] * mult
         defenseunluck = total_defense / 2
         if defenseunluck >= chosen_attack["stre"]:
@@ -568,8 +597,14 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
                         else:
                             player_inv[drop_enemy] = 1
                         print("Debug Backpack:", init_stats["party"][0]["inv"])
-            if enemy["eid"] == 12:
+            if enemy["eid"] in (86, 87, 88, 89):
                 init_stats["party"][0]["Majima_encounter"] += 1
+
+                main = init_stats["party"][0]
+                required = Majimaencounters.get("Dragon", 0)
+                if main["Majima_encounter"] >= required and "Dragon" not in main["unlocked_classes"]:
+                    main["unlocked_classes"].append("Dragon")
+                    print("You unlocked the Dragon job!")
 
                 has_charismatic = any("Charismatic Photo" in member["eq_accessory"] for member in init_stats["party"])
 
@@ -614,5 +649,13 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
                 i["lvl"] += 1
                 i["pts"] += 1
                 print(f"{i['name']} leveled up to {i['lvl']}")
+
+                if i.get("is_main_character"):
+                    for cls, req in classlvlreq.items():
+                        if cls == "Dragon":
+                            continue
+                        if i["lvl"] >= req and cls not in i["unlocked_classes"]:
+                            i["unlocked_classes"].append(cls)
+                            print(f"You unlocked the {cls} job!")
 
     return not game_over_flag[0]

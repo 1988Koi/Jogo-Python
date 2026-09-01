@@ -75,7 +75,14 @@
     },
     "2Bottle": {
         "type" : "weapon",
-        "stren" : 6,
+        "stren" : 100,
+        "desc" : "A premium bottle of champagne",
+        "usebleby" : ["Host"]
+    },
+    "Chilled Bottle": {
+        "type" : "weapon",
+        "stren" : 50,
+        "effect": ["ice"],
         "desc" : "A premium bottle of champagne",
         "usebleby" : ["Host"]
     },
