@@ -729,8 +729,13 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
             chancemaima = random.randint(1, 10)
             if chancemaima > 1:
-                print(f"Nhehehehe! Got you again, {init_stats['party'][0]['name']}!")
-                select_enemy_id = random.choices(majima_pool, k=1)
+                for enemy_id in ["86", "87", "88", "89"]:
+                    enemis[enemy_id]["hp"] = round(enemis[enemy_id]["basehp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
+                    enemis[enemy_id]["maxhp"] = round(enemis[enemy_id]["basemaxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
+                    enemis[enemy_id]["defe"] = round(enemis["basedefe"] + (init_stats["party"][0]["Majima_encounter"]))
+                    for move in enemis[enemy_id]["moveset"]: 
+                        move["stre"] = round(move["basestre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
+                select_enemy_id = random.choices(majimapool, k=1)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
 
         elif mapc == "d":
@@ -855,6 +860,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 for enemy_id in ["86", "87", "88", "89"]:
                     enemis[enemy_id]["hp"] = round(enemis[enemy_id]["basehp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
                     enemis[enemy_id]["maxhp"] = round(enemis[enemy_id]["basemaxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
+                    enemis[enemy_id]["defe"] = round(enemis["basedefe"] + (init_stats["party"][0]["Majima_encounter"]))
                     for move in enemis[enemy_id]["moveset"]: 
                         move["stre"] = round(move["basestre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
                 select_enemy_id = random.choices(majimapool, k=1)

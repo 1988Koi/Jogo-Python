@@ -114,7 +114,29 @@
         "desc": "There's nothing.",
         "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
     },
+    "Fish Inside a Birdcage" : {
+        "type" : "junk",
+        "sellvalue" : 1000
+    },
     "Broken Hard Hat" : {
+        "type" : "headgear",
+        "defen" : 5,
+        "desc": "A hard hat, it's broken.",
+        "usableby": ["Foreman"]
+    },
+    "Old" : {
+        "type" : "headgear",
+        "defen" : 15,
+        "desc": "A hard hat, it's old.",
+        "usableby": ["Foreman"]
+    },
+    "Hard Hat" : {
+        "type" : "headgear",
+        "defen" : 50,
+        "desc": "A hard hat, it's uh... normal this time.",
+        "usableby": ["Foreman"]
+    },
+    "Broken" : {
         "type" : "headgear",
         "defen" : 5,
         "desc": "A hard hat, it's broken.",

@@ -120,15 +120,13 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                         weapon_type = items[combate["eq_wep"]].get("dmgtype")
                         mult = get_mult(weapon_type, presentenemies[target_index])
                         effective_dmg = total_damage * mult
-                        total = round(effective_dmg)
-                        if total <= (presentenemies[target_index]['defe'] / 2):
-                            print(f"{presentenemies[target_index]['name']} managed to resist {combate['name']} attack!")
-                        else:
-                            presentenemies[target_index]["hp"] -= total
-                            combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
-                            print(f"Hit! {presentenemies[target_index]['name']} takes {total} damage.")
-                            print("And you got +5 mana!")
-                            turn_taken = True
+                        defe = presentenemies[target_index]['defe']
+                        total = round(effective_dmg) + defe
+                        presentenemies[target_index]["hp"] -= total
+                        combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
+                        print(f"Hit! {presentenemies[target_index]['name']} takes {total} damage.")
+                        print("And you got +5 mana!")
+                        turn_taken = True
                 else:
                     print("Invalid number!")
             else:
@@ -268,15 +266,14 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                             else:
                                 mult = get_mult(chosen.get("type", []), presentenemies[target_index])
                                 total = round(total_damage * mult)
+                                defense = presentenemies[target_index]["defe"]
                                 damage = round(total * chosen["dmgmlt"])
-                                if damage <= (presentenemies[target_index]["defe"] / 2):
-                                    print(f"{presentenemies[target_index]['name']} managed to resist {combate['name']} attack!")
-                                else:
-                                    presentenemies[target_index]["hp"] -= damage
-                                    combate["mana"] -= chosen["cost"]
-                                    print(f"Used {chosen['name']}! Dealt {damage} damage.")
-                                    apply_inflict(chosen, presentenemies[target_index])
-                                    turn_taken = True
+                                realdamage = damage - defense
+                                presentenemies[target_index]["hp"] -= realdamage
+                                combate["mana"] -= chosen["cost"]
+                                print(f"Used {chosen['name']}! Dealt {damage} damage.")
+                                apply_inflict(chosen, presentenemies[target_index])
+                                turn_taken = True
                         else:
                             print("Invalid number!")
                             continue
@@ -433,27 +430,24 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         mult = get_mult(chosen_attack.get("type", []), unluckyman)
         total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"] + items[unluckyman["eq_accessory"]]["defen"]
         effective_stre = chosen_attack["stre"] * mult
-        defenseunluck = total_defense / 2
-        if defenseunluck >= chosen_attack["stre"]:
-            print(f"{unluckyman['name']} managed to resist {eatt['name']} attack!")
-        else:
-            totaldmg = round(effective_stre)
-            unluckyman["hp"] -= totaldmg
-            if "statuschance" in chosen_attack:
-                statusroll = random.random()
-                effective_chance = max(0.0, chosen_attack["statuschance"] - unluckyman["luck"] * 0.2)
-                if statusroll <= effective_chance:
-                    if chosen_attack["status"] == "Bleed":
-                        unluckyman["bleed_turns"] = chosen_attack["bleedturns"]
-                        unluckyman["bleed_dmg"] = chosen_attack["bleeddmg"]
-                        print(f"{unluckyman['name']} is bleeding!")
-                    else:
-                        unluckyman["status"] = chosen_attack["status"]
-                        print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
+        defenseunluck = total_defense
+        totaldmg = round(effective_stre + defenseunluck)
+        unluckyman["hp"] -= totaldmg
+        if "statuschance" in chosen_attack:
+            statusroll = random.random()
+            effective_chance = max(0.0, chosen_attack["statuschance"] - unluckyman["luck"] * 0.2)
+            if statusroll <= effective_chance:
+                if chosen_attack["status"] == "Bleed":
+                    unluckyman["bleed_turns"] = chosen_attack["bleedturns"]
+                    unluckyman["bleed_dmg"] = chosen_attack["bleeddmg"]
+                    print(f"{unluckyman['name']} is bleeding!")
                 else:
-                    print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} but managed to dodge the debuff!")
+                    unluckyman["status"] = chosen_attack["status"]
+                    print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
             else:
-                print(f"{unluckyman['name']} was hit with {chosen_attack['nameskill']}!")
+                print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} but managed to dodge the debuff!")
+        else:
+            print(f"{unluckyman['name']} was hit with {chosen_attack['nameskill']}!")
 
     elif chosen_attack["targettype"] == "all":
         print(f"The enemy used {chosen_attack['nameskill']} on everybody!")
@@ -462,7 +456,7 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
             effective_stre = chosen_attack["stre"] * mult
             totaldmg = round(effective_stre)
             total_defense = member["defe"] + items[member["eq_head"]]["defen"] + items[member["eq_accessory"]]["defen"]
-            member["hp"] -= totaldmg
+            member["hp"] -= (totaldmg + total_defense)
             if "statuschance" in chosen_attack and chosen_attack.get("statustarget") == "ally":
                 statusroll = random.random()
                 effective_chance = max(0.0, chosen_attack["statuschance"] - member["luck"] * 0.2)
