@@ -2,7 +2,8 @@
     "DUNGEON1": {
         "Broken Blade": 0.10,
         "Dull Blade": 0.10,
-        "Scarecrow Mask": 0.10
+        "Scarecrow Mask": 0.10,
+        "Energy Dring" : 0.10
     },
     "STROLL1": {
         "Energy Drink": 0.25,
@@ -11,5 +12,8 @@
         "Joto Family Pin" : 0.10,
         "Charismatic Photo": 0.10,
         "Dull edged Knife" : 0.05
+    },
+    "DUNGEON2": {
+        "Broken Record" : 0.10
     }
 }

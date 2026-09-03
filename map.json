@@ -32,7 +32,7 @@
     "sewer": {
         "name": "Sewers",
         "lvlreq": 20,
-        "enemy_pool": [0],
+        "enemy_pool": [4, 5, 6, 7, 8, 9, 10, 11, 12],
         "boss": 91
     }
 }
