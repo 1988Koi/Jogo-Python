@@ -1,0 +1,30 @@
+{
+    "Spiked Brass Knuckles" : {
+        "materials" : {"Processed Metal": 5, "Brass Knuckles": 1},
+        "cost" : 200
+    },
+    "Clair" : {
+        "materials" : {"Perfect Metal": 5, "Squid Tentacle" : 1, "Empty Cough Drop": 1, "Izo's Katana" : 1},
+        "cost" : 5000
+    },
+    "Obscur" : {
+        "materials" : {"Perfect Metal": 5, "Shark Fin" : 1, "Empty Cough Drop": 1, "Knuckles of Someicho's Fist" : 1},
+        "cost" : 5000
+    },
+    "Clair-Obscur" : {
+        "materials" : {"Perfect Metal": 5, "Shark Fin" : 1, "Squid Tentacle": 1, "Empty Cough Drop": 1, "Clair": 1, "Obscur": 1},
+        "cost" : 5000
+    },
+    "Pipe Wrench" : {
+        "materials" : {"processed_metal": 3, "Rusty Wrench": 1},
+        "cost" : 200
+    },
+    "Infernum" : {
+        "materials" : {"Perfect Metal": 5, "Squid Tentacle": 1, "Empty Cough Drop": 1, "Legendary Clever": 1},
+        "cost" : 5000
+    },
+    "Hero's bat" : {
+        "materials" : {"Perfect Metal": 5, "Squid Tentacle" : 1, "Empty Cough Drop": 2, "Legendary Bat" : 1},
+        "cost": 5000
+    }
+}

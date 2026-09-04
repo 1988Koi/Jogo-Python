@@ -1,0 +1,38 @@
+{
+    "tutorial": {
+        "name": "Someicho - Under the Patriarch",
+        "lvlreq": 1,
+        "enemy_pool": [1, 2],
+        "boss" : null
+    },
+    "someicho": {
+        "name": "Someicho",
+        "lvlreq": 1,
+        "enemy_pool": [4, 5, 6, 7, 8, 9, 10, 11],
+        "boss" : 96
+    },
+    "feizhua" : {
+        "name" : "Feizhua",
+        "lvlreq": 10,
+        "enemy_pool": [6, 7, 8],
+        "boss" : 97
+    },
+    "jianqyang_ryu": {
+        "name" : "Jiangyang Ryu",
+        "lvlreq": 15,
+        "enemy_pool": [9, 10, 11],
+        "boss": 98
+    },
+    "fuxi_donzen": {
+        "name": "Fuxi Donzen",
+        "lvlreq": 20,
+        "enemy_pool": [12, 13, 14],
+        "boss": 99
+    },
+    "sewer": {
+        "name": "Sewers",
+        "lvlreq": 20,
+        "enemy_pool": [4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "boss": 91
+    }
+}

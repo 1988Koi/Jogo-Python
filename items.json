@@ -1,0 +1,281 @@
+{
+    "Piece of gum": {
+        "type": "heal",
+        "value" : 5,
+        "desc" : "Heals you a little, the flavor is long gone",
+        "sellvalue" : 1
+    },
+    "Energy Drink": {
+        "type": "heal",
+        "value" : 10,
+        "desc": "Heals you now, will kill you later...",
+        "sellvalue" : 2
+    },
+    "Stamina spark": {
+        "type" : "heal",
+        "value" : 30,
+        "desc" : "Heals you a lot, hoho... ahhhh...",
+        "sellvalue" : 15
+    },
+    "Frown burger": {
+        "type" : "heal",
+        "value" : 15,
+        "desc" :"Heals you a lot, a frown in each box",
+        "sellvalue" : 3
+    },
+    "Stomina spork": {
+        "type" : "heal",
+        "value" : -30,
+        "desc" : "Heals you a lot, hoho... ahhhh...",
+        "sellvalue" : 200
+    },
+    "Legend katana": {
+        "type" : "weapon",
+        "stren" : 30,
+        "desc" : "A katana forged from rare ores, gives 30 more attack damage",
+        "usebleby" : ["Security"],
+        "effect" : ["slash"]
+    },
+    "Hero sword": {
+        "type" : "weapon",
+        "stren" : 10,
+        "desc" : "A dusty baseball bat, gives 10 more attack",
+        "usebleby" : ["Hero"]
+    },
+    "Juggling ball": {
+        "type" : "junk",
+        "sellvalue" : 10
+    },
+    "Fists": {
+        "type" : "weapon",
+        "stren" : 0,
+        "desc" : "Your own fists, doesn't gives more attack"
+    },
+    "Spare change": {
+        "type" : "junk",
+        "sellvalue" : 4,
+        "desc" : "Some pocket change, can be sold for some reason"
+    },
+    "Ammo": {
+        "type" : "junk",
+        "sellvalue" : 10,
+        "desc" : "A single ammo, can be sold at a paw shop"
+    },
+    "Briefcase": {
+        "type" : "weapon",
+        "stren" : 0,
+        "desc" : "Gordon briefcase, there's not much inside",
+        "usebleby" : ["Salaryman"]
+    },
+    "Microphone": {
+        "type" : "weapon",
+        "stren" : 0,
+        "desc" : "Reggie's microphone, kinda bad",
+        "usebleby" : ["Unemployed"]
+    },
+    "2Bottle": {
+        "type" : "weapon",
+        "stren" : 100,
+        "desc" : "A premium bottle of champagne",
+        "usebleby" : ["Host"]
+    },
+    "Chilled Bottle": {
+        "type" : "weapon",
+        "stren" : 50,
+        "effect": ["ice"],
+        "desc" : "A premium bottle of champagne",
+        "usebleby" : ["Host"]
+    },
+    "Old coins" : {
+        "type" : "junk",
+        "sellvalue" : 5
+    },
+    "Lucky Charm": {
+        "type" : "accessory",
+        "desc" : "A simple lucky charm, probably doesn't work",
+        "luck" : 3,
+        "usableby" : ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
+    },
+    "Baseball hat" : {
+        "type" : "headgear",
+        "defen" : 3,
+        "desc" : "A simple baseball hat",
+        "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
+    },
+    "glasses" : {
+        "type" : "headgear",
+        "defen" : 0,
+        "desc" : "Glasses... makes you look like a dork.",
+        "usableby": ["Salaryman"]
+    },
+    "Nothing" : {
+        "type" : "headgear, accessory",
+        "defen" : 0,
+        "desc": "There's nothing.",
+        "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"]
+    },
+    "Fish Inside a Birdcage" : {
+        "type" : "junk",
+        "sellvalue" : 1000
+    },
+    "Broken Hard Hat" : {
+        "type" : "headgear",
+        "defen" : 5,
+        "desc": "A hard hat, it's broken.",
+        "usableby": ["Foreman"]
+    },
+    "Old" : {
+        "type" : "headgear",
+        "defen" : 15,
+        "desc": "A hard hat, it's old.",
+        "usableby": ["Foreman"]
+    },
+    "Hard Hat" : {
+        "type" : "headgear",
+        "defen" : 50,
+        "desc": "A hard hat, it's uh... normal this time.",
+        "usableby": ["Foreman"]
+    },
+    "Broken" : {
+        "type" : "headgear",
+        "defen" : 5,
+        "desc": "A hard hat, it's broken.",
+        "usableby": ["Foreman"]
+    },
+    "Top Hat" : {
+        "type" : "headgear",
+        "defen" : 8,
+        "desc": "Remarkable.",
+        "usableby": ["Gentleman"]
+    },
+    "Old Cane" : {
+        "type" : "weapon",
+        "stren" : "3",
+        "desc" : "Old run down cane.",
+        "usableby" : ["Gentleman"]
+    },
+    "Mall katana": {
+        "type" : "weapon",
+        "stren" : 10,
+        "desc" : "A mall katana, the edges are very dull.",
+        "usableby" : ["Security"]
+    },
+    "Hero's Bat" : {
+        "type" : "weapon",
+        "stren" : 200,
+        "desc" : "The bat of all bat's",
+        "usableby" : ["Hero"]
+    },
+    "Legendary Bat" : {
+        "type": "weapon",
+        "stren" : 150,
+        "desc" : "A bat that once hit a game winning home run",
+        "usableby" : ["Hero"]
+    },
+    "Pipe Wrench" : {
+        "type" : "weapon",
+        "stren" : 50,
+        "desc" : "A brand new pipe wrench",
+        "usableby" : ["technician"]
+    },
+    "Clair" : {
+        "type" : "weapon",
+        "stren" : 250,
+        "desc" : "Clair",
+        "usableby" : ["Yakuza"]
+    },
+    "Obscur" : {
+        "type" : "weapon",
+        "stren" : 250,
+        "desc" : "Obscur",
+        "usableby" : ["Legend"]
+    },
+    "Clair-Obscur" : {
+        "type" : "weapon",
+        "stren" : 500,
+        "desc" : "ensemble au Clair-Obscur",
+        "usableby" : ["Yakuza", "Legend"]
+    },
+    "Brass Knuckles" : {
+        "type" : "weapon",
+        "stren" : 30,
+        "desc" : "Simple brass knuckles",
+        "usableby" : ["Yakuza"]
+    },
+    "Spiked Brass Knuckles" : {
+        "type" : "weapon",
+        "stren" : 60,
+        "desc" : "a brass knuckles with some spikes on it",
+        "usableby" : ["Yakuza"]
+    },
+    "Perfect Knuckles" : {
+        "type" : "weapon",
+        "stren": 120,
+        "desc" : "A perfectly made brass knuckles",
+        "usableby" : ["Yakuza"]
+    },
+    "Knuckles of Someicho's Fist" : {
+        "type" : "weapon",
+        "stren" : 200,
+        "desc" : "a brass knuckles with some spikes on it",
+        "usableby" : ["Yakuza"]
+    },
+    "Old Suitcase" : {
+        "type" : "weapon",
+        "stren" : 6,
+        "desc" : "An old beatdown suitcase",
+        "usableby" : ["Salaryman"]
+    },
+    "Old Magazine" : {
+        "type" : "junk",
+        "sellvalue" : 7
+    },
+    "Joto Family Pin" : {
+        "type" : "accessory",
+        "sellvalue" : 15,
+        "desc" : "Old family pin, the family no longer exists.",
+        "defen" : 15
+    },
+    "Charismatic Photo" : {
+        "type" : "accessory",
+        "usableby": ["Host", "Hero", "Chef", "Security", "Foreman", "Yakuza", "Breaker", "Unemployed", "Salaryman", "Legend", "Freelancer", "Gentleman"],
+        "sellvalue" : 0,
+        "moneyincrease" : 2,
+        "desc" : "Everyone wants this.",
+        "defen": -15
+    },
+    "Bandana" : {
+        "type" : "headgear",
+        "usableby": ["Foreman", "Yakuza", "Breaker", "Unemployed", "Freelancer"],
+        "sellvalue" : 6,
+        "desc" : "Everyone wants this.",
+        "defen": 5
+    },
+    "Dull Edged Knife" : {
+        "type" : "accessory",
+        "usableby": ["Chef"],
+        "desc" : "Old knife, very dull",
+        "stre": 15
+    },
+    "Scrap Metal": {
+        "type" : "material"
+    },
+    "Processed Metal": {
+        "type" : "material"
+    },
+    "Polished Metal" : {
+        "type" : "material"
+    },
+    "Perfect Metal" : {
+        "type" : "material"
+    },
+    "Empty Cough Drop" : {
+        "type" : "material"
+    },
+    "Squid Tentacle" : {
+        "type" : "material"
+    },
+    "Shark Fin" : {
+        "type" : "material"
+    }
+}
