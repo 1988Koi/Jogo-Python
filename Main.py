@@ -239,70 +239,15 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "1":
             if playerlvl >= 1 and (mission1Started == False or mission1Complete == True):
+                inv = init_stats["party"][0]["inv"]
                 print("You enter the cafe...")
                 print("You grab a menu")
                 print("10 dollars for some french fries?????")
-                out = False
-                while not out:
-                    print("1. Burger with soda - 30 Dollars - Restores 15 health")
-                    print("2. French fries - 10 dollars - restores 5 health")
-                    print("3. Soda - 5 dollars - restores 2 health")
-                    print("Type i to quit.")
-                    choice = input("> ").strip()
-                    menu = {
-                        "1": "Burger with soda",
-                        "2": "French Fries",
-                        "3": "Soda",
-                        "i": "leave"
-                    }
-
-                    menuchoices = {
-                        "Burger with soda": {"heal": 15, "cost": 30},
-                        "French Fries": {"heal": 5, "cost": 10},
-                        "Soda": {"heal": 2, "cost": 5}
-                    }
-                    if choice == "i":
-                        out = True
-                        break
-                    if choice not in menu:
-                        print("We don't serve that here")
-                        continue
-                    elif choice in menu:
-                        food_name = menu[choice]
-                        food_stats = menuchoices[food_name]
-                        for names in init_stats["party"]:
-                            print(f"{names['name']}")
-                        print("Who do you want to feed?")
-                        feed = input("> ").strip()
-                        for member in init_stats["party"]:
-                            if member['name'].lower() == feed.lower():
-                                if init_stats["party"][0]["money"] < food_stats["cost"]:
-                                    print("You can't buy that!")
-                                    break
-                                else:
-                                    member["hp"] = min(member["maxhp"], member["hp"] + food_stats["heal"])
-                                    init_stats["party"][0]["money"] -= food_stats["cost"]
-            elif playerlvl >= 1 and (mission1Started == True and mission1Complete == False):
-                print("You enter the cafe...")
-                print("You grab a menu")
-                print("10 dollars for some french fries?????")
-                print("At the corner of your eye you see someone...")
-                print("You pull the evnelope with the info")
-                print("You see that everything matches perfectly...")
-                print("Do you attack him?")
-                print("Type y for yes and n for no.")
+                print("Will you eat here or will it be to go?")
+                print("Type here to eat here and go to buy food to go")
                 choice1 = input("> ").strip()
-                if choice1 == "yes" or choice1 == "y":
-                    print("You approach the guy...")
-                    print("You start discussing with him")
-                    time.sleep(2)
-                    barpool = [11]
-                    select_enemy_id = random.choices(barpool, k=1)
-                    combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
-                    init_stats["party"][0]["money"] += 10
-                elif choice1 == "no" or choice1 == "n":
+                if choice1 == "here" or choice1 == "h":
                     out = False
-                    print("You decide that now is not the time.")
                     while not out:
                         print("1. Burger with soda - 30 Dollars - Restores 15 health")
                         print("2. French fries - 10 dollars - restores 5 health")
@@ -314,12 +259,13 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                                 "2": "French Fries",
                                 "3": "Soda",
                                 "i": "leave"
-                                }
+                            }
+
                         menuchoices = {
                                 "Burger with soda": {"heal": 15, "cost": 30},
                                 "French Fries": {"heal": 5, "cost": 10},
                                 "Soda": {"heal": 2, "cost": 5}
-                                }
+                            }
                         if choice == "i":
                             out = True
                             break
@@ -341,6 +287,115 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                                     else:
                                         member["hp"] = min(member["maxhp"], member["hp"] + food_stats["heal"])
                                         init_stats["party"][0]["money"] -= food_stats["cost"]
+                elif choice1 == "go" or choice1 == "to go":
+                    print("What do you wish for, boss?")
+                    stock = list(shops["CAFE"].keys())
+                    for i, item_name in enumerate(stock, start=1):
+                        price = shops["CAFE"][item_name]
+                        print(f"{i}: {item_name} - {price} money")
+                    print("Type i to go back")
+
+                    choice = input("> ").strip()
+                    if choice.lower() == "i":
+                        continue
+                    if choice.isdigit() and 0 < int(choice) <= len(stock):
+                        item_name = stock[int(choice) - 1]
+                        price = shops["CAFE"][item_name]
+                        if init_stats["party"][0]["money"] >= price:
+                            init_stats["party"][0]["money"] -= price
+                            inv[item_name] = inv.get(item_name, 0) + 1
+                            print(f"Bought 1x {item_name}!")
+                        else:
+                            print("You can't afford that.")
+                    else:
+                        print("Invalid choice.")
+
+            elif playerlvl >= 1 and (mission1Started == True and mission1Complete == False):
+                    print("You enter the cafe...")
+                    print("You grab a menu")
+                    print("10 dollars for some french fries?????")
+                    print("At the corner of your eye you see someone...")
+                    print("You pull the evnelope with the info")
+                    print("You see that everything matches perfectly...")
+                    print("Do you attack him?")
+                    print("Type y for yes and n for no.")
+                    choice1 = input("> ").strip()
+                    if choice1 == "yes" or choice1 == "y":
+                        print("You approach the guy...")
+                        print("You start discussing with him")
+                        time.sleep(2)
+                        barpool = [11]
+                        select_enemy_id = random.choices(barpool, k=1)
+                        combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                        init_stats["party"][0]["money"] += 10
+                    elif choice1 == "no" or choice1 == "n":
+                        print("You decide to ignore him for the time being.")
+                        print("Will you eat here or will it be to go?")
+                        print("Type here to eat here and go to buy food to go")
+                    choice1 = input("> ").strip()
+                    if choice1 == "here" or choice1 == "h":
+                        out = False
+                        while not out:
+                            print("1. Burger with soda - 30 Dollars - Restores 15 health")
+                            print("2. French fries - 10 dollars - restores 5 health")
+                            print("3. Soda - 5 dollars - restores 2 health")
+                            print("Type i to quit.")
+                            choice = input("> ").strip()
+                            menu = {
+                                    "1": "Burger with soda",
+                                    "2": "French Fries",
+                                    "3": "Soda",
+                                    "i": "leave"
+                                }
+
+                            menuchoices = {
+                                    "Burger with soda": {"heal": 15, "cost": 30},
+                                    "French Fries": {"heal": 5, "cost": 10},
+                                    "Soda": {"heal": 2, "cost": 5}
+                                }
+                            if choice == "i":
+                                out = True
+                                break
+                            if choice not in menu:
+                                print("We don't serve that here")
+                                continue
+                            elif choice in menu:
+                                food_name = menu[choice]
+                                food_stats = menuchoices[food_name]
+                                for names in init_stats["party"]:
+                                    print(f"{names['name']}")
+                                print("Who do you want to feed?")
+                                feed = input("> ").strip()
+                                for member in init_stats["party"]:
+                                    if member['name'].lower() == feed.lower():
+                                        if init_stats["party"][0]["money"] < food_stats["cost"]:
+                                            print("You can't buy that!")
+                                            break
+                                        else:
+                                            member["hp"] = min(member["maxhp"], member["hp"] + food_stats["heal"])
+                                            init_stats["party"][0]["money"] -= food_stats["cost"]
+                    elif choice1 == "go" or choice1 == "to go":
+                        print("What do you wish for, boss?")
+                        stock = list(shops["CAFE"].keys())
+                        for i, item_name in enumerate(stock, start=1):
+                            price = shops["CAFE"][item_name]
+                            print(f"{i}: {item_name} - {price} money")
+                        print("Type i to go back")
+
+                        choice = input("> ").strip()
+                        if choice.lower() == "i":
+                            continue
+                        if choice.isdigit() and 0 < int(choice) <= len(stock):
+                            item_name = stock[int(choice) - 1]
+                            price = shops["CAFE"][item_name]
+                            if init_stats["party"][0]["money"] >= price:
+                                init_stats["party"][0]["money"] -= price
+                                inv[item_name] = inv.get(item_name, 0) + 1
+                                print(f"Bought 1x {item_name}!")
+                            else:
+                                print("You can't afford that.")
+                        else:
+                            print("Invalid choice.")
             else:
                 print("\n" + lang[language1]["lowlv"])
 

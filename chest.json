@@ -1,19 +1,37 @@
 {
     "DUNGEON1": {
-        "Broken Blade": 0.10,
-        "Dull Blade": 0.10,
-        "Scarecrow Mask": 0.10,
-        "Energy Dring" : 0.10
+        "Broken Blade": 0.1,
+        "Dull Blade": 0.1,
+        "Scarecrow Mask": 0.1
     },
     "STROLL1": {
         "Energy Drink": 0.25,
-        "Old Suitcase" : 0.25,
-        "Old Magazine" : 0.25,
-        "Joto Family Pin" : 0.10,
-        "Charismatic Photo": 0.10,
-        "Dull edged Knife" : 0.05
+        "Old Suitcase": 0.25,
+        "Old Magazine": 0.25,
+        "Joto Family Pin": 0.1,
+        "Charismatic Picture": 0.1,
+        "Dull edged Knife": 0.05
     },
     "DUNGEON2": {
-        "Broken Record" : 0.10
+        "Silver Ingot": 0.2,
+        "Reinforced Leather": 0.2,
+        "Circuit Board": 0.15,
+        "Aged Oak": 0.15,
+        "Crushed Pearl": 0.1,
+        "Polished Metal": 0.2
+    },
+    "DUNGEON3": {
+        "Perfect Metal": 0.3,
+        "Crushed Pearl": 0.25,
+        "Empty Cough Drop": 0.15,
+        "Squid Tentacle": 0.15,
+        "Shark Fin": 0.15
+    },
+    "ZORO_ENCOUNTER": {
+        "Crushed Pearl": 0.35,
+        "Silver Ingot": 0.25,
+        "Perfect Metal": 0.15,
+        "Fancy Watch": 0.15,
+        "Premium Watch": 0.1
     }
 }

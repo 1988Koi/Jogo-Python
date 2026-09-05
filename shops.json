@@ -1,5 +1,5 @@
 {
-    "PAWN_SHOP" : {
+    "PAWN_SHOP": {
         "Piece of gum": 2,
         "Energy Drink": 5,
         "Toy Pistol": 20,
@@ -8,6 +8,51 @@
         "Premium Watch": 1000,
         "Top Hat": 250,
         "Checkered Suit": 400,
-        "Renoir's Suit": 500
+        "Renoir's Suit": 500,
+        "Convenience Store Onigiri": 10,
+        "Instant Ramen": 15,
+        "Bottle of Painkillers": 25,
+        "Worn Wedding Ring": 60,
+        "Empty Wallet": 5
+    },
+    "CAFE": {
+        "Convenience Store Onigiri": 10,
+        "Instant Ramen": 15,
+        "Katsu Sando": 30,
+        "Family Recipe Stew": 60,
+        "Frown burger": 15,
+        "Stamina spark": 80,
+        "First Aid Kit": 120
+    },
+    "WORKSHOP": {
+        "Stapler": 40,
+        "Champagne Flute": 45,
+        "Rebar Rod": 55,
+        "Paring Knife": 30,
+        "Boombox": 65,
+        "Silver Cane": 60,
+        "Screwdriver": 35,
+        "Dull edged Knife": 20,
+        "Cracked Glasses": 15,
+        "Faded Sunglasses": 15,
+        "Cracked Hard Hat": 25,
+        "Paper Toque": 15,
+        "Torn Bandana": 20,
+        "Cracked Visor": 30,
+        "Snapback Cap": 25,
+        "Worn Top Hat": 30,
+        "Safety Goggles": 25,
+        "Rusty Wrench": 20,
+        "Processed Metal": 15
+    },
+    "BAR": {
+        "Rabbit's Foot": 100,
+        "Four-Leaf Clover": 90,
+        "Loaded Dice": 150,
+        "Lucky Charm": 80,
+        "Dusty Shot Glass": 50,
+        "Old Timey Fedora": 40,
+        "Sturdy Bottle": 50,
+        "Energy Drink": 5
     }
 }
