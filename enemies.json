@@ -367,7 +367,7 @@
             "statuschance" : 1,
             "defe" : 2,
             "boostdef" : 2,
-            "targettype" : "one",
+            "targettype" : "self",
             "stre" : 0
             },
             {

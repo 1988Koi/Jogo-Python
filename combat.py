@@ -89,7 +89,12 @@ def print_bars(presentenemies, party):
 
 
 def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee=True):
-    total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
+    has_anon = any(member["eq_head"] == "Anon Sunglasses" for member in init_stats["party"])
+    if has_anon:
+        total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"] * 2
+    else:
+        total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
+    total_defense = combate["defe"] + items[combate["eq_head"]]["defen"] + items[combate["eq_accessory"]]["defen"]
     turn_taken = False
 
     while not game_over_flag[0] and not turn_taken:
@@ -144,11 +149,11 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                 if combate["class"] == "Dragon":
                     if skil["style"] == combate["style"] and skil["encounterreq"] <= combate["encounterreq"]:
                         available.append(skil)
-                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {skil['desc']}")
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {lang[language1].get(skil['desc'], skil['desc'])}")
                 else:
                     if skil["lvlreq"] <= combate["lvl"]:
                         available.append(skil)
-                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {skil['desc']}")
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {lang[language1].get(skil['desc'], skil['desc'])}")
 
             if not available:
                 print("No skills available!")
@@ -237,7 +242,6 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
             elif "defe" in chosen or chosen.get("inflict") == "Taunt":
                 if "defe" in chosen:
-                    total_defense += items[combate["eq_head"]]["defen"]
                     combate["boostdef"] += chosen["boostdef"]
                     combate["last_def_boost"] = chosen["defe"]
                     print(f"{combate['name']} got a defense boost!")
@@ -471,7 +475,7 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
             print(f"The enemy also got applied with {chosen_attack['status']}")
 
         if chosen_attack.get("statustarget") == "enemy":
-            chosen = random.choice(eatt)
+            chosen = random.choice(presentenemies)
             if chosen_attack.get("status") == "heal":
                 chosen["hp"] += chosen_attack["heal"]
 
@@ -601,8 +605,9 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
                     print("You unlocked the Dragon job!")
 
                 has_charismatic = any("Charismatic Photo" in member["eq_accessory"] for member in init_stats["party"])
+                has_anon = any(member["eq_head"] == "Anon Sunglasses" for member in init_stats["party"])
 
-                if has_charismatic:
+                if has_charismatic or has_anon:
                     init_stats["party"][0]["money"] += enemy["money"] * 2
                 else:
                     init_stats["party"][0]["money"] += enemy["money"]

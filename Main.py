@@ -6,6 +6,7 @@ import time
 from saveload import *
 from combat import *
 from classdata import statusclass, classlvlreq, Majimaencounters
+from tanban import tanban_menu
 
 def cleaning():
     subprocess.run("cls", shell=True)
@@ -439,9 +440,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("\n" + lang[language1]["lowlv"])
 
         elif mapc == "3":
-            if playerlvl >= 5:
-                cleaning()
-                combat1(init_stats, [6], enemis, lang, language1, skills, items)
+            if playerlvl >= 1:
+                tanban_menu(init_stats, lang, language1)
             else:
                 print("\n" + lang[language1]["lowlv"])
 
@@ -787,7 +787,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 for enemy_id in ["86", "87", "88", "89"]:
                     enemis[enemy_id]["hp"] = round(enemis[enemy_id]["basehp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
                     enemis[enemy_id]["maxhp"] = round(enemis[enemy_id]["basemaxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
-                    enemis[enemy_id]["defe"] = round(enemis["basedefe"] + (init_stats["party"][0]["Majima_encounter"]))
+                    enemis[enemy_id]["defe"] = round(enemis[enemy_id]["basedefe"] + (init_stats["party"][0]["Majima_encounter"]))
                     for move in enemis[enemy_id]["moveset"]: 
                         move["stre"] = round(move["basestre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
                 select_enemy_id = random.choices(majimapool, k=1)
@@ -915,7 +915,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 for enemy_id in ["86", "87", "88", "89"]:
                     enemis[enemy_id]["hp"] = round(enemis[enemy_id]["basehp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
                     enemis[enemy_id]["maxhp"] = round(enemis[enemy_id]["basemaxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
-                    enemis[enemy_id]["defe"] = round(enemis["basedefe"] + (init_stats["party"][0]["Majima_encounter"]))
+                    enemis[enemy_id]["defe"] = round(enemis[enemy_id]["basedefe"] + (init_stats["party"][0]["Majima_encounter"]))
                     for move in enemis[enemy_id]["moveset"]: 
                         move["stre"] = round(move["basestre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
                 select_enemy_id = random.choices(majimapool, k=1)
@@ -947,17 +947,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 init_stats["party"][0]["money"] += coolmonay
             elif chance >= 8 or chance <= 10:
                 print("You took the stroll.")
-        elif mapc == "test":
-            majimapool = [86, 87, 88, 89]
-            for enemy_id in ["86", "87", "88", "89"]:
-                enemis[enemy_id]["hp"] = round(enemis[enemy_id]["basehp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
-                enemis[enemy_id]["maxhp"] = round(enemis[enemy_id]["basemaxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
-                for move in enemis[enemy_id]["moveset"]: 
-                    move["stre"] = round(move["basestre"] + (init_stats["party"][0]["Majima_encounter"] * 1.10))
-            select_enemy_id = random.choices(majimapool, k=1)
-            combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
         elif mapc == "Final":
-            if init_stats["story_flags"]["Kine_defeated"] == True:
+            if init_stats["story_flags"]["Kine_Defeated"] == True:
                 print("You enter the Family Office again... \n Everything is messy and turned. \n At the patriarch chair you see someone... \n ???: We finally meet \n The Amon will destroy you!")
                 Amon = [100]
                 select_enemy_id = random.choices(Amon, k=1)

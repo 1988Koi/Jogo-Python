@@ -108,7 +108,8 @@
             "Legend",
             "Freelancer",
             "Gentleman"
-        ]
+        ],
+        "defen": 0
     },
     "Baseball hat": {
         "type": "headgear",
@@ -376,32 +377,13 @@
         "sellvalue": 25,
         "desc": "A pin bearing the Joto family crest. Best not to be seen with it."
     },
-    "Charismatic Picture": {
-        "type": "accessory",
-        "usableby": [
-            "Host",
-            "Hero",
-            "Chef",
-            "Security",
-            "Foreman",
-            "Yakuza",
-            "Breaker",
-            "Salaryman",
-            "Legend",
-            "Freelancer",
-            "Gentleman",
-            "Technician",
-            "Barman"
-        ],
-        "sellvalue": 0,
-        "desc": "People will go crazy to steal this from you."
-    },
     "Dull edged Knife": {
         "type": "weapon",
         "stren": 2,
         "desc": "Barely cuts butter.",
         "usableby": [
-            "Security"
+            "Security",
+            "Freelancer"
         ],
         "effect": [
             "slash"
@@ -424,7 +406,8 @@
         "stren": 4,
         "desc": "Looks real enough to scare someone, does no real damage.",
         "usableby": [
-            "Yakuza"
+            "Yakuza",
+            "Freelancer"
         ],
         "effect": [
             "shot"
@@ -456,7 +439,8 @@
             "Gentleman",
             "Technician",
             "Barman"
-        ]
+        ],
+        "defen": 0
     },
     "Premium Watch": {
         "type": "accessory",
@@ -476,7 +460,8 @@
             "Gentleman",
             "Technician",
             "Barman"
-        ]
+        ],
+        "defen": 0
     },
     "Checkered Suit": {
         "type": "headgear",
@@ -1010,7 +995,8 @@
             "Gentleman",
             "Technician",
             "Barman"
-        ]
+        ],
+        "defen": 0
     },
     "Four-Leaf Clover": {
         "type": "accessory",
@@ -1030,7 +1016,8 @@
             "Gentleman",
             "Technician",
             "Barman"
-        ]
+        ],
+        "defen": 0
     },
     "Worn Wedding Ring": {
         "type": "accessory",
@@ -1050,7 +1037,8 @@
             "Gentleman",
             "Technician",
             "Barman"
-        ]
+        ],
+        "defen": 0
     },
     "Loaded Dice": {
         "type": "accessory",
@@ -1070,12 +1058,37 @@
             "Gentleman",
             "Technician",
             "Barman"
-        ]
+        ],
+        "defen": 0
     },
     "Empty Wallet": {
         "type": "accessory",
         "luck": -2,
         "desc": "Somehow still on you. Bad omen.",
+        "usableby": [
+            "Host",
+            "Hero",
+            "Chef",
+            "Security",
+            "Foreman",
+            "Yakuza",
+            "Breaker",
+            "Salaryman",
+            "Legend",
+            "Freelancer",
+            "Gentleman",
+            "Technician",
+            "Barman"
+        ],
+        "defen": 0
+    },
+    "Anon Sunglasses": {
+        "type" : "headgear",
+        "luck" : 10,
+        "stren" : 100,
+        "defen" : 100,
+        "dmg_mlt" : 1.5,
+        "desc" : "Hallmark of the Anon clan",
         "usableby": [
             "Host",
             "Hero",
@@ -1111,5 +1124,10 @@
     "Crushed Pearl": {
         "type": "material",
         "desc": "Ground fine, used in luxury crafting."
+    },
+    "Charismatic Photo": {
+        "type": "junk",
+        "sellvalue": 12,
+        "desc": "People will go crazy for this."
     }
 }
