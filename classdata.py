@@ -8,7 +8,8 @@ statusclass = {
     "Hero":       {"hp": 11, "maxhp": 11, "mana": 11, "maxmana": 11, "stre": 6, "luck": 5, "speed": 7,  "defe": 3, "weakness": ["slash", "bash"], "strong" : ["shot", "stab"]},
     "Freelancer": {"hp": 15,  "maxhp": 15,  "mana": 4,  "maxmana": 4,  "stre": 4, "luck": 2, "speed": 4,  "defe": 1, "weakness": [], "strong" : []},
     "Gentleman": {"hp": 8,  "maxhp": 8,  "mana": 10,  "maxmana": 10,  "stre": 8, "luck": 3, "speed": 4,  "defe": 1, "weakness": ["bash", "fire"], "strong" : ["slash", "stab"]},
-    "Dragon": {"hp": 20,  "maxhp": 20,  "mana": 10,  "maxmana": 10,  "stre": 8, "luck": 3, "speed": 4,  "defe": 1, "weakness": ["ice"], "strong" : ["slash", "stab", "shot"]},
+    "Dragon": {"hp": 20,  "maxhp": 20,  "mana": 10,  "maxmana": 10,  "stre": 8, "luck": 3, "speed": 4,  "defe": 5, "weakness": ["ice"], "strong" : ["slash", "stab", "shot"]},
+    "Mad Dog": {"hp": 15,  "maxhp": 15,  "mana": 12,  "maxmana": 12,  "stre": 10, "luck": 3, "speed": 8,  "defe": 2, "weakness": ["fire"], "strong" : ["slash", "stab", "shot"]},
 }
 
 classlvlreq = {
@@ -26,4 +27,5 @@ classlvlreq = {
 
 Majimaencounters = {
     "Dragon" : 4,
+    "Mad Dog" : 5,
 }

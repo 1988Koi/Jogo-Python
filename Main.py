@@ -51,7 +51,8 @@ acceptedclass = {
     "7": "Hero",
     "8": "Freelancer",
     "9": "Gentleman",
-    "0" : "Dragon",
+    "10" : "Dragon",
+    "11" : "Mad Dog"
 }
 
 def apply_class_stats(character, new_class):
@@ -94,6 +95,12 @@ def byework(character, new_class, statusclass, classlvlreq, items, Majimaencount
     if character["eq_wep"] != "Fists" and character["class"] not in items[character["eq_wep"]]["usableby"]:
         print(f"Your {character['eq_wep']} can't be used as a {new_class}, switching to Fists")
         character["eq_wep"] = "Fists"
+
+    if character["class"] == "Dragon":
+        character["eq_wep"] == "Dragon Fists"
+
+    if character["class"] == "Mad Dog":
+        character["eq_wep"] == "Demon Fire Dagger"
 
     print(f"{character['name']} is now a {new_class}!")
     return True
@@ -601,17 +608,19 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("\n" + lang[language1]["lowlv"])
                 
         elif mapc == "6":
+            print("You enter Doshima's family office.")
+            print("Time to put an end to this.")
             cleared = dungeon(pool, boss, init_stats, lang, language1, skills, items, enemis)
             if cleared and not init_stats["story_flags"].get("Deisuki_Defeated"):
                 init_stats["story_flags"]["Deisuki_Defeated"] = True
                 cleaning()
-                print("You managed to defeat Malushi.")
+                print("You managed to defeat Deisuke.")
                 time.sleep(2)
-                print("You beat him down for answers. \n and he tells you how it wasn't him who shot you.")
+                print("You wait for him to recover")
                 time.sleep(2)
-                print("But before he finishes...")
+                print("He says he won't say anything.")
                 time.sleep(2)
-                print("He gets shot by a man wearing a raincoat that vanishes by jumping out of a window")
+                print("He punches your face and vanishes")
                 time.sleep(2)
                 print("You try to catch him but he is too fast.")
                 print("You contemplate what to do now...")
@@ -622,10 +631,10 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "7":
             if playerlvl >= map_data["feizhua"]["lvlreq"]:
                 cleared = dungeon(map_data["feizhua"]["enemy_pool"], map_data["feizhua"]["boss"], init_stats, lang, language1, skills, items, enemis)
-                if cleared and not init_stats["story_flags"].get("Malushi_Defeated"):
-                    init_stats["story_flags"]["Malushi_Defeated"] = True
+                if cleared and not init_stats["story_flags"].get("Akila_Defeated"):
+                    init_stats["story_flags"]["Akila_Defeated"] = True
                     cleaning()
-                    print("You managed to defeat Malushi.")
+                    print("You managed to defeat Akila.")
                     time.sleep(2)
                     print("You beat him down for answers. \n and he tells you how it wasn't him who shot you.")
                     time.sleep(2)
@@ -783,7 +792,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             select_enemy_id = random.choices(testpool, k=num_enemies)
             combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
             chancemaima = random.randint(1, 10)
-            if chancemaima > 1:
+            if chancemaima == 1:
                 for enemy_id in ["86", "87", "88", "89"]:
                     enemis[enemy_id]["hp"] = round(enemis[enemy_id]["basehp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
                     enemis[enemy_id]["maxhp"] = round(enemis[enemy_id]["basemaxhp"] + (init_stats["party"][0]["Majima_encounter"] * 1.15))
@@ -936,11 +945,11 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                         else:
                             player_inv[item_name] = 1
                         break
-            elif chance >= 3 or chance <= 4:
+            elif chance >= 3 or chance <= 5:
                 print("You got jumped!")
                 select_enemy_id = random.choices(jumppool, k=1)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
-            elif chance >= 5 or chance <= 8:
+            elif chance >= 6 or chance <= 7:
                 print("You found some money laying around")
                 monay = random.randint(1, 10)
                 coolmonay = monay + (init_stats["party"][0]["lvl"] * 1.5)
@@ -948,7 +957,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             elif chance >= 8 or chance <= 10:
                 print("You took the stroll.")
         elif mapc == "Final":
-            if init_stats["story_flags"]["Kine_Defeated"] == True:
+            if init_stats["story_flags"]["Kine_Defeated"] == True and mission2Complete == True:
                 print("You enter the Family Office again... \n Everything is messy and turned. \n At the patriarch chair you see someone... \n ???: We finally meet \n The Amon will destroy you!")
                 Amon = [100]
                 select_enemy_id = random.choices(Amon, k=1)

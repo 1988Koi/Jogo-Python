@@ -929,6 +929,22 @@
             "Technician"
         ]
     },
+    "Demon Fire Dagger": {
+        "type": "weapon",
+        "stren": 200,
+        "desc": "Dagger.",
+        "usableby": [
+            "Mad Dog"
+        ]
+    },
+    "Dragon Fists": {
+        "type": "weapon",
+        "stren": 200,
+        "desc": "Fists.",
+        "usableby": [
+            "Dragon"
+        ]
+    },
     "Convenience Store Onigiri": {
         "type": "heal",
         "value": 8,
@@ -1126,8 +1142,8 @@
         "desc": "Ground fine, used in luxury crafting."
     },
     "Charismatic Photo": {
-        "type": "junk",
-        "sellvalue": 12,
+        "type": "accessory",
+        "sellvalue": 0,
         "desc": "People will go crazy for this."
     }
 }

@@ -788,7 +788,7 @@
         ],
         "possibledrop" : [
             {
-                "itemid" : "Ammo",
+                "itemid" : "Bloody Knife",
                 "chance" : 1
             }
         ]
@@ -796,8 +796,8 @@
     "62": {
         "name" : "Low Tier Mobster",
         "eid" : 62,
-        "hp" : 10,
-        "maxhp" : 10,
+        "hp" : 40,
+        "maxhp" : 40,
         "lvl" : 48,
         "xpdrop" : 60,
         "isboss" : false,
@@ -855,7 +855,7 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "2Bottle",
+            "itemid" : "Ammo",
             "chance" : 0.20
             }
         ]
@@ -863,9 +863,9 @@
     "63": {
         "name" : "Mid tier Mobster",
         "eid" : 63,
-        "hp" : 10,
-        "maxhp" : 10,
-        "lvl" : 2,
+        "hp" : 50,
+        "maxhp" : 50,
+        "lvl" : 67,
         "xpdrop" : 60,
         "isboss" : false,
         "speed" : 10,
@@ -922,7 +922,74 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "2Bottle",
+            "itemid" : "Batted Hat",
+            "chance" : 0.20
+            }
+        ]
+    },
+    "64": {
+        "name" : "Elite Mobster",
+        "eid" : 64,
+        "hp" : 10,
+        "maxhp" : 10,
+        "lvl" : 70,
+        "xpdrop" : 100,
+        "isboss" : false,
+        "speed" : 10,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["bash"], 
+        "strong" : ["shot", "slash", "stab"],
+        "moveset" : [
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "all",
+            "effect" : ["bash"],
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 10,
+            "boostdef" : 10,
+            "targettype" : "all",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Grapple attack",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 40
+            },
+            {
+            "nameskill" : "Two Combo",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 35
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Angelo's Fedora",
             "chance" : 0.20
             }
         ]
@@ -1060,7 +1127,7 @@
             "status" : "Nothing",
             "statuschance" : 1,
             "statustarget" : "one",
-            "targettype" : "all",
+            "targettype" : "one",
             "basestre" : 10,
             "stre" : 10
             }
@@ -1093,7 +1160,7 @@
         "scaling" : 1.25,
         "moveset" : [
             {
-            "nameskill" : "Batting Out",
+            "nameskill" : "Full Swing",
             "chance" : 0.25,
             "status" : "Stun",
             "statuschance" : 0.50,
@@ -1277,7 +1344,7 @@
     },
     "91" : {
         "name" : "Scarred Yakuza",
-        "eid" : 95,
+        "eid" : 91,
         "hp" : 200,
         "maxhp" : 200,
         "lvl" : 30,
@@ -1341,6 +1408,76 @@
         "possibledrop" : [
             {
                 "itemid" : "Katana",
+                "chance" : 1
+            }
+        ]
+    },
+    "92" : {
+        "name" : "Talumi Somna",
+        "eid" : 92,
+        "hp" : 300,
+        "maxhp" : 300,
+        "lvl" : 50,
+        "xpdrop" : 400,
+        "isboss" : true,
+        "speed" : 7,
+        "defe" : 50,
+        "money" : 500,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "AttackUp" : 0,
+        "taunt_turns": 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["slash", "stab"], 
+        "strong" : ["ice", "shot"],
+        "moveset" : [
+            {
+            "nameskill" : "Katana Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "statuschance" : 1,
+            "bleeddmg": 3,
+            "bleedturns" : 5,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 49
+            },
+            {
+            "nameskill" : "Katana Hit",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 45
+            },
+            {
+            "nameskill" : "Weapon Backside",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0.75,
+            "effect" : ["slash"],
+            "targettype" : "one",
+            "stre" : 40
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 20,
+            "boostdef" : 3,
+            "statustarget" : "self",
+            "targettype" : "self",
+            "stre" : 0
+            }
+        ],
+        "possibledrop" : [
+            {
+                "itemid" : "Somna's Katana",
                 "chance" : 1
             }
         ]
@@ -1431,7 +1568,7 @@
         ]
     },
     "97" : {
-        "name" : "Akila Maluchi",
+        "name" : "Akila Nilikiyama",
         "eid" : 97,
         "hp" : 750,
         "maxhp" : 750,
@@ -1453,18 +1590,18 @@
         "strong" : ["slash", "stab"],
         "moveset" : [
             {
-            "nameskill" : "Petal Blossom Kick",
+            "nameskill" : "Knee Strike-Roundhouse Kick-Mountain Punch Combo",
             "chance" : 0.25,
             "status" : "Bleed",
             "statuschance" : 1,
             "bleeddmg": 3,
             "bleedturns" : 5,
             "targettype" : "one",
-            "effect" : ["slash"],
+            "effect" : ["Bash"],
             "stre" : 15
             },
             {
-            "nameskill" : "Crismon Aura",
+            "nameskill" : "Heat Mode",
             "chance" : 0.10,
             "status" : "AttackUp",
             "AttackUp" : 10,
@@ -1483,7 +1620,7 @@
             "stre" : 30
             },
             {
-            "nameskill" : "Dragon Breaker",
+            "nameskill" : "Rush Uppercut",
             "chance" : 0.15,
             "status" : "Bleed",
             "bleeddmg": 2,
@@ -1494,7 +1631,7 @@
             "stre" : 20
             },
             {
-            "nameskill" : "Divine Dragon Breaker",
+            "nameskill" : "Essence of Wreckage",
             "chance" : 0.10,
             "status" : "Stun",
             "statuschance" : 0.90,

@@ -101,6 +101,9 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
         if combate["class"] == "Dragon":
             print("\n" + lang[language1]["combat1"])
             playerturn = input("> ").strip().lower()
+        elif combate["class"] == "Mad Dog":
+            print("\n" + lang[language1]["combat2"])
+            playerturn = input("> ").strip().lower()
         else:
             print("\n" + lang[language1]["combat"])
             playerturn = input("> ").strip().lower()
@@ -147,6 +150,10 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
             for skil in class_skills:
                 if combate["class"] == "Dragon":
+                    if skil["style"] == combate["style"] and skil["encounterreq"] <= combate["encounterreq"]:
+                        available.append(skil)
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {lang[language1].get(skil['desc'], skil['desc'])}")
+                elif combate["class"] == "Mad Dog":
                     if skil["style"] == combate["style"] and skil["encounterreq"] <= combate["encounterreq"]:
                         available.append(skil)
                         print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {lang[language1].get(skil['desc'], skil['desc'])}")
@@ -360,7 +367,7 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                 print(f"{combate['name']} tried to run, but couldn't get away!")
                 turn_taken = True
 
-        elif playerturn == "5" and combate["class"] == "Dragon":
+        elif playerturn == "5" and combate["class"] == "Dragon" or combate["class"] == "Mad Dog":
             styles = combate["allstyles"]
             pos = styles.index(combate["style"])
             print("Type a and d to cycle between styles")
@@ -603,6 +610,9 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
                 if main["Majima_encounter"] >= required and "Dragon" not in main["unlocked_classes"]:
                     main["unlocked_classes"].append("Dragon")
                     print("You unlocked the Dragon job!")
+                if main["Majima_encounters"] >= required and "Mad Dog" not in main["unlocked_classes"]:
+                    main["unlocked_classes"].append("Mad Dog")
+                    print("You unlocked the Mad Dog job!")
 
                 has_charismatic = any("Charismatic Photo" in member["eq_accessory"] for member in init_stats["party"])
                 has_anon = any(member["eq_head"] == "Anon Sunglasses" for member in init_stats["party"])
@@ -652,6 +662,8 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
                 if i.get("is_main_character"):
                     for cls, req in classlvlreq.items():
                         if cls == "Dragon":
+                            continue
+                        if cls == "Mad Dog":
                             continue
                         if i["lvl"] >= req and cls not in i["unlocked_classes"]:
                             i["unlocked_classes"].append(cls)
