@@ -624,6 +624,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 time.sleep(2)
                 print("You try to catch him but he is too fast.")
                 print("You contemplate what to do now...")
+                print("Maybe I can ask around?")
                 time.sleep(1)
                 print("Chapter 3: By the books")
                 time.sleep(3)
@@ -643,7 +644,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     print("He gets shot by a man wearing a raincoat that vanishes by jumping out of a window")
                     time.sleep(2)
                     print("You try to catch him but he is too fast.")
-                    print("You contemplate what to do now...")
+                    print("You contemplate what to do now... and why people keep running and why you are so slow...")
                     time.sleep(1)
                     print("Chapter 4: Dead man's gamble")
                     time.sleep(3)
@@ -680,24 +681,41 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "9":
             if playerlvl >= map_data["fuxi_donzen"]["lvlreq"]:
-                print("You climb the hospital. \n You see Kina standing at the rooftop \n He looks at you... \n Without even a word he lunges at you...")
-                time.sleep(3)
-                cleared = dungeon(map_data["fuxi_donzen"]["enemy_pool"], map_data["fuxi_donzen"]["boss"], init_stats, lang, language1, skills, items, enemis)
-                if cleared and not init_stats["story_flags"].get("Kine_Defeated"):
-                    init_stats["story_flags"]["Kine_defeated"] = True
-                    cleaning()
-                    print("You finally took down Kine.")
-                    time.sleep(2)
-                    print("You begin to repeatedly beat him down. \n He tells you that he doesn't regret anything he did.")
-                    time.sleep(2)
-                    print("You finally deliver the finishing blow")
-                    time.sleep(2)
-                    print("You grab one of your cigars and smoke peacefully for the first time in weeks.")
-                    time.sleep(2)
-                    print("I can do anything, I can go anywhere.")
-                    time.sleep(1)
-                    print("Game end - Thanks for playing.")
+                print("Warning, this next fight is EXTREMELY hard and there's NO save. This is the final long fight, I recomend you grinding more.")
+                print("Do you really want to continue?")
+                print("Type yes or no")
+                ok = input("> ").strip()
+                if ok == "yes" or ok == "y":
+                    print("You climb the hospital. A lot of Kine's goons surround you.")
+                    clearedstep1 = dungeon(map_data["fuxi_donzen"]["enemy_pool"], map_data["fuxi_donzen"]["boss"], init_stats, lang, language1, skills, items, enemis)
+                    if clearedstep1 and not init_stats["story_flags"].get("Richardson_Defeated"):
+                        print("You see a man wearing sunglasses and a suit")
+                        print("He turns to you and says")
+                        print("If you are looking for Kine, he is up on the ruff")
+                        time.sleep(3)
+                        print("...He starts trying to beat you.")
+                        combat1(init_stats, [pool[89]], enemis, lang, language1, skills, items, can_flee=False)
                     time.sleep(3)
+                    cleared = dungeon(map_data["fuxi_donzen"]["enemy_pool"], map_data["fuxi_donzen"]["boss"], init_stats, lang, language1, skills, items, enemis)
+                    if cleared and not init_stats["story_flags"].get("Kine_Defeated"):
+                        init_stats["story_flags"]["Kine_defeated"] = True
+                        cleaning()
+                        print("You finally took down Kine.")
+                        time.sleep(2)
+                        print("You begin to repeatedly beat him down. \n He tells you that he doesn't regret anything he did.")
+                        time.sleep(2)
+                        print("You finally deliver the finishing blow")
+                        time.sleep(2)
+                        print("You grab one of your cigars and smoke peacefully for the first time in weeks.")
+                        time.sleep(2)
+                        print("I can do anything, I can go anywhere.")
+                        time.sleep(1)
+                        print("Game end - Thanks for playing.")
+                        print("Althought, it's not over! After completing all 5 quests you can type final on the menu to go to the true final boss... Good luck!")
+                        time.sleep(3)
+                else:
+                    print("Understood")
+                    continue
             else:
                 print("\n" + lang[language1]["lowlv"])
 

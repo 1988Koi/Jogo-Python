@@ -1483,6 +1483,72 @@
         ]
     },
     "commentsb" : "Story bosses",
+    "95" : {
+        "name" : "Andrew Harrison",
+        "eid" : 92,
+        "hp" : 300,
+        "maxhp" : 300,
+        "lvl" : 50,
+        "xpdrop" : 400,
+        "isboss" : true,
+        "speed" : 7,
+        "defe" : 50,
+        "money" : 500,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "AttackUp" : 0,
+        "taunt_turns": 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["slash", "stab"], 
+        "strong" : ["ice", "shot"],
+        "moveset" : [
+            {
+            "nameskill" : "Four Kick Combo",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 1,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 49
+            },
+            {
+            "nameskill" : "Kick Shot",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 45
+            },
+            {
+            "nameskill" : "Pistol Salvo",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0.75,
+            "effect" : ["shot"],
+            "targettype" : "all",
+            "stre" : 40
+            },
+            {
+            "nameskill" : "Shotgun Blast",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 1,
+            "effect" : ["shot"],
+            "targettype" : "all",
+            "stre" : 50
+            }
+        ],
+        "possibledrop" : [
+            {
+                "itemid" : "Richardson Glasses",
+                "chance" : 1
+            }
+        ]
+    },
     "96" : {
         "name" : "Deisuki Kezu",
         "eid" : 96,

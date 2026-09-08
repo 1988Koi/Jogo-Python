@@ -33,7 +33,7 @@
         "name": "Fuxi Donzen",
         "lvlreq": 20,
         "enemy_pool": [12, 13, 14],
-        "boss": 99
+        "boss": null
     },
     "sewer": {
         "name": "Sewers",
