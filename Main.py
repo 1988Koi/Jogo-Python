@@ -233,11 +233,20 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
     mission1Complete = False
     mission2started = False
     mission2Complete = False
+    mission3started = False
+    mission3Complete = False
+    mission4started = False
+    mission4Complete = False
+    mission5started = False
+    mission5Complete = False
     in_here = True
 
     while in_here:
         playerlvl = init_stats["party"][0]["lvl"]
-        print("\n" + lang[language1]["map1"])
+        if mission5Complete == "complete" and init_stats["story_flags"]["Kine_defeated"] == True:
+            print("\n" + lang[language1]["map2"])
+        else:
+            print("\n" + lang[language1]["map1"])
         mapc = input("> ").strip()
 
         if mapc == "0":
