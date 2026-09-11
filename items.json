@@ -468,16 +468,15 @@
         "defen": 6,
         "desc": "Loud, but the padding helps.",
         "usableby": [
-            "Salaryman",
-            "Freelancer"
+            "Gentleman"
         ]
     },
     "Renoir's Suit": {
         "type": "headgear",
         "defen": 10,
-        "desc": "Renoir's own suit, kept pristine.",
+        "desc": "Belonged to a painter, is covered in yellow petals for some reason.",
         "usableby": [
-            "Freelancer"
+            "Gentleman"
         ]
     },
     "Dusty Shot Glass": {
