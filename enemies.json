@@ -2205,7 +2205,7 @@
         ],
         "phase2_threshold": 0.75,
         "phase2_triggered": false,
-        "phase2_text": "Sanjo Anon cracks his neck. \"The mob taught me a few things too.\"",
+        "phase2_text": "Sanjo's grab some weapons.",
         "moveset2": [
             {
                 "nameskill": "Gun Mobster's Shoot",
