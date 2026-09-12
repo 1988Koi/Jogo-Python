@@ -240,14 +240,24 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
     mission5started = False
     mission5Complete = False
     in_here = True
+    maptsk3 = False
 
     while in_here:
         playerlvl = init_stats["party"][0]["lvl"]
-        if mission5Complete == "complete" and init_stats["story_flags"]["Kine_defeated"] == True:
+        if mission5Complete == True and init_stats["story_flags"]["Kine_defeated"] == True:
             print("\n" + lang[language1]["map2"])
+        elif mission3started == True:
+            print("\n") + lang[language1]["maptsk3"]
+            maptsk3 = True
         else:
             print("\n" + lang[language1]["map1"])
         mapc = input("> ").strip()
+
+        if mapc == "M" and maptsk3 == True:
+            print("What the hell am I doing in a wacky house?")
+            print("Oh well... better to... Enjoy it... I guess...?")
+            print("Substory 3: Wacky Places")
+            time.sleep(2)
 
         if mapc == "0":
             save(init_stats)
