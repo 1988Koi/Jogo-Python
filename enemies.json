@@ -458,14 +458,12 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "Charismatic Photo",
-            "chance" : 1
             }
         ]
     },
         "10": {
         "name" : "Low tier Fighter",
-        "eid" : 7,
+        "eid" : 10,
         "hp" : 10,
         "maxhp" : 10,
         "lvl" : 2,
@@ -486,7 +484,7 @@
         "strong" : ["ice"],
         "moveset" : [
             {
-            "nameskill" : "Bottle Smash",
+            "nameskill" : "Weak One Two",
             "chance" : 0.25,
             "status" : "Nothing",
             "statuschance" : 0,
@@ -495,7 +493,7 @@
             "stre" : 3
             },
             {
-            "nameskill" : "Pose up",
+            "nameskill" : "Weak Block",
             "chance" : 0.25,
             "status" : "Defenseup",
             "statuschance" : 1,
@@ -505,16 +503,16 @@
             "stre" : 0
             },
             {
-            "nameskill" : "Cork Pop",
+            "nameskill" : "Clumsy Hook",
             "chance" : 0.25,
             "status" : "Nothing",
             "statuschance" : 0,
             "targettype" : "one",
-            "effect" : ["ice"],
+            "effect" : ["bash"],
             "stre" : 5
             },
             {
-            "nameskill" : "Shard Slash",
+            "nameskill" : "Cheating Punch",
             "chance" : 0.25,
             "status" : "Bleed",
             "bleeddmg": 2,
@@ -527,14 +525,12 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "Charismatic Photo",
-            "chance" : 1
             }
         ]
     },
     "11": {
         "name" : "Bar Brawler",
-        "eid" : 7,
+        "eid" : 11,
         "hp" : 35,
         "maxhp" : 35,
         "lvl" : 2,
@@ -603,7 +599,7 @@
     },
     "12": {
         "name" : "Shady Host",
-        "eid" : 7,
+        "eid" : 12,
         "hp" : 70,
         "maxhp" : 70,
         "lvl" : 15,
@@ -664,6 +660,270 @@
         "possibledrop" : [
             {
             "itemid" : "Chilled Bottle",
+            "chance" : 1
+            }
+        ]
+    },
+        "13": {
+        "name" : "Con artist",
+        "eid" : 13,
+        "hp" : 90,
+        "maxhp" : 90,
+        "lvl" : 25,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 4,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Stunning Kick",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 40
+            },
+            {
+            "nameskill" : "Clipboard Cover",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 6,
+            "boostdef" : 6,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.4,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Insurrance Fraud",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["Bash"],
+            "stre" : 35
+            }
+        ],
+        "possibledrop" : [
+            {
+            }
+        ]
+    },
+    "14": {
+        "name" : "Meathead",
+        "eid" : 14,
+        "hp" : 120,
+        "maxhp" : 120,
+        "lvl" : 30,
+        "xpdrop" : 100,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["stab", "shot"], 
+        "strong" : ["bash"],
+        "moveset" : [
+            {
+            "nameskill" : "One Two",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 26
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 20,
+            "boostdef" : 6,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Left Hook",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.4,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 30
+            },
+            {
+            "nameskill" : "Rock Breake",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["Bash"],
+            "stre" : 40
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Dirty brass knuckles",
+            "chance" : 1
+            }
+        ]
+    },
+    "15": {
+        "name" : "Con artist",
+        "eid" : 15,
+        "hp" : 120,
+        "maxhp" : 120,
+        "lvl" : 30,
+        "xpdrop" : 60,
+        "isboss" : false,
+        "speed" : 4,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Stunning Kick",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 45
+            },
+            {
+            "nameskill" : "Clipboard Cover",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 6,
+            "boostdef" : 6,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Punch",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.4,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 35
+            },
+            {
+            "nameskill" : "Insurrance Fraud",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["Bash"],
+            "stre" : 40
+            }
+        ],
+        "possibledrop" : [
+            {
+            }
+        ]
+    },
+    "16": {
+        "name" : "Meathead",
+        "eid" : 16,
+        "hp" : 160,
+        "maxhp" : 160,
+        "lvl" : 30,
+        "xpdrop" : 100,
+        "isboss" : false,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["stab", "shot"], 
+        "strong" : ["bash"],
+        "moveset" : [
+            {
+            "nameskill" : "One Two",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 35
+            },
+            {
+            "nameskill" : "Block",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 40,
+            "boostdef" : 6,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Left Hook",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.4,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 40
+            },
+            {
+            "nameskill" : "Rock Breaker",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["Bash"],
+            "stre" : 50
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Polished brass knuckles",
             "chance" : 1
             }
         ]

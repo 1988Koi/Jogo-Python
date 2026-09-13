@@ -229,6 +229,8 @@ def tutorial_map(init_stats, lang, language1, map_data):
 def someicho_map(init_stats, lang, language1, map_data, playerOV):
     pool = map_data["someicho"]["enemy_pool"]
     boss = map_data["someicho"]["boss"]
+    in_here = True
+    maptsk3 = False
     mission1Started = False
     mission1Complete = False
     mission2started = False
@@ -239,25 +241,51 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
     mission4Complete = False
     mission5started = False
     mission5Complete = False
-    in_here = True
-    maptsk3 = False
 
     while in_here:
+        if init_stats["party"][0]["lvl"] >= 25:
+            print("Huh... the circus is in town... I kinda want to check it out...")
+            print("\n") + lang[language1]["maptsk3"]
+            mission3started = True
         playerlvl = init_stats["party"][0]["lvl"]
         if mission5Complete == True and init_stats["story_flags"]["Kine_defeated"] == True:
             print("\n" + lang[language1]["map2"])
-        elif mission3started == True:
-            print("\n") + lang[language1]["maptsk3"]
-            maptsk3 = True
         else:
             print("\n" + lang[language1]["map1"])
         mapc = input("> ").strip()
 
-        if mapc == "M" and maptsk3 == True:
+        if mapc == "M" and mission3started == True:
             print("What the hell am I doing in a wacky house?")
             print("Oh well... better to... Enjoy it... I guess...?")
             print("Substory 3: Wacky Places")
             time.sleep(2)
+            print("As you are walking around you hear a man shouting \n as you turn you see 3 cups \n you approach him and he explains that he will give you 100 bucks for you to guess where he hid the ball")
+            print("But you have to pay 100 bucks first")
+            print("You paid without thinking, saying to yourself, heh, free money.")
+            print("Where do you think the ball is?")
+            print("Cup 1, 2 or 3?")
+            ball = True
+            while ball:
+                chosenball = input("> ").strip()
+                if chosenball == "1" or "2" or "3":
+                    print("He lifts the cup and...")
+                    time.sleep(2)
+                    print("Nothing.")
+                    print("He pulls a 4th cup from under the table and shows you \n saying that he never said that the ball was in a cup")
+                    print("You begin to say how this  is cheating, but before you can finish 2 people close in on you, saying that if you are unhappy with the results they are more than willing to settle the 'fee'.")
+                    time.sleep(5)
+                    wackpool = ["14", "13", "14"]
+                    select_enemy_id = random.choices(wackpool, k=3)
+                    combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                    print("after you took him down, he says \n Hey sorry man, I'll stop, alright? Here's your money back... \n You press on him and he says \n fine. fine. Here.")
+                    print("You got 200 bucks!")
+                    init_stats["party"][0]["money"] += 200
+                    print("Substory 3: Wacky Places finished!")
+                    time.sleep(5)
+                    mission3Complete = True
+                    ball = False
+        else:
+            continue
 
         if mapc == "0":
             save(init_stats)
@@ -355,6 +383,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                         select_enemy_id = random.choices(barpool, k=1)
                         combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
                         init_stats["party"][0]["money"] += 10
+                        mission1Complete = True
                     elif choice1 == "no" or choice1 == "n":
                         print("You decide to ignore him for the time being.")
                         print("Will you eat here or will it be to go?")
@@ -950,9 +979,16 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 byework(playerOV, unlocked[int(choice) - 1], statusclass, classlvlreq, items, Majimaencounters)
             else:
                 print("Invalid choice!")
-
         elif mapc == "s":
             print("You decide to take a stroll around town.")
+            if mission3Complete == True:
+                mission4started = True
+                print("You take a stroll around town, when three guys shout over you. \n HEY, YES, YOU!")
+                print("Remember us? Yeah, whatever, just fork us the cash.")
+                beatpool = ["15", "16", "16"]
+                select_enemy_id = random.choices(majimapool, k=3)
+                combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                mission4Complete = True
             chance = random.randint(1, 10)
             print(f"roll: {chance}")
             jumppool = [4, 5, 6, 7, 8]
