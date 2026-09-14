@@ -230,7 +230,6 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
     pool = map_data["someicho"]["enemy_pool"]
     boss = map_data["someicho"]["boss"]
     in_here = True
-    maptsk3 = False
     mission1Started = False
     mission1Complete = False
     mission2started = False
@@ -267,6 +266,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             ball = True
             while ball:
                 chosenball = input("> ").strip()
+                ball = False
                 if chosenball == "1" or "2" or "3":
                     print("He lifts the cup and...")
                     time.sleep(2)
@@ -283,8 +283,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     print("Substory 3: Wacky Places finished!")
                     time.sleep(5)
                     mission3Complete = True
-                    ball = False
         else:
+            print("Not a cup.")
             continue
 
         if mapc == "0":
