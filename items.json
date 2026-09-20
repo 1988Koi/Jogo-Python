@@ -173,6 +173,63 @@
             "Gentleman"
         ]
     },
+    "Dirty brass knuckles": {
+        "type": "weapon",
+        "stren": "25",
+        "desc": "Very dirty.",
+        "usableby": [
+            "Yakuza"
+        ]
+    },
+    "Chilled Bottle": {
+        "type": "weapon",
+        "stren": "30",
+        "desc": "Chilled to perfection.",
+        "effect" : ["ice"],
+        "usableby": [
+            "Host"
+        ]
+    },
+    "Billard Stick": {
+        "type": "weapon",
+        "stren": "20",
+        "desc": "Simple billard stick.",
+        "effect" : ["bash"],
+        "usableby": [
+            "Yakuza"
+        ]
+    },
+    "Tommy Gun": {
+        "type": "weapon",
+        "stren": "60",
+        "desc": "A old gun.",
+        "effect" : ["shot"],
+        "usableby": [
+            "Gentleman"
+        ]
+    },
+    "Bloody Knife": {
+        "type": "weapon",
+        "stren": "60",
+        "desc": "A old gun.",
+        "effect" : ["stab"],
+        "usableby": [
+            "Yakuza"
+        ]
+    },
+    "Polished brass knuckles": {
+        "type": "weapon",
+        "stren": "40",
+        "desc": "Polished brass knuckles.",
+        "effect" : ["bash"],
+        "usableby": [
+            "Yakuza"
+        ]
+    },
+    "Juggling ball": {
+        "type": "junk",
+        "sellvalue": "20"
+    },
     "Mall katana": {
         "type": "weapon",
         "stren": 10,
