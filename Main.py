@@ -242,11 +242,11 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
     mission5Complete = False
 
     while in_here:
+        playerlvl = init_stats["party"][0]["lvl"]
         if init_stats["party"][0]["lvl"] >= 25:
             print("Huh... the circus is in town... I kinda want to check it out...")
             print("\n") + lang[language1]["maptsk3"]
             mission3started = True
-        playerlvl = init_stats["party"][0]["lvl"]
         if mission5Complete == True and init_stats["story_flags"]["Kine_defeated"] == True:
             print("\n" + lang[language1]["map2"])
         else:
@@ -271,8 +271,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     print("He lifts the cup and...")
                     time.sleep(2)
                     print("Nothing.")
-                    print("He pulls a 4th cup from under the table and shows you \n saying that he never said that the ball was in a cup")
-                    print("You begin to say how this  is cheating, but before you can finish 2 people close in on you, saying that if you are unhappy with the results they are more than willing to settle the 'fee'.")
+                    print("He pulls a 4th cup from under the table and shows it to you \n He then says that he never said that the ball was on the table")
+                    print("You begin to say how this is cheating, but before you can finish 2 people close in on you, saying that if you are unhappy with the results they are more than willing to settle the 'fee'.")
                     time.sleep(5)
                     wackpool = ["14", "13", "14"]
                     select_enemy_id = random.choices(wackpool, k=3)
