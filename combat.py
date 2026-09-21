@@ -2,9 +2,10 @@ import json
 import random
 import subprocess
 from saveload import *
+from classdata import classlvlreq, Majimaencounters
 
 def cleaning():
-    subprocess.run("cls", shell=True)
+    subprocess.run("cls" if subprocess.os.name == "nt" else "clear", shell=True)
 
 with open("items.json", "r", encoding="utf-8") as thingamajing:
     items = json.load(thingamajing)
@@ -52,33 +53,60 @@ def get_mult(attack_type, target):
     return 1.0
 
 def print_bars(presentenemies, party):
+
     for enemy in presentenemies:
+        color = "\033[91m"
+        phrase = ""
+        if enemy.get("phase4_triggered"):
+            color = "\033[94m"
+            phrase = enemy.get("phase4_text")
+        elif enemy.get("phase3_triggered"):
+            phrase = enemy.get("phase3_text")
+            color = "\033[91m"
+        elif enemy.get("phase2_triggered"):
+            color = "\033[93m"
+            phrase = enemy.get("phase2_text")
+
         current_hp = max(0, enemy["hp"])
         enemyhpmax = max(0, min(10, (10 * current_hp) // enemy["maxhp"]))
         enemyhpmin = 10 - enemyhpmax
-        print(f"{enemy['name']}:  [\033[91m{'█' * enemyhpmax}\033[0m{'░' * enemyhpmin}] {current_hp} / {enemy['maxhp']}")
+
+        print(f"{enemy['name']}:"f"[{color}{'█' * enemyhpmax}\033[0m{'░' * enemyhpmin}]"f"{current_hp} / {enemy['maxhp']}")
+        print(f"{phrase}")
 
     for member in party:
         current_hp = max(0, member["hp"])
         hpbarmax = max(0, min(10, (current_hp * 10) // member["maxhp"]))
         hpbarmin = 10 - hpbarmax
-        print(f"{member['name']}:[\033[92m{'█' * hpbarmax}\033[0m{'░' * hpbarmin}] {current_hp} / {member['maxhp']}")
+
+        print(f"{member['name']}:"f"[\033[92m{'█' * hpbarmax}\033[0m{'░' * hpbarmin}]"f"{current_hp} / {member['maxhp']}")
 
         current_mana = max(0, member["mana"])
         manabarmax = max(0, min(10, (current_mana * 10) // member["maxmana"]))
         manabarmin = 10 - manabarmax
-        print(f"{member['name']}: [\033[95m{'█' * manabarmax}\033[0m{'░' * manabarmin}] {current_mana} / {member['maxmana']}")
+
+        print(f"{member['name']}:"f"[\033[95m{'█' * manabarmax}\033[0m{'░' * manabarmin}] "f"{current_mana} / {member['maxmana']}")
 
 
 def player_turn(combate, presentenemies, init_stats, lang, language1, skills, items, game_over_flag, fled_flag, can_flee=True):
-
-    total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
-    total_defense = combate["defe"] + items[combate["eq_head"]]["defen"]
+    has_anon = any(member["eq_head"] == "Anon Sunglasses" for member in init_stats["party"])
+    if has_anon:
+        total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"] * 2
+    else:
+        total_damage = combate["stre"] + items[combate["eq_wep"]]["stren"]
+    total_defense = combate["defe"] + items[combate["eq_head"]]["defen"] + items[combate["eq_accessory"]]["defen"]
     turn_taken = False
 
     while not game_over_flag[0] and not turn_taken:
-        print("\n" + lang[language1]["combat"])
-        playerturn = input("> ").strip().lower()
+        if combate["class"] == "Dragon":
+            print("\n" + lang[language1]["combat1"])
+            playerturn = input("> ").strip().lower()
+        elif combate["class"] == "Mad Dog":
+            print("\n" + lang[language1]["combat2"])
+            playerturn = input("> ").strip().lower()
+        else:
+            print("\n" + lang[language1]["combat"])
+            playerturn = input("> ").strip().lower()
 
         if playerturn == "1":
             print("\n" + lang[language1]["attack"])
@@ -100,15 +128,13 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                         weapon_type = items[combate["eq_wep"]].get("dmgtype")
                         mult = get_mult(weapon_type, presentenemies[target_index])
                         effective_dmg = total_damage * mult
-                        total = round(effective_dmg)
-                        if total <= (presentenemies[target_index]['defe'] / 2):
-                            print(f"{presentenemies[target_index]['name']} managed to resist {combate['name']} attack!")
-                        else:
-                            presentenemies[target_index]["hp"] -= total
-                            combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
-                            print(f"Hit! {presentenemies[target_index]['name']} takes {total} damage.")
-                            print("And you got +5 mana!")
-                            turn_taken = True
+                        defe = presentenemies[target_index]['defe']
+                        total = round(effective_dmg) + defe
+                        presentenemies[target_index]["hp"] -= total
+                        combate["mana"] = min(combate["maxmana"], combate["mana"] + 5)
+                        print(f"Hit! {presentenemies[target_index]['name']} takes {total} damage.")
+                        print("And you got +5 mana!")
+                        turn_taken = True
                 else:
                     print("Invalid number!")
             else:
@@ -116,14 +142,25 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
         elif playerturn == "2":
             print("\n" + lang[language1]["attack"])
+
             current = combate["class"].lower()
             class_skills = skills[current]
             available = []
+            currentstyle = "brawler"
 
             for skil in class_skills:
-                if skil["lvlreq"] <= combate["lvl"]:
-                    available.append(skil)
-                    print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {skil['desc']}")
+                if combate["class"] == "Dragon":
+                    if skil["style"] == combate["style"] and skil["encounterreq"] <= combate["encounterreq"]:
+                        available.append(skil)
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {lang[language1].get(skil['desc'], skil['desc'])}")
+                elif combate["class"] == "Mad Dog":
+                    if skil["style"] == combate["style"] and skil["encounterreq"] <= combate["encounterreq"]:
+                        available.append(skil)
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {lang[language1].get(skil['desc'], skil['desc'])}")
+                else:
+                    if skil["lvlreq"] <= combate["lvl"]:
+                        available.append(skil)
+                        print(f"{len(available)}: {skil['name']}, cost: {skil['cost']} Description: {lang[language1].get(skil['desc'], skil['desc'])}")
 
             if not available:
                 print("No skills available!")
@@ -180,6 +217,7 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                     print(chosen["message"])
                 else:
                     print(f"{init_stats['name']} used {chosen['nameskill']} is getting pumped up!")
+                turn_taken = True
 
             elif "healing" in chosen:
                 for i, ally in enumerate(init_stats["party"]):
@@ -211,7 +249,6 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
 
             elif "defe" in chosen or chosen.get("inflict") == "Taunt":
                 if "defe" in chosen:
-                    total_defense += items[combate["eq_head"]]["defen"]
                     combate["boostdef"] += chosen["boostdef"]
                     combate["last_def_boost"] = chosen["defe"]
                     print(f"{combate['name']} got a defense boost!")
@@ -240,15 +277,14 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                             else:
                                 mult = get_mult(chosen.get("type", []), presentenemies[target_index])
                                 total = round(total_damage * mult)
+                                defense = presentenemies[target_index]["defe"]
                                 damage = round(total * chosen["dmgmlt"])
-                                if damage <= (presentenemies[target_index]["defe"] / 2):
-                                    print(f"{presentenemies[target_index]['name']} managed to resist {combate['name']} attack!")
-                                else:
-                                    presentenemies[target_index]["hp"] -= damage
-                                    combate["mana"] -= chosen["cost"]
-                                    print(f"Used {chosen['name']}! Dealt {damage} damage.")
-                                    apply_inflict(chosen, presentenemies[target_index])
-                                    turn_taken = True
+                                realdamage = damage - defense
+                                presentenemies[target_index]["hp"] -= realdamage
+                                combate["mana"] -= chosen["cost"]
+                                print(f"Used {chosen['name']}! Dealt {damage} damage.")
+                                apply_inflict(chosen, presentenemies[target_index])
+                                turn_taken = True
                         else:
                             print("Invalid number!")
                             continue
@@ -331,6 +367,23 @@ def player_turn(combate, presentenemies, init_stats, lang, language1, skills, it
                 print(f"{combate['name']} tried to run, but couldn't get away!")
                 turn_taken = True
 
+        elif playerturn == "5" and combate["class"] == "Dragon" or combate["class"] == "Mad Dog":
+            styles = combate["allstyles"]
+            pos = styles.index(combate["style"])
+            print("Type a and d to cycle between styles")
+            thedecision = input("> ").strip()
+            if thedecision == "a":
+                stylesewpos = (pos + 1) % len(styles)
+                combate["style"] =styles[stylesewpos]
+                print(f"You are now in {styles[stylesewpos]} style")
+            if thedecision == "d":
+                stylesewpos = (pos - 1) % len(styles)
+                combate["style"] = styles[stylesewpos]
+                print(f"You are now in {styles[stylesewpos]} style")
+            continue
+        elif playerturn == "5" and combate["class"] != "Dragon":
+            print("You can't change styles")
+
         else:
             print("Invalid choice, try again.")
             continue
@@ -386,38 +439,35 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
     if chosen_attack["targettype"] == "one":
         unluckyman = random.choice(taunting) if taunting else random.choice(living_party)
         mult = get_mult(chosen_attack.get("type", []), unluckyman)
-        total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"]
+        total_defense = unluckyman["defe"] + items[unluckyman["eq_head"]]["defen"] + items[unluckyman["eq_accessory"]]["defen"]
         effective_stre = chosen_attack["stre"] * mult
-        defenseunluck = total_defense / 2
-        if defenseunluck >= chosen_attack["stre"]:
-            print(f"{unluckyman['name']} managed to resist {eatt['name']} attack!")
-        else:
-            totaldmg = round(effective_stre)
-            unluckyman["hp"] -= totaldmg
-            if "statuschance" in chosen_attack:
-                statusroll = random.random()
-                effective_chance = max(0.0, chosen_attack["statuschance"] - unluckyman["luck"] * 0.2)
-                if statusroll <= effective_chance:
-                    if chosen_attack["status"] == "Bleed":
-                        unluckyman["bleed_turns"] = chosen_attack["bleedturns"]
-                        unluckyman["bleed_dmg"] = chosen_attack["bleeddmg"]
-                        print(f"{unluckyman['name']} is bleeding!")
-                    else:
-                        unluckyman["status"] = chosen_attack["status"]
-                        print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
+        defenseunluck = total_defense
+        totaldmg = round(effective_stre + defenseunluck)
+        unluckyman["hp"] -= totaldmg
+        if "statuschance" in chosen_attack:
+            statusroll = random.random()
+            effective_chance = max(0.0, chosen_attack["statuschance"] - unluckyman["luck"] * 0.2)
+            if statusroll <= effective_chance:
+                if chosen_attack["status"] == "Bleed":
+                    unluckyman["bleed_turns"] = chosen_attack["bleedturns"]
+                    unluckyman["bleed_dmg"] = chosen_attack["bleeddmg"]
+                    print(f"{unluckyman['name']} is bleeding!")
                 else:
-                    print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} but managed to dodge the debuff!")
+                    unluckyman["status"] = chosen_attack["status"]
+                    print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} and was applied {chosen_attack['status']}!")
             else:
-                print(f"{unluckyman['name']} was hit with {chosen_attack['nameskill']}!")
+                print(f"{unluckyman['name']} got hit by {chosen_attack['nameskill']} but managed to dodge the debuff!")
+        else:
+            print(f"{unluckyman['name']} was hit with {chosen_attack['nameskill']}!")
 
     elif chosen_attack["targettype"] == "all":
         print(f"The enemy used {chosen_attack['nameskill']} on everybody!")
         for member in living_party:
-            total_defense = member["defe"] + items[member["eq_head"]["defe"]]
             mult = get_mult(chosen_attack.get("type", []), member)
             effective_stre = chosen_attack["stre"] * mult
             totaldmg = round(effective_stre)
-            member["hp"] -= totaldmg
+            total_defense = member["defe"] + items[member["eq_head"]]["defen"] + items[member["eq_accessory"]]["defen"]
+            member["hp"] -= (totaldmg + total_defense)
             if "statuschance" in chosen_attack and chosen_attack.get("statustarget") == "ally":
                 statusroll = random.random()
                 effective_chance = max(0.0, chosen_attack["statuschance"] - member["luck"] * 0.2)
@@ -430,6 +480,12 @@ def enemy_turn(eatt, presentenemies, init_stats, game_over_flag):
         if chosen_attack.get("statustarget") == "self":
             eatt["status"] = chosen_attack["status"]
             print(f"The enemy also got applied with {chosen_attack['status']}")
+
+        if chosen_attack.get("statustarget") == "enemy":
+            chosen = random.choice(presentenemies)
+            if chosen_attack.get("status") == "heal":
+                chosen["hp"] += chosen_attack["heal"]
+
 
     elif chosen_attack["targettype"] == "self":
         if chosen_attack.get("status") == "Defenseup":
@@ -546,10 +602,27 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
                         else:
                             player_inv[drop_enemy] = 1
                         print("Debug Backpack:", init_stats["party"][0]["inv"])
-            if enemy["eid"] == 12:
+            if enemy["eid"] in (86, 87, 88, 89):
                 init_stats["party"][0]["Majima_encounter"] += 1
 
-            init_stats["party"][0]["money"] += enemy["money"]
+                main = init_stats["party"][0]
+                required = Majimaencounters.get("Dragon", 0)
+                if main["Majima_encounter"] >= required and "Dragon" not in main["unlocked_classes"]:
+                    main["unlocked_classes"].append("Dragon")
+                    print("You unlocked the Dragon job!")
+                if main["Majima_encounters"] >= required and "Mad Dog" not in main["unlocked_classes"]:
+                    main["unlocked_classes"].append("Mad Dog")
+                    print("You unlocked the Mad Dog job!")
+
+                has_charismatic = any("Charismatic Photo" in member["eq_accessory"] for member in init_stats["party"])
+                has_anon = any(member["eq_head"] == "Anon Sunglasses" for member in init_stats["party"])
+
+                if has_charismatic or has_anon:
+                    init_stats["party"][0]["money"] += enemy["money"] * 2
+                else:
+                    init_stats["party"][0]["money"] += enemy["money"]
+
+                print(f"You got {enemy['money']} bucks!")
 
         defeated = presentenemies
         for i in init_stats["party"]:
@@ -585,5 +658,15 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
                 i["lvl"] += 1
                 i["pts"] += 1
                 print(f"{i['name']} leveled up to {i['lvl']}")
+
+                if i.get("is_main_character"):
+                    for cls, req in classlvlreq.items():
+                        if cls == "Dragon":
+                            continue
+                        if cls == "Mad Dog":
+                            continue
+                        if i["lvl"] >= req and cls not in i["unlocked_classes"]:
+                            i["unlocked_classes"].append(cls)
+                            print(f"You unlocked the {cls} job!")
 
     return not game_over_flag[0]
