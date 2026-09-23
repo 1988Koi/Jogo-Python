@@ -157,6 +157,22 @@
             "Foreman"
         ]
     },
+    "Hard Hat": {
+        "type": "headgear",
+        "defen": 50,
+        "desc": "A hard hat.",
+        "usableby": [
+            "Foreman"
+        ]
+    },
+    "Scuffed Hat": {
+        "type": "headgear",
+        "defen": 5,
+        "desc": "A old hat, pretty scuffed.",
+        "usableby": [
+            "Gentleman"
+        ]
+    },
     "Top Hat": {
         "type": "headgear",
         "defen": 8,
@@ -217,6 +233,7 @@
             "Yakuza"
         ]
     },
+    
     "Polished brass knuckles": {
         "type": "weapon",
         "stren": "40",
