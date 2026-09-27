@@ -928,6 +928,75 @@
             }
         ]
     },
+    "17": {
+        "name" : "Bar Brawler",
+        "eid" : 17,
+        "hp" : 250,
+        "maxhp" : 250,
+        "lvl" : 55,
+        "xpdrop" : 60,
+        "isboss" : true,
+        "speed" : 2,
+        "defe" : 0,
+        "money" : 5,
+        "status" : "Normal",
+        "bleed_turns" : 0,
+        "bleed_dmg" : 0,
+        "boostdef" : 0,
+        "taunt_turns": 0,
+        "AttackUp" : 0,
+        "AttackUpTurn" : 0,
+        "last_def_boost" : 0,
+        "weakness": ["fire"], 
+        "strong" : ["ice"],
+        "moveset" : [
+            {
+            "nameskill" : "Bottle Smash",
+            "chance" : 0.25,
+            "status" : "Nothing",
+            "statuschance" : 0,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 100
+            },
+            {
+            "nameskill" : "Drink Up",
+            "chance" : 0.25,
+            "status" : "Defenseup",
+            "statuschance" : 1,
+            "defe" : 75,
+            "boostdef" : 4,
+            "targettype" : "one",
+            "stre" : 0
+            },
+            {
+            "nameskill" : "Billard Throw",
+            "chance" : 0.25,
+            "status" : "Stun",
+            "statuschance" : 0.9,
+            "targettype" : "one",
+            "effect" : ["bash"],
+            "stre" : 50
+            },
+            {
+            "nameskill" : "Shard Slash",
+            "chance" : 0.25,
+            "status" : "Bleed",
+            "bleeddmg": 2,
+            "bleedturns" : 3,
+            "statuschance" : 0.90,
+            "targettype" : "one",
+            "effect" : ["slash"],
+            "stre" : 75
+            }
+        ],
+        "possibledrop" : [
+            {
+            "itemid" : "Omega Billard Stick",
+            "chance" : 1
+            }
+        ]
+    },
     "60": {
         "name" : "Gun mobster",
         "eid" : 60,

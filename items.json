@@ -220,7 +220,16 @@
         "desc": "Simple billard stick.",
         "effect" : ["bash"],
         "usableby": [
-            "Yakuza"
+            "Barman"
+        ]
+    },
+    "Omega Billard Stick": {
+        "type": "weapon",
+        "stren": "20",
+        "desc": "The billard stick to end all billard stick.",
+        "effect" : ["bash"],
+        "usableby": [
+            "Barman"
         ]
     },
     "Tommy Gun": {
@@ -704,6 +713,14 @@
         "desc": "The chef's favorite.",
         "usableby": [
             "Chef"
+        ]
+    },
+    "Yakuza": {
+        "type": "weapon",
+        "stren": 125,
+        "desc": "A loaded handgun.",
+        "usableby": [
+            "Yakuza"
         ]
     },
     "Chef's Masterpiece Knife": {
