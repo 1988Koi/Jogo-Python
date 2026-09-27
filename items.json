@@ -181,6 +181,14 @@
             "Gentleman"
         ]
     },
+    "Scimitar": {
+        "type": "weapon",
+        "stren": "100",
+        "desc": "A very nice weapon.",
+        "usableby": [
+            "Security"
+        ]
+    },
     "Old Cane": {
         "type": "weapon",
         "stren": "3",

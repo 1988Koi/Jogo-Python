@@ -247,7 +247,12 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             print("Huh... the circus is in town... I kinda want to check it out...")
             print("\n") + lang[language1]["maptsk3"]
             mission3started = True
+        if mission3Complete == True:
+            print("\n" + lang[language1]["maptsk4"])
+            mission4started = True
         if mission5Complete == True and init_stats["story_flags"]["Kine_defeated"] == True:
+            print("Your phone begins to buzz \n EO EO EO EO \n What the hell is this? That's not my ringtone!? You grab it and it reads. \n Go to the Centurion tower at night. \n Weird... But sure why not, I took down Kinem, who this guy thinks he is?")
+            time.sleep(10)
             print("\n" + lang[language1]["map2"])
         else:
             print("\n" + lang[language1]["map1"])
@@ -283,6 +288,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     print("Substory 3: Wacky Places finished!")
                     time.sleep(5)
                     mission3Complete = True
+                    mission4started = True
         else:
             print("Not a cup.")
             continue
@@ -528,6 +534,16 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     init_stats["party"][0]["money"] += 250
                     print("And a little something as a bonus")
                     init_stats["party"][0]["inv"]["Bandana"] = init_stats["party"][0]["inv"].get("Bandana", 0) + 1
+                if mission4started == True:
+                    print("You approach the bar and drink a little, what a surprise seeing the guys from the wacky house running another scam!")
+                    print("You sigh and immediately try to beat them up again")
+                    tsk4 = [14, 14, 15]
+                    select_enemy_id = random.choices(tsk4, k=3)
+                    combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                    print("You manage to beat them again, he just sighs and gives you some cash, but this time you beat him even more, guess he can't scam people if his fingers are broken, huh?")
+                    init_stats["party"][0]["money"] += 1000
+                    print("You got 1000 dollars and a Scimitar!")
+                    init_stats["party"][0]["inv"]["Scimitar"] = init_stats["party"][0]["inv"].get("Scimitar", 0) + 1
                 if mission1Complete == True and already_recruited and mission2started == False:
                     print("You enter the bar again")
                     print("The bartender calls you again")
@@ -658,7 +674,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "6":
             print("You enter Doshima's family office.")
             print("Time to put an end to this.")
-            cleared = dungeon(pool, boss, init_stats, lang, language1, skills, items, enemis)
+            cleared = dungeon(map_data["doshima_family_office"]["enemy_pool"], map_data["doshima_family_office"]["boss"], init_stats, lang, language1, skills, items, enemis)
             if cleared and not init_stats["story_flags"].get("Deisuki_Defeated"):
                 init_stats["story_flags"]["Deisuki_Defeated"] = True
                 cleaning()
@@ -729,7 +745,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "9":
             if playerlvl >= map_data["fuxi_donzen"]["lvlreq"]:
-                print("Warning, this next fight is EXTREMELY hard and there's NO save. This is the final long fight, I recomend you grinding more.")
+                print("Warning, this next fight is EXTREMELY hard and there's NO save. This is the final long fight, I recommend you to grind more.")
                 print("Do you really want to continue?")
                 print("Type yes or no")
                 ok = input("> ").strip()
@@ -742,7 +758,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                         print("If you are looking for Kine, he is up on the ruff")
                         time.sleep(3)
                         print("...He starts trying to beat you.")
-                        combat1(init_stats, [pool[89]], enemis, lang, language1, skills, items, can_flee=False)
+                        combat1(init_stats, [pool[99]], enemis, lang, language1, skills, items, can_flee=False)
                     time.sleep(3)
                     cleared = dungeon(map_data["fuxi_donzen"]["enemy_pool"], map_data["fuxi_donzen"]["boss"], init_stats, lang, language1, skills, items, enemis)
                     if cleared and not init_stats["story_flags"].get("Kine_Defeated"):
