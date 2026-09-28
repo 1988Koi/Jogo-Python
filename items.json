@@ -225,7 +225,7 @@
     },
     "Omega Billard Stick": {
         "type": "weapon",
-        "stren": "20",
+        "stren": "120",
         "desc": "The billard stick to end all billard stick.",
         "effect" : ["bash"],
         "usableby": [
@@ -250,7 +250,6 @@
             "Yakuza"
         ]
     },
-    
     "Polished brass knuckles": {
         "type": "weapon",
         "stren": "40",
