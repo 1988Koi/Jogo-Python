@@ -954,13 +954,15 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print(f"Strenght: {total_damage}")
                 print(f"Defense: {total_defense}")
                 print(f"lvl: {init_stats["party"][currentslot]["lvl"]}")
-                choice = input("> ").strip()
+                choice = input("> ").strip().lower()
                 if choice == "d":
                     currentslot = (currentslot + 1) % len(init_stats["party"])
                 if choice == "a":
                     currentslot = (currentslot - 1) % len(init_stats["party"])
                 if choice == "p":
                     break
+                else:
+                    print("command not recognized")
 
         elif mapc == "j":
             currentslot = 0
@@ -972,7 +974,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print(f"You currently have {active['pts']} points")
                 print(f"You currently have {active['xptotal']} out of {lvlup(active["lvl"])} for the next point")
                 print(lang[language1]["upgrade"])
-                choice = input("> ").strip()
+                choice = input("> ").strip().lower()
                 if choice == "d":
                     currentslot = (currentslot + 1) % len(init_stats["party"])
                 if choice == "a":
@@ -1001,6 +1003,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     active["bonus_mana"] += 1
                     active["maxmana"] += 1
                     active["mana"] += 1
+                else:
+                    print("Command not recognized")
 
         elif mapc == "c":
             unlocked = playerOV["unlocked_classes"]
@@ -1021,7 +1025,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("You take a stroll around town, when three guys shout over you. \n HEY, YES, YOU!")
                 print("Remember us? Yeah, whatever, just fork us the cash.")
                 beatpool = ["15", "16", "16"]
-                select_enemy_id = random.choices(majimapool, k=3)
+                select_enemy_id = random.choices(beatpool, k=3)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
                 mission4Complete = True
             chance = random.randint(1, 10)
@@ -1073,9 +1077,6 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("What? How could I lose to... you!? \n This is NOT over.")
                 print("He vanishes...")
 
-
-
-
         else:
             print("Invalid choice!")
 
@@ -1087,7 +1088,7 @@ MAP_FUNCTIONS = {
     "someicho": someicho_map,
 }
 
-
+print("This game is in early access, for better playing experience choose english, thank you and sorry.")
 print("Welcome to the game! / bienvenue á la jeux! / Bem vindo ao jogo!")
 print("Select your language / Choisissez votre language / Escolha seu idioma")
 print("en for english / fr vers français / pt para português.")
