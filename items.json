@@ -157,12 +157,44 @@
             "Foreman"
         ]
     },
+    "Hard Hat": {
+        "type": "headgear",
+        "defen": 50,
+        "desc": "A hard hat.",
+        "usableby": [
+            "Foreman"
+        ]
+    },
+    "Scuffed Hat": {
+        "type": "headgear",
+        "defen": 65,
+        "desc": "A old hat, pretty scuffed.",
+        "usableby": [
+            "Gentleman"
+        ]
+    },
     "Top Hat": {
         "type": "headgear",
         "defen": 8,
         "desc": "Remarkable.",
         "usableby": [
             "Gentleman"
+        ]
+    },
+    "Angelo's Fedora": {
+        "type": "headgear",
+        "defen": 100,
+        "desc": "Iconic.",
+        "usableby": [
+            "Gentleman"
+        ]
+    },
+    "Scimitar": {
+        "type": "weapon",
+        "stren": "100",
+        "desc": "A very nice weapon.",
+        "usableby": [
+            "Security"
         ]
     },
     "Old Cane": {
@@ -196,7 +228,16 @@
         "desc": "Simple billard stick.",
         "effect" : ["bash"],
         "usableby": [
-            "Yakuza"
+            "Barman"
+        ]
+    },
+    "Omega Billard Stick": {
+        "type": "weapon",
+        "stren": "120",
+        "desc": "The billard stick to end all billard stick.",
+        "effect" : ["bash"],
+        "usableby": [
+            "Barman"
         ]
     },
     "Tommy Gun": {
@@ -681,6 +722,14 @@
             "Chef"
         ]
     },
+    "Yakuza": {
+        "type": "weapon",
+        "stren": 125,
+        "desc": "A loaded handgun.",
+        "usableby": [
+            "Yakuza"
+        ]
+    },
     "Chef's Masterpiece Knife": {
         "type": "weapon",
         "stren": 65,
@@ -923,7 +972,7 @@
     },
     "Legendary Do-Rag": {
         "type": "headgear",
-        "defen": 10,
+        "defen": 100,
         "desc": "As iconic as the moves.",
         "usableby": [
             "Breaker"
@@ -931,7 +980,7 @@
     },
     "Worn Top Hat": {
         "type": "headgear",
-        "defen": 3,
+        "defen": 15,
         "desc": "Seen better days.",
         "usableby": [
             "Gentleman"
@@ -939,7 +988,7 @@
     },
     "Silk Top Hat": {
         "type": "headgear",
-        "defen": 9,
+        "defen": 50,
         "desc": "Fitting for the occasion.",
         "usableby": [
             "Gentleman"
@@ -947,7 +996,7 @@
     },
     "Duke's Top Hat": {
         "type": "headgear",
-        "defen": 17,
+        "defen": 130,
         "desc": "Immaculate, monogrammed.",
         "usableby": [
             "Gentleman"
@@ -955,7 +1004,7 @@
     },
     "Safety Goggles": {
         "type": "headgear",
-        "defen": 2,
+        "defen": 15,
         "desc": "Standard workshop protection.",
         "usableby": [
             "Technician"
@@ -963,7 +1012,7 @@
     },
     "Anti-Static Cap": {
         "type": "headgear",
-        "defen": 7,
+        "defen": 40,
         "desc": "Keeps the circuits from frying.",
         "usableby": [
             "Technician"
@@ -971,7 +1020,7 @@
     },
     "Overclocker's Visor": {
         "type": "headgear",
-        "defen": 13,
+        "defen": 90,
         "desc": "HUD included, mostly for show.",
         "usableby": [
             "Technician"

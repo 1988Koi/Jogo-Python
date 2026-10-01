@@ -61,7 +61,6 @@ def dice_duel(init_stats, lang, language1):
         if cont != "y":
             return
 
-
 SLOT_SYMBOLS = ["🍒", "🍋", "🔔", "⭐", "7"]
 SLOT_WEIGHTS = [35, 30, 20, 10, 5]
 
@@ -103,7 +102,6 @@ def slot_machine(init_stats, lang, language1):
         cont = input(lang[language1]["tanban_play_again"] + " (y/n) > ").strip().lower()
         if cont != "y":
             return
-
 
 def tanban_menu(init_stats, lang, language1):
     in_here = True

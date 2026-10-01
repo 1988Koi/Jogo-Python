@@ -247,7 +247,14 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             print("Huh... the circus is in town... I kinda want to check it out...")
             print("\n") + lang[language1]["maptsk3"]
             mission3started = True
+        if mission3Complete == True:
+            print("\n" + lang[language1]["maptsk4"])
+            mission4started = True
+        if mission4Complete and init_stats["story_flags"]["Kawashiro_Defeated"]:
+            print("\n" + lang[language1]["maptsk5"])
         if mission5Complete == True and init_stats["story_flags"]["Kine_defeated"] == True:
+            print("Your phone begins to buzz \n EO EO EO EO \n What the hell is this? That's not my ringtone!? You grab it and it reads. \n Go to the Centurion tower at night. \n Weird... But sure why not, I took down Kinem, who this guy thinks he is?")
+            time.sleep(10)
             print("\n" + lang[language1]["map2"])
         else:
             print("\n" + lang[language1]["map1"])
@@ -283,6 +290,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     print("Substory 3: Wacky Places finished!")
                     time.sleep(5)
                     mission3Complete = True
+                    mission4started = True
         else:
             print("Not a cup.")
             continue
@@ -502,6 +510,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "4":
             if playerlvl >= 1:
+                philipon = any(member["name"] == "philip" for member in init_stats["party"])
                 already_recruited = any(member["name"] == "Gordon" for member in init_stats["party"])
                 if already_recruited and mission1Complete:
                     print("How about a beer?")
@@ -528,6 +537,16 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     init_stats["party"][0]["money"] += 250
                     print("And a little something as a bonus")
                     init_stats["party"][0]["inv"]["Bandana"] = init_stats["party"][0]["inv"].get("Bandana", 0) + 1
+                if mission4started == True:
+                    print("You approach the bar and drink a little, what a surprise seeing the guys from the wacky house running another scam!")
+                    print("You sigh and immediately try to beat them up again")
+                    tsk4 = [14, 14, 15]
+                    select_enemy_id = random.choices(tsk4, k=3)
+                    combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                    print("You manage to beat them again, he just sighs and gives you some cash, but this time you beat him even more, guess he can't scam people if his fingers are broken, huh?")
+                    init_stats["party"][0]["money"] += 1000
+                    print("You got 1000 dollars and a Scimitar!")
+                    init_stats["party"][0]["inv"]["Scimitar"] = init_stats["party"][0]["inv"].get("Scimitar", 0) + 1
                 if mission1Complete == True and already_recruited and mission2started == False:
                     print("You enter the bar again")
                     print("The bartender calls you again")
@@ -550,6 +569,22 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     elif choice == "no" or choice == "n":
                         print("That's a shame... if you change your mind you know where to find me.")
                         break
+                if mission5started == True and philipon:
+                    print("You enter the bar \n Philip turns to you and says \n huh, long time, eh? How about a beer, on me.")
+                    time.sleep(3)
+                    print("As you drink you talk you notice someone staring at you")
+                    time.sleep(2)
+                    print("After some time he begins to approach you, that's when you realized.")
+                    time.sleep(2)
+                    print("It's the first guy you beat up for Philip, he arrives and says \n What my luck ol' Phil... and you. \n Without even a word more he swings")
+                    time.sleep(3)
+                    barpool = [17]
+                    select_enemy_id = random.choices(barpool, k=1)
+                    combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+                    print("Ah dammit, not again! \n Philip does a signal with his hand and says \n He won't bother us anymore... as you see 3 guys in black suit drag him to a backroom")
+                    print("Philip then says to you, My thanks... Here's something for your troubles")
+                    print("You got 2000 Bucks and a Revolver!")
+                    init_stats["party"][0]["money"] += 2000
 
                 else:
                     print("You drink a little bit of beer, before you hear a man grumbling to himself")
@@ -658,7 +693,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         elif mapc == "6":
             print("You enter Doshima's family office.")
             print("Time to put an end to this.")
-            cleared = dungeon(pool, boss, init_stats, lang, language1, skills, items, enemis)
+            cleared = dungeon(map_data["doshima_family_office"]["enemy_pool"], map_data["doshima_family_office"]["boss"], init_stats, lang, language1, skills, items, enemis)
             if cleared and not init_stats["story_flags"].get("Deisuki_Defeated"):
                 init_stats["story_flags"]["Deisuki_Defeated"] = True
                 cleaning()
@@ -729,7 +764,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
 
         elif mapc == "9":
             if playerlvl >= map_data["fuxi_donzen"]["lvlreq"]:
-                print("Warning, this next fight is EXTREMELY hard and there's NO save. This is the final long fight, I recomend you grinding more.")
+                print("Warning, this next fight is EXTREMELY hard and there's NO save. This is the final long fight, I recommend you to grind more.")
                 print("Do you really want to continue?")
                 print("Type yes or no")
                 ok = input("> ").strip()
@@ -742,7 +777,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                         print("If you are looking for Kine, he is up on the ruff")
                         time.sleep(3)
                         print("...He starts trying to beat you.")
-                        combat1(init_stats, [pool[89]], enemis, lang, language1, skills, items, can_flee=False)
+                        combat1(init_stats, [pool[99]], enemis, lang, language1, skills, items, can_flee=False)
                     time.sleep(3)
                     cleared = dungeon(map_data["fuxi_donzen"]["enemy_pool"], map_data["fuxi_donzen"]["boss"], init_stats, lang, language1, skills, items, enemis)
                     if cleared and not init_stats["story_flags"].get("Kine_Defeated"):
@@ -919,13 +954,15 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print(f"Strenght: {total_damage}")
                 print(f"Defense: {total_defense}")
                 print(f"lvl: {init_stats["party"][currentslot]["lvl"]}")
-                choice = input("> ").strip()
+                choice = input("> ").strip().lower()
                 if choice == "d":
                     currentslot = (currentslot + 1) % len(init_stats["party"])
                 if choice == "a":
                     currentslot = (currentslot - 1) % len(init_stats["party"])
                 if choice == "p":
                     break
+                else:
+                    print("command not recognized")
 
         elif mapc == "j":
             currentslot = 0
@@ -937,7 +974,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print(f"You currently have {active['pts']} points")
                 print(f"You currently have {active['xptotal']} out of {lvlup(active["lvl"])} for the next point")
                 print(lang[language1]["upgrade"])
-                choice = input("> ").strip()
+                choice = input("> ").strip().lower()
                 if choice == "d":
                     currentslot = (currentslot + 1) % len(init_stats["party"])
                 if choice == "a":
@@ -966,6 +1003,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     active["bonus_mana"] += 1
                     active["maxmana"] += 1
                     active["mana"] += 1
+                else:
+                    print("Command not recognized")
 
         elif mapc == "c":
             unlocked = playerOV["unlocked_classes"]
@@ -986,7 +1025,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("You take a stroll around town, when three guys shout over you. \n HEY, YES, YOU!")
                 print("Remember us? Yeah, whatever, just fork us the cash.")
                 beatpool = ["15", "16", "16"]
-                select_enemy_id = random.choices(majimapool, k=3)
+                select_enemy_id = random.choices(beatpool, k=3)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
                 mission4Complete = True
             chance = random.randint(1, 10)
@@ -1038,9 +1077,6 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 print("What? How could I lose to... you!? \n This is NOT over.")
                 print("He vanishes...")
 
-
-
-
         else:
             print("Invalid choice!")
 
@@ -1052,7 +1088,7 @@ MAP_FUNCTIONS = {
     "someicho": someicho_map,
 }
 
-
+print("This game is in early access, for better playing experience choose english, thank you and sorry.")
 print("Welcome to the game! / bienvenue á la jeux! / Bem vindo ao jogo!")
 print("Select your language / Choisissez votre language / Escolha seu idioma")
 print("en for english / fr vers français / pt para português.")
