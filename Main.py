@@ -240,6 +240,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
     mission4Complete = False
     mission5started = False
     mission5Complete = False
+    mission6started = False
+    mission6complete = False
 
     while in_here:
         playerlvl = init_stats["party"][0]["lvl"]
@@ -250,9 +252,12 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
         if mission3Complete == True:
             print("\n" + lang[language1]["maptsk4"])
             mission4started = True
-        if mission4Complete and init_stats["story_flags"]["Kawashiro_Defeated"]:
+        if mission4Complete:
             print("\n" + lang[language1]["maptsk5"])
-        if mission5Complete == True and init_stats["story_flags"]["Kine_defeated"] == True:
+        if mission5Complete == True:
+            mission6started = True
+            print("\n" + lang[language1]["maptsk6"])
+        if mission6complete == True and init_stats["story_flags"]["Kine_defeated"] == True:
             print("Your phone begins to buzz \n EO EO EO EO \n What the hell is this? That's not my ringtone!? You grab it and it reads. \n Go to the Centurion tower at night. \n Weird... But sure why not, I took down Kinem, who this guy thinks he is?")
             time.sleep(10)
             print("\n" + lang[language1]["map2"])
@@ -918,6 +923,16 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 club_brawl = [12]
                 select_enemy_id = random.choices(club_brawl, k=1)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
+            if mission6started == True:
+                print("You sit down and begin chatting with your party, after a while a guy appears")
+                print("He approaches you and says")
+                time.sleep(1)
+                print("You... are a friend of Kanae?")
+                print("You nod and he says")
+                print("My name is Moryu Kazaki, Kanae told me about your adventures, it will be a pleasure if I can participate.")
+                moryukazaki = apply_defaults(copy.deepcopy(parte["moryukazaki"]))
+                init_stats["party"].append(moryukazaki)
+                init_stats["party"][0]["peoplerec"] += 1
             elif already_recruited:
                 print("Kanae looks at you \n What's up? Anything new?")
             elif playerlvl >= 3 and mission1Started == False and already_recruited == False:
