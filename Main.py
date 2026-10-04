@@ -923,7 +923,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                 club_brawl = [12]
                 select_enemy_id = random.choices(club_brawl, k=1)
                 combat1(init_stats, select_enemy_id, enemis, lang, language1, skills, items)
-            if mission6started == True:
+            if mission3Complete == True:
                 print("You sit down and begin chatting with your party, after a while a guy appears")
                 print("He approaches you and says")
                 time.sleep(1)
