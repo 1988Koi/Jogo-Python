@@ -130,6 +130,7 @@
     "legend": [
         {"name": "Finishing blow", "desc": "Ldmg", "targettype": "single", "cost" : 3, "dmgmlt": 1.5, "lvlreq" : 1, "effect": ["bash"]},
         {"name": "3 Hit combo", "desc": "Ldmg", "targettype": "single", "cost" : 1, "dmgmlt": 1.3, "lvlreq": 1, "effect": ["bash"]},
+        {"name": "Tiger Drop", "desc": "Ldmg", "targettype": "single", "cost" : 10, "dmgmlt": 1.5, "lvlreq": 3, "effect": ["bash"]},
         {"name": "Essence of Knife", "desc": "Mdmg", "targettype": "single", "cost": 5, "dmgmlt": 1.7, "lvlreq" : 3, "effect": ["slash"]},
         {"name": "Essence of Gun", "desc": "Mdmg", "targettype": "single","cost" : 7, "dmgmlt": 2.0, "lvlreq": 5, "effect": ["shot"]},
         {"name": "Essence of Central mass", "desc": "Hdmg", "targettype": "single", "cost": 10, "dmgmlt": 2.5, "lvlreq" : 8},

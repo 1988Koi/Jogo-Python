@@ -404,7 +404,7 @@
     "sunglasses": {
         "type": "headgear",
         "defen": 1,
-        "desc": "Cool shades. Kanae never takes them off.",
+        "desc": "Cool shades.",
         "usableby": [
             "Host"
         ]
@@ -453,9 +453,15 @@
         ]
     },
     "Old Suitcase": {
-        "type": "junk",
-        "sellvalue": 8,
-        "desc": "Empty, but someone will pay for the leather."
+        "type": "weapon",
+        "stren": 9,
+        "desc": "Old old old.",
+        "usableby": [
+            "Salaryman"
+        ],
+        "effect": [
+            "slash"
+        ]
     },
     "Old Magazine": {
         "type": "junk",
@@ -494,7 +500,7 @@
     "Toy Pistol": {
         "type": "weapon",
         "stren": 4,
-        "desc": "Looks real enough to scare someone, does no real damage.",
+        "desc": "Hurts more to throw at the enemy.",
         "usableby": [
             "Yakuza",
             "Freelancer"
@@ -505,7 +511,7 @@
     },
     "Sturdy Bottle": {
         "type": "weapon",
-        "stren": 8,
+        "stren": 30,
         "desc": "Reinforced glass, won't break on the first swing.",
         "usableby": [
             "Host"
@@ -534,7 +540,7 @@
     },
     "Premium Watch": {
         "type": "accessory",
-        "luck": 6,
+        "luck": 15,
         "desc": "Definitely not for show.",
         "usableby": [
             "Host",
@@ -551,19 +557,19 @@
             "Technician",
             "Barman"
         ],
-        "defen": 0
+        "defen": 4
     },
     "Checkered Suit": {
         "type": "headgear",
-        "defen": 6,
-        "desc": "Loud, but the padding helps.",
+        "defen": 30,
+        "desc": "Now you look rather dapper.",
         "usableby": [
             "Gentleman"
         ]
     },
     "Renoir's Suit": {
         "type": "headgear",
-        "defen": 10,
+        "defen": 33,
         "desc": "Belonged to a painter, is covered in yellow petals for some reason.",
         "usableby": [
             "Gentleman"
@@ -605,14 +611,14 @@
     "The Last Call": {
         "type": "weapon",
         "stren": 180,
-        "desc": "Philip's signature bottle. Nobody's ordered a second round after seeing this.",
+        "desc": "Philip's brand whiskey.",
         "usableby": [
             "Barman"
         ]
     },
     "Old Timey Fedora": {
         "type": "headgear",
-        "defen": 1,
+        "defen": 4,
         "desc": "Philip's starting fedora, out of fashion by decades.",
         "usableby": [
             "Barman"
@@ -620,15 +626,15 @@
     },
     "Pressed Fedora": {
         "type": "headgear",
-        "defen": 5,
-        "desc": "Freshly steamed and reshaped.",
+        "defen": 15,
+        "desc": "Fresh from the 40s",
         "usableby": [
             "Barman"
         ]
     },
     "Bartender's Bowler": {
         "type": "headgear",
-        "defen": 9,
+        "defen": 40,
         "desc": "The mark of a barman who's seen it all.",
         "usableby": [
             "Barman"
@@ -653,7 +659,7 @@
     "Golden Briefcase": {
         "type": "weapon",
         "stren": 70,
-        "desc": "Given only to top performers. Very dense.",
+        "desc": "How do you even carry that,",
         "usableby": [
             "Salaryman"
         ]
@@ -698,7 +704,7 @@
             "Foreman"
         ]
     },
-    "Reinforced I-Beam": {
+    "A bended unbendeable bar": {
         "type": "weapon",
         "stren": 100,
         "desc": "Requires real strength just to lift.",
@@ -722,7 +728,7 @@
             "Chef"
         ]
     },
-    "Yakuza": {
+    "Big Shot": {
         "type": "weapon",
         "stren": 125,
         "desc": "A loaded handgun.",
@@ -732,7 +738,7 @@
     },
     "Chef's Masterpiece Knife": {
         "type": "weapon",
-        "stren": 65,
+        "stren": 100,
         "desc": "Folded a thousand times, holds an edge forever.",
         "usableby": [
             "Chef"
@@ -892,7 +898,7 @@
     },
     "Cloth Toque": {
         "type": "headgear",
-        "defen": 6,
+        "defen": 25,
         "desc": "Proper kitchen wear.",
         "usableby": [
             "Chef"
@@ -900,7 +906,7 @@
     },
     "Master Chef's Toque": {
         "type": "headgear",
-        "defen": 13,
+        "defen": 50,
         "desc": "Michelin-star quality.",
         "usableby": [
             "Chef"
@@ -914,9 +920,17 @@
             "Yakuza"
         ]
     },
+    "Bandana": {
+        "type": "headgear",
+        "defen": 20,
+        "desc": "Keeps the sweat out of his eyes.",
+        "usableby": [
+            "Yakuza"
+        ]
+    },
     "Silk Bandana": {
         "type": "headgear",
-        "defen": 8,
+        "defen": 40,
         "desc": "A mark of respect in the family.",
         "usableby": [
             "Yakuza"
@@ -924,7 +938,7 @@
     },
     "Oyabun's Headband": {
         "type": "headgear",
-        "defen": 15,
+        "defen": 60,
         "desc": "Only the boss wears this.",
         "usableby": [
             "Yakuza"
@@ -952,14 +966,6 @@
         "desc": "Full coverage, heavy but effective.",
         "usableby": [
             "Security"
-        ]
-    },
-    "Bandana": {
-        "type": "headgear",
-        "defen": 1,
-        "desc": "Keeps the sweat out of his eyes.",
-        "usableby": [
-            "Breaker"
         ]
     },
     "Snapback Cap": {
