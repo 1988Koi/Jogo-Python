@@ -79,6 +79,14 @@
             "Host"
         ]
     },
+    "whiskeybottle": {
+        "type": "weapon",
+        "stren": 45,
+        "desc": "A nice bootle of whiskey, a gift from Philip.",
+        "usebleby": [
+            "Host"
+        ]
+    },
     "Old coins": {
         "type": "junk",
         "sellvalue": 5
@@ -970,7 +978,7 @@
     },
     "Snapback Cap": {
         "type": "headgear",
-        "defen": 5,
+        "defen": 25,
         "desc": "Fits the style.",
         "usableby": [
             "Breaker"

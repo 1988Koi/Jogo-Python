@@ -565,6 +565,8 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                         print("Great, knew I could count on you, here's the info on where to find him and what he looks like.")
                         print("He hands you a envelope containing some places, you are likely to find him at the club.")
                         print("Don't kill him, just rough him up real good, ok? And also if he has anything in his person you may have it, I don't care...")
+                        print("Oh yeah, and hey, have this \n He gives you a bottle of whiskey")
+                        init_stats["party"][0]["inv"]["whiskeybottle"] = init_stats["party"][0]["inv"].get("whiskeybottle", 0) + 1
                         mission2started = True
                     if mission2Complete == True and already_recruited and mission2started == True:
                         print("Hey, amazing work... say... You've done me a solid 2 times already, why don't I join your little adventure, just tell me what you are doing... \n After some time explaining your story to him he sighs and says \n Alright, that's messed up, I'm in, I'm Philip, nice to meet you.")
