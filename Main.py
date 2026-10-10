@@ -173,7 +173,7 @@ def dungeon(enemy_pool, boss_id, init_stats, lang, language1, skills, items, ene
             print(lang[language1]["chest"])
             for drop in chest:
                 roll = random.random()
-                if roll <= drop["chance"]:
+                if roll >= drop["chance"]:
                     drop_enemy = drop["itemid"]
                     print(f"You got a {drop_enemy}!")
                     player_inv = init_stats["party"][0]["inv"]
@@ -279,7 +279,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             while ball:
                 chosenball = input("> ").strip()
                 ball = False
-                if chosenball == "1" or "2" or "3":
+                if chosenball == "1" or chosenball == "2" or chosenball == "3":
                     print("He lifts the cup and...")
                     time.sleep(2)
                     print("Nothing.")
@@ -296,9 +296,9 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     time.sleep(5)
                     mission3Complete = True
                     mission4started = True
-        else:
-            print("Not a cup.")
-            continue
+                else:
+                    print("Not a cup.")
+                    continue
 
         if mapc == "0":
             save(init_stats)

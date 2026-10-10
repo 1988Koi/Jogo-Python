@@ -592,16 +592,17 @@ def combat1(init_stats, enemy_ids, enemies_db, lang, language1, skills, items, c
         for enemy in presentenemies:
             if "possibledrop" in enemy:
                 for drop in enemy["possibledrop"]:
+                    if isinstance(drop, dict):
+                        item_name = drop["itemid"]
+                        chance = drop["chance"]
+                    else:
+                        continue
                     roll = random.random()
-                    if roll <= drop["chance"]:
-                        drop_enemy = drop["itemid"]
-                        print(f"You got a {drop_enemy}!")
+
+                    if roll <= chance:
+                        print(f"You got {item_name}!")
                         player_inv = init_stats["party"][0]["inv"]
-                        if drop_enemy in player_inv:
-                            player_inv[drop_enemy] += 1
-                        else:
-                            player_inv[drop_enemy] = 1
-                        print("Debug Backpack:", init_stats["party"][0]["inv"])
+                        player_inv[item_name] = player_inv.get(item_name, 0) + 1
             if enemy["eid"] in (86, 87, 88, 89):
                 init_stats["party"][0]["Majima_encounter"] += 1
 
