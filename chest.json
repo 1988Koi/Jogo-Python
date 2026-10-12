@@ -26,12 +26,5 @@
         "Empty Cough Drop": 0.15,
         "Squid Tentacle": 0.15,
         "Shark Fin": 0.15
-    },
-    "ZORO_ENCOUNTER": {
-        "Crushed Pearl": 0.35,
-        "Silver Ingot": 0.25,
-        "Perfect Metal": 0.15,
-        "Fancy Watch": 0.15,
-        "Premium Watch": 0.1
     }
 }

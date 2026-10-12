@@ -106,6 +106,7 @@
         ]
     },
     "comment": "I'll start commenting because as I add characters this gets more confusing and messy.",
+    "commentsorrow": "I really need a way to add more diverse characters.",
     "comment1" : "Low tier enemies",
     "4": {
         "name" : "Bully",
@@ -156,8 +157,8 @@
         ],
         "possibledrop" : [
             {
-            "itemid" : "Piece of gum",
-            "chance" : 0.90
+                "itemid" : "Piece of gum",
+                "chance" : 0.90
             },
             {
                 "itemid" : "Spare change",
@@ -1392,7 +1393,23 @@
             "basestre" : 10,
             "stre" : 10
             }
-        ]
+        ],
+        "possibledrop" : [{
+            "itemid": "Crushed Pearl", "chance": 0.35
+        },
+        {
+            "itemid": "Silver Ingot", "chance": 0.25
+        },
+        {
+            "itemid": "Perfect Metal", "chance" : 0.15
+        },
+        {
+            "itemid" : "Fancy Watch", "chance": 0.15
+        },
+        {
+            "itemid": "Premium Watch", "chance": 0.1
+        }
+    ]
     },
     "87": {
         "name" : "Zoro Hashima",
@@ -1460,7 +1477,23 @@
             "basestre" : 10,
             "stre" : 10
             }
-        ]
+        ],
+        "possibledrop" : [{
+            "itemid": "Crushed Pearl", "chance": 0.35
+        },
+        {
+            "itemid": "Silver Ingot", "chance": 0.25
+        },
+        {
+            "itemid": "Perfect Metal", "chance" : 0.15
+        },
+        {
+            "itemid" : "Fancy Watch", "chance": 0.15
+        },
+        {
+            "itemid": "Premium Watch", "chance": 0.1
+        }
+    ]
     },
     "88": {
         "name" : "Zoro Hashima",
@@ -1530,7 +1563,23 @@
             "stre" : 0,
             "basestre" : 0
             }
-        ]
+        ],
+        "possibledrop" : [{
+            "itemid": "Crushed Pearl", "chance": 0.35
+        },
+        {
+            "itemid": "Silver Ingot", "chance": 0.25
+        },
+        {
+            "itemid": "Perfect Metal", "chance" : 0.15
+        },
+        {
+            "itemid" : "Fancy Watch", "chance": 0.15
+        },
+        {
+            "itemid": "Premium Watch", "chance": 0.1
+        }
+    ]
     },
     "89": {
         "name" : "Zoro Hashima",
@@ -1598,7 +1647,23 @@
             "basestre" : 5,
             "stre" : 5
             }
-        ]
+        ],
+        "possibledrop" : [{
+            "itemid": "Crushed Pearl", "chance": 0.35
+        },
+        {
+            "itemid": "Silver Ingot", "chance": 0.25
+        },
+        {
+            "itemid": "Perfect Metal", "chance" : 0.15
+        },
+        {
+            "itemid" : "Fancy Watch", "chance": 0.15
+        },
+        {
+            "itemid": "Premium Watch", "chance": 0.1
+        }
+    ]
     },
     "commentb" : "Normal Bosses",
     "90" : {

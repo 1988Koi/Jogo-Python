@@ -171,17 +171,21 @@ def dungeon(enemy_pool, boss_id, init_stats, lang, language1, skills, items, ene
         elif event == "chest":
             cleaning()
             print(lang[language1]["chest"])
-            for drop in chest:
-                roll = random.random()
-                if roll >= drop["chance"]:
-                    drop_enemy = drop["itemid"]
-                    print(f"You got a {drop_enemy}!")
+
+            chest_drops = chest["STROLL1"]
+
+            roll = random.random()
+            runningchance = 0
+
+            for item_name, chance in chest_drops.items():
+                runningchance += chance
+
+                if roll <= runningchance:
+                    print(f"You got {item_name}")
+
                     player_inv = init_stats["party"][0]["inv"]
-                    if drop_enemy in player_inv:
-                        player_inv[drop_enemy] += 1
-                    else:
-                        player_inv[drop_enemy] = 1
-                        print("Debug Backpack:", init_stats["party"][0]["inv"])
+                    player_inv[item_name] = player_inv.get(item_name, 0) + 1
+
         elif event == "break":
             cleaning()
             print(lang[language1]["break"])
@@ -212,9 +216,13 @@ def tutorial_map(init_stats, lang, language1, map_data):
         mapc = input("> ").strip()
 
         if mapc == "1":
+            init_stats["party"][0]["hp"] = init_stats["party"][0]["maxhp"]
+            init_stats["party"][0]["mana"] = init_stats["party"][0]["maxmana"]
             cleaning()
             combat1(init_stats, [pool[0]], enemis, lang, language1, skills, items, can_flee=False)
         elif mapc == "2":
+            init_stats["party"][0]["hp"] = init_stats["party"][0]["maxhp"]
+            init_stats["party"][0]["mana"] = init_stats["party"][0]["maxmana"]
             cleaning()
             combat1(init_stats, [pool[1]], enemis, lang, language1, skills, items, can_flee=False)
         elif mapc == "3":
@@ -263,7 +271,7 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
             print("\n" + lang[language1]["map2"])
         else:
             print("\n" + lang[language1]["map1"])
-        mapc = input("> ").strip()
+        mapc = input("> ").strip().lower()
 
         if mapc == "M" and mission3started == True:
             print("What the hell am I doing in a wacky house?")
@@ -300,10 +308,15 @@ def someicho_map(init_stats, lang, language1, map_data, playerOV):
                     print("Not a cup.")
                     continue
 
-        if mapc == "0":
+        if mapc == "quit":
             save(init_stats)
             print(lang[language1]["bye"])
             return "quit"
+
+        elif mapc == "save":
+            save(init_stats)
+            print("saved")
+            continue
 
         elif mapc == "1":
             if playerlvl >= 1 and (mission1Started == False or mission1Complete == True):
@@ -1121,42 +1134,42 @@ if begin1 == "2":
     init_stats = {
         "party": [
             {
-                "name": "name",
-                "class": "class",
-                "maxhp": 18,
-                "hp": 18,
-                "mana": 3,
-                "maxmana": 3,
-                "stre": 1,
-                "luck": 1,
-                "inv": {},
-                "xp": 0,
-                "defe": 3,
-                "lvl": 1,
-                "xptotal": 0,
-                "status": "Normal",
-                "bleed_turns": 0,
-                "bleed_dmg": 0,
-                "boostdef": 0,
-                "last_def_boost": 0,
-                "taunt_turns": 0,
-                "pts": 0,
-                "eq_wep": "Fists",
-                "peoplerec": 0,
-                "speed": 0,
-                "bonus_stre": 0,
-                "bonus_hp": 0,
-                "bonus_mana": 0,
-                "bonus_luck": 0,
-                "unlocked_classes": ["Yakuza"],
-                "isplayer": True,
-                "is_main_character": True,
-                "money": 50,
-                "AttackUp" : 20,
-                "AttackUpTurn" : 2,
-                "weakness": [],
-                "strong" : [],
-                "Majima_encounter" : 0,
+                    "hp": 10,
+            "maxhp": 10,
+            "mana": 5,
+            "maxmana": 5,
+            "stre": 1,
+            "luck": 1,
+            "defe": 0,
+            "speed": 5,
+            "xp": 0,
+            "lvl": 1,
+            "xptotal": 0,
+            "pts": 0,
+            "status": "Normal",
+            "bleed_turns": 0,
+            "bleed_dmg": 0,
+            "boostdef": 0,
+            "last_def_boost": 0,
+            "taunt_turns": 0,
+            "eq_wep": "Fists",
+            "eq_head" : "Nothing",
+            "eq_accessory" : "Nothing",
+            "peoplerec": 0,
+            "isplayer": True,
+            "money": 50,
+            "bonus_stre": 0,
+            "bonus_hp": 0,
+            "bonus_mana": 0,
+            "bonus_luck": 0,
+            "is_main_character": False,
+            "weakness": [],
+            "strong" : [],
+            "AttackUp" : 20,
+            "AttackUpTurn" : 2,
+            "Majima_encounter" : 0,
+            "style": "brawler",
+            "allstyles": ["brawler", "beast", "rush"]
             }
         ],
         "story_flags": {

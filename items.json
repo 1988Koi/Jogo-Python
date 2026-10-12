@@ -1263,6 +1263,21 @@
     "Charismatic Photo": {
         "type": "accessory",
         "sellvalue": 0,
-        "desc": "People will go crazy for this."
+        "desc": "People will go crazy for this.",
+        "usableby": [
+            "Host",
+            "Hero",
+            "Chef",
+            "Security",
+            "Foreman",
+            "Yakuza",
+            "Breaker",
+            "Salaryman",
+            "Legend",
+            "Freelancer",
+            "Gentleman",
+            "Technician",
+            "Barman"
+        ]
     }
 }
